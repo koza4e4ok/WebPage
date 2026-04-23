@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=VT323&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-terminal: "VT323", monospace;
+  --font-mono: "JetBrains Mono", monospace;
+  --color-terminal-green: #00ff41;
+  --color-terminal-dim: #008f11;
+  --color-terminal-dark: #003b00;
+}
+
+@layer base {
+  body {
+    @apply bg-[#020202] text-gray-300 font-mono antialiased overflow-hidden;
+  }
+  h1, h2, h3, h4, h5, h6, .font-terminal {
+    @apply font-terminal text-terminal-green tracking-wider;
+  }
+  input, textarea {
+    @apply bg-[#0a0a0a] border border-terminal-green/40 text-gray-200 placeholder:text-gray-600 font-mono focus:border-terminal-green focus:shadow-[0_0_10px_rgba(0,255,65,0.2)] outline-none rounded-lg transition-all;
+  }
+}
+
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-terminal-dim) rgba(0,0,0,0.5);
+}
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(0,0,0,0.3);
+  border-radius: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--color-terminal-dim);
+  border-radius: 4px;
+}
+
+/* Friendly CRT overlay */
+.crt-overlay {
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 8, 3, 0.4) 50%);
+  background-size: 100% 4px;
+}
+.crt-vignette {
+  background: radial-gradient(circle at center, transparent 40%, rgba(0,0,0,0.9) 100%);
+}
+
+/* Modern RGB Glitch Hover */
+.glitch-hover {
+  position: relative;
+  transition: all 0.2s;
+}
+.glitch-hover:hover, .glitch-hover:focus {
+  color: #fff;
+  animation: modern-glitch 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+}
+
+@keyframes modern-glitch {
+  0% { transform: translate(0); text-shadow: none; }
+  20% { transform: translate(-2px, 1px); text-shadow: 2px 0 red, -2px 0 cyan; }
+  40% { transform: translate(2px, -1px); text-shadow: -2px 0 red, 1px 0 cyan; }
+  60% { transform: translate(0); text-shadow: none; }
+  80% { transform: translate(-1px, -1px); text-shadow: 1px 0 red, -1px 0 cyan; }
+  100% { transform: translate(0); text-shadow: none; }
+}
+
+/* User Friendly Hacker Cards & Buttons */
+.hacker-card {
+  @apply bg-[#0a0a0a] border border-terminal-green/20 rounded-xl hover:border-terminal-green transition-all duration-300;
+}
+.hacker-card:hover {
+  box-shadow: 0 4px 20px rgba(0, 255, 65, 0.1);
+}
+
+.hacker-btn {
+  @apply px-6 py-3 border border-terminal-green text-terminal-green rounded-lg bg-terminal-green/5 hover:bg-terminal-green hover:text-black uppercase tracking-widest font-bold transition-all flex items-center justify-center gap-2;
+}
+
+.hacker-btn-alt {
+  @apply bg-[#0a0a0a] text-gray-300 border border-gray-600 hover:border-terminal-green hover:text-terminal-green hover:bg-terminal-green/10;
+}
+
+/* Blinking cursor for text */
+.blink {
+  animation: blinker 1s step-end infinite;
+}
+@keyframes blinker {
+  50% { opacity: 0; }
+}
