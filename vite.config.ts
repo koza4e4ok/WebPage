@@ -6,7 +6,7 @@ import {defineConfig, loadEnv} from 'vite';
 export default defineConfig(({mode}) => {
   const env = loadEnv(mode, '.', '');
   return {
-    base: './', // Relative base is safer for many cloud/static hostings
+    base: '/', // Custom domains at the root MUST use / base for correct asset resolution
     publicDir: 'public',
     plugins: [react(), tailwindcss()],
     define: {
