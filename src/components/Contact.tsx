@@ -1,8 +1,59 @@
 import { motion } from "motion/react";
-import { Mail, Send, TerminalSquare } from "lucide-react";
+import { Mail, Send, TerminalSquare, Loader2, CheckCircle2, AlertCircle } from "lucide-react";
+import { useState } from "react";
 
 export function Contact() {
   const email = "koza4e4ok@gmail.com";
+  // Uses GitHub Secrets/Env var if available, otherwise falls back to the hardcoded key
+  const ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_KEY || "";
+  
+  const [formData, setFormData] = useState({
+    name: "",
+    returnAddr: "",
+    payload: ""
+  });
+  
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+
+  const handleTransmit = async () => {
+    if (!formData.returnAddr || !formData.payload) {
+      setStatus('error');
+      setTimeout(() => setStatus('idle'), 3000);
+      return;
+    }
+
+    setStatus('submitting');
+    
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: ACCESS_KEY,
+          name: formData.name || "Guest_User",
+          email: formData.returnAddr,
+          message: formData.payload,
+          subject: `[System Ping] Connection from ${formData.name || 'node@network.com'}`,
+        }),
+      });
+      
+      const json = await response.json();
+      
+      if (json.success) {
+        setStatus('success');
+        setFormData({ name: "", returnAddr: "", payload: "" });
+      } else {
+        setStatus('error');
+      }
+    } catch (err) {
+      setStatus('error');
+    }
+    
+    setTimeout(() => setStatus('idle'), 4000);
+  };
 
   return (
     <section id="contact" className="w-full h-full flex-shrink-0 snap-start snap-always p-2 md:p-4 lg:p-8 flex items-center justify-center">
@@ -45,7 +96,7 @@ export function Contact() {
                 </div>
                 <div>
                   <div className="text-[10px] lg:text-xs text-gray-500 uppercase tracking-widest mb-0.5 lg:mb-1">Telegram Secure Line</div>
-                  <div className="text-sm lg:text-base text-white glitch-hover">@alexkoz_dev</div>
+                  <div className="text-sm lg:text-base text-white glitch-hover">@koza4e4ok</div>
                 </div>
               </a>
             </div>
@@ -59,6 +110,8 @@ export function Contact() {
                   type="text" 
                   className="w-full px-4 py-3"
                   placeholder="Guest_User"
+                  value={formData.name}
+                  onChange={(e) => setFormData({...formData, name: e.target.value})}
                 />
               </div>
               <div>
@@ -67,6 +120,8 @@ export function Contact() {
                   type="email" 
                   className="w-full px-4 py-3"
                   placeholder="node@network.com"
+                  value={formData.returnAddr}
+                  onChange={(e) => setFormData({...formData, returnAddr: e.target.value})}
                 />
               </div>
               <div>
@@ -75,14 +130,26 @@ export function Contact() {
                   rows={4}
                   className="w-full px-4 py-3 resize-none"
                   placeholder="Encrypting message..."
+                  value={formData.payload}
+                  onChange={(e) => setFormData({...formData, payload: e.target.value})}
                 />
               </div>
               <motion.button
-                whileTap={{ scale: 0.98 }}
+                whileTap={status === 'idle' ? { scale: 0.98 } : {}}
                 type="button"
-                className="hacker-btn w-full mt-1 lg:mt-2 glitch-hover py-2 lg:py-3 text-sm lg:text-base"
+                onClick={handleTransmit}
+                disabled={status === 'submitting'}
+                className={`w-full mt-1 lg:mt-2 py-2 lg:py-3 text-sm lg:text-base flex items-center justify-center gap-2 ${
+                  status === 'idle' ? 'hacker-btn glitch-hover' : 
+                  status === 'submitting' ? 'bg-[#111] text-terminal-dim border border-gray-800' :
+                  status === 'success' ? 'bg-terminal-green/20 text-terminal-green border border-terminal-green' :
+                  'bg-red-900/20 text-red-500 border border-red-900'
+                }`}
               >
-                Execute Transmit <Send size={18} />
+                {status === 'idle' && <>Execute Transmit <Send size={18} /></>}
+                {status === 'submitting' && <>Transmitting... <Loader2 size={18} className="animate-spin" /></>}
+                {status === 'success' && <>Payload Delivered <CheckCircle2 size={18} /></>}
+                {status === 'error' && <>Transmission Failed <AlertCircle size={18} /></>}
               </motion.button>
             </div>
           </form>
