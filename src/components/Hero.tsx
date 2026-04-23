@@ -44,7 +44,7 @@ export function Hero() {
             <motion.a
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              href={`${import.meta.env.BASE_URL}andriikozakov.pdf`}
+              href="public/andriikozakov.pdf"
               download="andriikozakov.pdf"
               className="hacker-btn hacker-btn-alt glitch-hover"
             >
