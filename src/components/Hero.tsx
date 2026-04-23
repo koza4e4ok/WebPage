@@ -68,7 +68,7 @@ export function Hero() {
               <div className="w-full aspect-square rounded-lg overflow-hidden relative border border-terminal-green/20 bg-black">
                 <div className="absolute inset-0 bg-terminal-green/10 mix-blend-color z-10 pointer-events-none" />
                 <img 
-                  src={`${import.meta.env.BASE_URL}avatar.jpg`}
+                  src= "public/avatar.jpg"
                   alt="Portrait of Andrii Kozakov"
                   className="w-full h-full object-cover grayscale contrast-125"
                   referrerPolicy="no-referrer"
