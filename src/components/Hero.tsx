@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import { Terminal, Download, Cpu } from "lucide-react";
-import avatarImg from "../assets/avatar.jpg";
+import avatarImg from "../assets/avatar.webp";
 import resumePdf from "../assets/andriikozakov.pdf";
 
 export function Hero() {
