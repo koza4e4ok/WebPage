@@ -1,6 +1,5 @@
 import { motion } from "motion/react";
 import { Terminal, Download, Cpu } from "lucide-react";
-import profileImg from "../assets/profile.webp";
 import resumePdf from "../assets/andriikozakov.pdf";
 
 export function Hero() {
@@ -70,7 +69,7 @@ export function Hero() {
               <div className="w-full aspect-square rounded-lg overflow-hidden relative border border-terminal-green/20 bg-black">
                 <div className="absolute inset-0 bg-terminal-green/10 mix-blend-color z-10 pointer-events-none" />
                 <img 
-                  src={profileImg}
+                  src="/avatar.webp"
                   alt="Portrait of Andrii Kozakov"
                   className="w-full h-full object-cover grayscale contrast-125"
                   referrerPolicy="no-referrer"
