@@ -44,7 +44,8 @@ export function Hero() {
             <motion.a
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              href="/resume.pdf"
+              href="/andriikozakov.pdf"
+              download="andriikozakov.pdf"
               className="hacker-btn hacker-btn-alt glitch-hover"
             >
               <Download size={18} />
@@ -67,7 +68,7 @@ export function Hero() {
               <div className="w-full aspect-square rounded-lg overflow-hidden relative border border-terminal-green/20 bg-black">
                 <div className="absolute inset-0 bg-terminal-green/10 mix-blend-color z-10 pointer-events-none" />
                 <img 
-                  src="https://picsum.photos/seed/terminal-profile/800/800" 
+                  src="/avatar.jpeg" 
                   alt="Portrait of Andrii Kozakov"
                   className="w-full h-full object-cover grayscale contrast-125"
                   referrerPolicy="no-referrer"

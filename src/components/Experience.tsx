@@ -4,21 +4,21 @@ import { Terminal } from "lucide-react";
 export function Experience() {
   const experiences = [
     {
-      company: "TechNova Mobile",
+      company: "DataArt Solutions, Inc. (www.dataart.com)",
       role: "SENIOR ANDROID ENGINEER",
-      period: "2022 - PRESENT",
+      period: "2021 - PRESENT",
       description: "Leading the development of multi-module Android applications using Jetpack Compose and modern architecture. Mentoring junior developers and implementing CI/CD pipelines."
     },
     {
-      company: "AppScale Systems",
+      company: "Unicreo",
       role: "ANDROID DEVELOPER",
-      period: "2019 - 2022",
-      description: "Focused on high-performance SDK development and internal library creation. Optimized application startup time by 40% and improved memory efficiency."
+      period: "2016 - 2021",
+      description: "Application development from the initial stage of project estimation, designing architecture and components to the GooglePlay delivery"
     },
     {
       company: "Digital Horizon",
       role: "JUNIOR SOFTWARE ENGINEER",
-      period: "2017 - 2019",
+      period: "2017 - 2016",
       description: "Contributed to cross-platform and native Android projects. Gained deep experience with Java, XML layouts, and REST API integrations."
     }
   ];
