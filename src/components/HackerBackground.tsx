@@ -17,9 +17,9 @@ export function HackerBackground() {
   }, []);
 
   return (
-    <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none bg-[#020202]">
+    <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none bg-gray-100 dark:bg-[#020202]">
       {/* Vignette mask */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#020202_90%)] z-10" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#f3f4f6_90%)] dark:bg-[radial-gradient(circle_at_center,transparent_0%,#020202_90%)] z-10" />
       
       {/* Raw Hex Data Dump */}
       <div className="absolute inset-0 opacity-[0.05] text-terminal-green font-mono text-sm break-all leading-relaxed p-4 select-none">

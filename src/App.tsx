@@ -7,7 +7,7 @@ import { Contact } from "./components/Contact";
 
 export default function App() {
   return (
-    <div className="h-screen w-full bg-[#020202] text-gray-300 font-mono relative selection:bg-terminal-green selection:text-black flex flex-col overflow-hidden">
+    <div className="h-screen w-full bg-gray-100 dark:bg-[#020202] text-gray-800 dark:text-gray-300 font-mono relative selection:bg-terminal-green selection:text-black flex flex-col overflow-hidden">
       {/* Main Top Nav rendered securely ON TOP of everything, OUTSIDE the CRT screen */}
       <div className="pt-2 md:pt-4 lg:pt-6 px-2 md:px-4 lg:px-6 w-full max-w-[100rem] mx-auto z-50 flex-shrink-0 relative">
         <Navbar />
@@ -17,7 +17,7 @@ export default function App() {
       <div className="p-2 md:p-4 lg:p-6 pb-2 md:pb-4 lg:pb-6 flex-1 w-full max-w-[100rem] mx-auto flex flex-col min-h-0">
         
         {/* The actual "CRT Screen" Box */}
-        <div className="relative flex-1 bg-[#050505] rounded-xl lg:rounded-[2rem] border-[6px] md:border-[12px] border-[#111] overflow-hidden shadow-[0_4px_30px_rgba(0,255,65,0.05),inset_0_0_60px_rgba(0,0,0,0.9)] flex flex-col min-h-0">
+        <div className="relative flex-1 bg-white dark:bg-[#050505] rounded-xl lg:rounded-[2rem] border-[6px] md:border-[12px] border-gray-300 dark:border-[#111] overflow-hidden shadow-[0_4px_30px_rgba(0,255,65,0.05),inset_0_0_60px_rgba(0,0,0,0.05)] flex flex-col min-h-0">
           
           {/* CRT Screen Overlays scoping precisely to this inner screen */}
           <div className="crt-overlay absolute inset-0 z-40 pointer-events-none" />

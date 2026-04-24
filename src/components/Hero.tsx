@@ -23,11 +23,11 @@ export function Hero() {
             Andrii <br/>Kozakov<span className="blink">_</span>
           </h1>
           
-          <h2 className="text-lg md:text-xl font-mono text-gray-300 font-bold mb-3 md:mb-4">
+          <h2 className="text-lg md:text-xl font-mono text-gray-800 dark:text-gray-300 font-bold mb-3 md:mb-4">
             Android Developer
           </h2>
           
-          <p className="text-sm md:text-base text-gray-400 font-mono mb-6 lg:mb-8 max-w-xl leading-relaxed lg:leading-relaxed">
+          <p className="text-sm md:text-base text-gray-600 dark:text-gray-400 font-mono mb-6 lg:mb-8 max-w-xl leading-relaxed lg:leading-relaxed">
             Senior Android Engineer building high-performance applications with Kotlin and modern architecture. Bridging the gap between robust systems and elegant UI.
           </p>
 
@@ -44,7 +44,7 @@ export function Hero() {
             <motion.a
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              href="/andriikozakov.pdf"
+              href={`${import.meta.env.BASE_URL}andriikozakov.pdf`}
               download="andriikozakov.pdf"
               className="hacker-btn hacker-btn-alt glitch-hover"
             >
@@ -64,11 +64,11 @@ export function Hero() {
           <div className="relative w-full max-w-[280px] lg:max-w-[400px] mx-auto">
             <div className="absolute inset-0 bg-terminal-green/20 blur-[80px] rounded-full" />
             
-            <div className="hacker-card p-2 relative z-10 bg-black">
-              <div className="w-full aspect-square rounded-lg overflow-hidden relative border border-terminal-green/20 bg-black">
+            <div className="hacker-card p-2 relative z-10 bg-white dark:bg-[#050505]">
+              <div className="w-full aspect-square rounded-lg overflow-hidden relative border border-terminal-green/20 bg-white dark:bg-[#0a0a0a]">
                 <div className="absolute inset-0 bg-terminal-green/10 mix-blend-color z-10 pointer-events-none" />
                 <img 
-                  src="avatar.jpg"
+                  src="avatar.webp"
                   alt="Portrait of Andrii Kozakov"
                   className="w-full h-full object-cover grayscale contrast-125"
                   referrerPolicy="no-referrer"
@@ -76,12 +76,12 @@ export function Hero() {
               </div>
             </div>
 
-            <div className="absolute -bottom-6 -left-6 z-20 hacker-card px-6 py-4 flex items-center gap-4 bg-[#0a0a0a]">
+            <div className="absolute -bottom-6 -left-6 z-20 hacker-card px-6 py-4 flex items-center gap-4 bg-gray-50 dark:bg-[#0a0a0a]">
               <div className="p-3 bg-terminal-green/10 rounded-lg text-terminal-green border border-terminal-green/20">
                 <Cpu size={24} />
               </div>
               <div>
-                <div className="text-2xl font-terminal text-white glitch-hover">12+ YEARS</div>
+                <div className="text-2xl font-terminal text-gray-900 dark:text-gray-200 glitch-hover">12+ YEARS</div>
                 <div className="text-xs text-gray-500 font-mono tracking-wider">UPTIME</div>
               </div>
             </div>

@@ -66,8 +66,8 @@ export function Contact() {
             <h2 className="text-xs lg:text-sm font-mono text-terminal-green uppercase tracking-widest mb-2 flex items-center gap-2">
               <TerminalSquare size={14} /> Establish Connection
             </h2>
-            <h3 className="text-3xl md:text-5xl font-terminal mb-4 text-white">Open a new socket.</h3>
-            <p className="text-gray-400 font-mono text-xs lg:text-sm mb-6 lg:mb-10 max-w-md leading-relaxed hidden sm:block">
+            <h3 className="text-3xl md:text-5xl font-terminal mb-4 text-gray-900 dark:text-gray-200">Open a new socket.</h3>
+            <p className="text-gray-600 dark:text-gray-400 font-mono text-xs lg:text-sm mb-6 lg:mb-10 max-w-md leading-relaxed hidden sm:block">
               Ready to deploy new solutions or optimize existing ones. Drop a ping and I'll confirm reception.
             </p>
 
@@ -76,12 +76,12 @@ export function Contact() {
                 href={`mailto:${email}`}
                 className="flex items-center gap-3 lg:gap-4 group"
               >
-                <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-lg bg-[#111] border border-terminal-green/20 flex items-center justify-center group-hover:bg-terminal-green/10 group-hover:border-terminal-green transition-all glitch-hover">
-                  <Mail className="text-gray-400 group-hover:text-terminal-green transition-colors" size={18} />
+                <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-lg bg-gray-200 dark:bg-[#111] border border-terminal-green/20 flex items-center justify-center group-hover:bg-terminal-green/10 group-hover:border-terminal-green transition-all glitch-hover">
+                  <Mail className="text-gray-600 dark:text-gray-400 group-hover:text-terminal-green transition-colors" size={18} />
                 </div>
                 <div>
                   <div className="text-[10px] lg:text-xs text-gray-500 uppercase tracking-widest mb-0.5 lg:mb-1">Email Endpoint</div>
-                  <div className="text-sm lg:text-base text-white glitch-hover truncate max-w-[200px] sm:max-w-none">{email}</div>
+                  <div className="text-sm lg:text-base text-gray-900 dark:text-gray-200 glitch-hover truncate max-w-[200px] sm:max-w-none">{email}</div>
                 </div>
               </a>
 
@@ -91,18 +91,18 @@ export function Contact() {
                 rel="noreferrer"
                 className="flex items-center gap-3 lg:gap-4 group"
               >
-                <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-lg bg-[#111] border border-[#00ffff]/20 flex items-center justify-center group-hover:bg-[#00ffff]/10 group-hover:border-[#00ffff] transition-all glitch-hover">
-                  <Send className="text-gray-400 group-hover:text-[#00ffff] transition-colors" size={18} />
+                <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-lg bg-gray-200 dark:bg-[#111] border border-[#00ffff]/20 flex items-center justify-center group-hover:bg-[#00ffff]/10 group-hover:border-[#00ffff] transition-all glitch-hover">
+                  <Send className="text-gray-600 dark:text-gray-400 group-hover:text-[#00ffff] transition-colors" size={18} />
                 </div>
                 <div>
                   <div className="text-[10px] lg:text-xs text-gray-500 uppercase tracking-widest mb-0.5 lg:mb-1">Telegram Secure Line</div>
-                  <div className="text-sm lg:text-base text-white glitch-hover">@koza4e4ok</div>
+                  <div className="text-sm lg:text-base text-gray-900 dark:text-gray-200 glitch-hover">@koza4e4ok</div>
                 </div>
               </a>
             </div>
           </div>
 
-          <form className="bg-[#050505] p-5 lg:p-8 rounded-2xl border border-gray-800 relative z-10 shadow-lg min-h-0 flex flex-col justify-center">
+          <form className="bg-white dark:bg-[#050505] p-5 lg:p-8 rounded-2xl border border-gray-200 dark:border-gray-800 relative z-10 shadow-lg min-h-0 flex flex-col justify-center">
             <div className="space-y-3 lg:space-y-5 font-mono">
               <div>
                 <label className="block text-xs text-terminal-dim uppercase tracking-widest mb-2">{">"}_ INPUT NAME</label>
@@ -141,7 +141,7 @@ export function Contact() {
                 disabled={status === 'submitting'}
                 className={`w-full mt-1 lg:mt-2 py-2 lg:py-3 text-sm lg:text-base flex items-center justify-center gap-2 ${
                   status === 'idle' ? 'hacker-btn glitch-hover' : 
-                  status === 'submitting' ? 'bg-[#111] text-terminal-dim border border-gray-800' :
+                  status === 'submitting' ? 'bg-gray-200 dark:bg-[#111] text-terminal-dim border border-gray-200 dark:border-gray-800' :
                   status === 'success' ? 'bg-terminal-green/20 text-terminal-green border border-terminal-green' :
                   'bg-red-900/20 text-red-500 border border-red-900'
                 }`}

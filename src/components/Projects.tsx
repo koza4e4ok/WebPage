@@ -38,7 +38,7 @@ export function Projects() {
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-4 lg:mb-8 gap-4 lg:gap-8 w-full">
         <div className="border-l-4 border-terminal-green pl-4 lg:pl-6">
           <h2 className="text-xs lg:text-sm font-mono text-terminal-dim uppercase tracking-widest mb-1 lg:mb-2">{">_"} LS PROJECTS/</h2>
-          <h3 className="text-3xl md:text-5xl font-terminal text-white">Deployed Systems.</h3>
+          <h3 className="text-3xl md:text-5xl font-terminal text-gray-900 dark:text-gray-200">Deployed Systems.</h3>
         </div>
       </div>
 
@@ -50,10 +50,10 @@ export function Projects() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.1 }}
-            className="bg-black border border-gray-800 rounded-xl flex flex-row md:flex-col group overflow-hidden hover:border-terminal-green/50 hover:shadow-[0_4px_20px_rgba(0,255,65,0.05)] transition-all duration-300 flex-1 min-h-0"
+            className="bg-white dark:bg-[#050505] border border-gray-200 dark:border-gray-800 rounded-xl flex flex-row md:flex-col group overflow-hidden hover:border-terminal-green/50 hover:shadow-[0_4px_20px_rgba(0,255,65,0.05)] transition-all duration-300 flex-1 min-h-0"
           >
             {/* Image is only shown on larger vertical screens to save space on strict 100vh grids */}
-            <div className="hidden lg:block w-full lg:h-24 xl:h-32 relative overflow-hidden border-b border-terminal-green/20 bg-black flex-shrink-0">
+            <div className="hidden lg:block w-full lg:h-24 xl:h-32 relative overflow-hidden border-b border-terminal-green/20 bg-white dark:bg-[#050505] flex-shrink-0">
               <div className="absolute inset-0 bg-terminal-green/20 mix-blend-color group-hover:opacity-0 transition-opacity z-10 pointer-events-none" />
               <img
                 src={project.image}
@@ -68,7 +68,7 @@ export function Projects() {
               </div>
             </div>
 
-            <div className="p-3 bg-[#0a0a0a] min-h-0 flex-1 flex flex-col justify-between">
+            <div className="p-3 bg-gray-50 dark:bg-[#0a0a0a] min-h-0 flex-1 flex flex-col justify-between">
               <div className="min-h-0 overflow-hidden flex flex-col">
                 <div className="flex gap-1 mb-1.5 flex-wrap shrink-0">
                   {project.tech.map(t => (
@@ -78,12 +78,12 @@ export function Projects() {
                   ))}
                 </div>
 
-                <h4 className="text-sm lg:text-base font-terminal mb-1 text-white flex items-center gap-1.5 shrink-0 truncate">
+                <h4 className="text-sm lg:text-base font-terminal mb-1 text-gray-900 dark:text-gray-200 flex items-center gap-1.5 shrink-0 truncate">
                   <FolderGit2 size={12} className="text-terminal-dim shrink-0 hidden lg:block" /> 
                   <span className="truncate">{project.title}</span>
                 </h4>
                 
-                <p className="text-gray-400 text-[10px] lg:text-xs leading-tight mb-2 font-mono flex-1 line-clamp-2 md:line-clamp-3">
+                <p className="text-gray-600 dark:text-gray-400 text-[10px] lg:text-xs leading-tight mb-2 font-mono flex-1 line-clamp-2 md:line-clamp-3">
                   {project.description}
                 </p>
               </div>
