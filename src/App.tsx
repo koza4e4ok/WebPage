@@ -4,6 +4,7 @@ import { Skills } from "./components/Skills";
 import { Projects } from "./components/Projects";
 import { Experience } from "./components/Experience";
 import { Contact } from "./components/Contact";
+import { HackerBackground } from "./components/HackerBackground";
 
 export default function App() {
   return (
@@ -19,6 +20,9 @@ export default function App() {
         {/* The actual "CRT Screen" Box */}
         <div className="relative flex-1 bg-white dark:bg-[#050505] rounded-xl lg:rounded-[2rem] border-[6px] md:border-[12px] border-gray-300 dark:border-[#111] overflow-hidden shadow-[0_4px_30px_rgba(0,255,65,0.05),inset_0_0_60px_rgba(0,0,0,0.05)] flex flex-col min-h-0">
           
+          {/* Ambient canvas background sits above the screen surface but below all content. */}
+          <HackerBackground />
+
           {/* CRT Screen Overlays scoping precisely to this inner screen */}
           <div className="crt-overlay absolute inset-0 z-40 pointer-events-none" />
           <div className="crt-vignette absolute inset-0 z-30 pointer-events-none" />

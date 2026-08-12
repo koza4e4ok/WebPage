@@ -1,21 +1,19 @@
+import { InteractiveCanvas } from "./InteractiveCanvas";
 import { MatrixCanvas } from "./MatrixCanvas";
 
+/**
+ * Ambient visuals are confined to the CRT screen, below scroll content and above
+ * the plain screen surface. pointer-events-none guarantees they never block UI.
+ */
 export function HackerBackground() {
   return (
-    <>
-      {/* Matrix canvas — hidden automatically under prefers-reduced-motion via JS check inside MatrixCanvas */}
+    <div aria-hidden="true" className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
       <MatrixCanvas />
+      <InteractiveCanvas />
 
-      {/* Static fallback grid overlay — always present, very low opacity */}
-      <div
-        aria-hidden="true"
-        className="fixed inset-0 z-[-1] pointer-events-none"
-      >
-        {/* Vignette */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#f3f4f6_90%)] dark:bg-[radial-gradient(circle_at_center,transparent_0%,#020202_90%)] z-10" />
-        {/* Scanline grid */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(0,255,65,0.025)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,65,0.025)_1px,transparent_1px)] bg-[size:40px_40px] z-10" />
-      </div>
-    </>
+      {/* Static visual base remains available when reduced-motion disables canvases. */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#f3f4f6_90%)] dark:bg-[radial-gradient(circle_at_center,transparent_0%,#020202_90%)]" />
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(0,255,65,0.025)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,65,0.025)_1px,transparent_1px)] bg-[size:40px_40px]" />
+    </div>
   );
 }

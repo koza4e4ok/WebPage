@@ -21,8 +21,9 @@ export function MatrixCanvas() {
     let lastTime = 0;
 
     const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      const bounds = canvas.getBoundingClientRect();
+      canvas.width = Math.round(bounds.width);
+      canvas.height = Math.round(bounds.height);
     };
     resize();
     window.addEventListener("resize", resize);
@@ -74,7 +75,7 @@ export function MatrixCanvas() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 z-[-1] pointer-events-none"
+      className="absolute inset-0 w-full h-full pointer-events-none"
       aria-hidden="true"
     />
   );
