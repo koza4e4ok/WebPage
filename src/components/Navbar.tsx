@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { Github, Mail, Instagram, Facebook, Twitter, Menu, X, TerminalSquare, Activity } from "lucide-react";
+import { Github, Mail, Menu, X, TerminalSquare, Activity } from "lucide-react";
 import { useState, useEffect } from "react";
 
 export function Navbar() {
@@ -22,11 +22,8 @@ export function Navbar() {
   ];
 
   const socialLinks = [
-    { icon: <Instagram size={16} />, href: "https://instagram.com", label: "INSTA" },
-    { icon: <Facebook size={16} />, href: "https://facebook.com", label: "FB" },
-    { icon: <Twitter size={16} />, href: "https://twitter.com", label: "TWTR" },
-    { icon: <Mail size={16} />, href: "mailto:koza4e4ok@gmail.com", label: "MAIL" },
-    { icon: <Github size={16} />, href: "https://github.com", label: "GIT" },
+    { icon: <Github size={16} />, href: "https://github.com/koza4e4ok", label: "GitHub profile" },
+    { icon: <Mail size={16} />, href: "mailto:koza4e4ok@gmail.com", label: "Send email" },
   ];
 
   return (
@@ -81,9 +78,9 @@ export function Navbar() {
                 key={link.label}
                 href={link.href}
                 target="_blank" 
-                rel="noreferrer" 
-                className="w-8 h-8 rounded-full flex items-center justify-center bg-gray-50 dark:bg-[#0a0a0a] border border-gray-200 dark:border-gray-800 text-gray-600 dark:text-gray-400 hover:text-terminal-green hover:border-terminal-green hover:shadow-[0_0_10px_rgba(0,255,65,0.2)] transition-all glitch-hover"
-                title={link.label}
+                rel="noreferrer noopener" 
+                aria-label={link.label}
+                className="w-8 h-8 rounded-full flex items-center justify-center bg-gray-50 dark:bg-[#0a0a0a] border border-gray-200 dark:border-gray-800 text-gray-600 dark:text-gray-400 hover:text-terminal-green hover:border-terminal-green hover:shadow-[0_0_10px_rgba(0,255,65,0.2)] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terminal-green focus-visible:ring-offset-2"
               >
                 {link.icon}
               </a>
@@ -95,8 +92,10 @@ export function Navbar() {
         <div className="flex items-center gap-4 lg:hidden">
           <span className="text-terminal-green/70 font-terminal text-lg tracking-widest">{time}</span>
           <button 
-            className="text-terminal-green rounded-full bg-gray-50 dark:bg-[#0a0a0a] border border-gray-200 dark:border-gray-800 hover:border-terminal-green hover:shadow-[0_0_10px_rgba(0,255,65,0.2)] hover:bg-terminal-green/10 p-2 transition-all duration-300"
+            className="text-terminal-green rounded-full bg-gray-50 dark:bg-[#0a0a0a] border border-gray-200 dark:border-gray-800 hover:border-terminal-green hover:shadow-[0_0_10px_rgba(0,255,65,0.2)] hover:bg-terminal-green/10 p-2 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terminal-green focus-visible:ring-offset-2"
             onClick={() => setIsOpen(!isOpen)}
+            aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={isOpen}
           >
             {isOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
@@ -133,8 +132,11 @@ export function Navbar() {
             {socialLinks.map((link) => (
               <a 
                 key={link.label}
-                href={link.href} 
-                className="p-3 w-12 h-12 flex items-center justify-center rounded-full text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-[#0a0a0a] border border-gray-200 dark:border-gray-800 hover:border-terminal-green hover:shadow-[0_0_10px_rgba(0,255,65,0.2)] hover:text-terminal-green transition-all"
+                href={link.href}
+                target="_blank"
+                rel="noreferrer noopener"
+                aria-label={link.label}
+                className="p-3 w-12 h-12 flex items-center justify-center rounded-full text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-[#0a0a0a] border border-gray-200 dark:border-gray-800 hover:border-terminal-green hover:shadow-[0_0_10px_rgba(0,255,65,0.2)] hover:text-terminal-green transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terminal-green focus-visible:ring-offset-2"
               >
                 {link.icon}
               </a>

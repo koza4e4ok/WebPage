@@ -86,9 +86,9 @@ export function Contact() {
               </a>
 
               <a 
-                href="https://t.me" 
+                href="https://t.me/koza4e4ok" 
                 target="_blank" 
-                rel="noreferrer"
+                rel="noreferrer noopener"
                 className="flex items-center gap-3 lg:gap-4 group"
               >
                 <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-lg bg-gray-200 dark:bg-[#111] border border-[#00ffff]/20 flex items-center justify-center group-hover:bg-[#00ffff]/10 group-hover:border-[#00ffff] transition-all glitch-hover">
@@ -105,40 +105,55 @@ export function Contact() {
           <form className="bg-white dark:bg-[#050505] p-5 lg:p-8 rounded-2xl border border-gray-200 dark:border-gray-800 relative z-10 shadow-lg min-h-0 flex flex-col justify-center">
             <div className="space-y-3 lg:space-y-5 font-mono">
               <div>
-                <label className="block text-xs text-terminal-dim uppercase tracking-widest mb-2">{">"}_ INPUT NAME</label>
+                <label htmlFor="contact-name" className="block text-xs text-terminal-dim uppercase tracking-widest mb-2">{">"}_ INPUT NAME</label>
                 <input 
-                  type="text" 
+                  id="contact-name"
+                  name="name"
+                  type="text"
+                  autoComplete="name"
                   className="w-full px-4 py-3"
-                  placeholder="Guest_User"
+                  placeholder="Your name"
                   value={formData.name}
                   onChange={(e) => setFormData({...formData, name: e.target.value})}
                 />
               </div>
               <div>
-                <label className="block text-xs text-terminal-dim uppercase tracking-widest mb-2">{">"}_ INPUT RETURN_ADDR</label>
+                <label htmlFor="contact-email" className="block text-xs text-terminal-dim uppercase tracking-widest mb-2">{">"}_ INPUT RETURN_ADDR</label>
                 <input 
-                  type="email" 
+                  id="contact-email"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  required
                   className="w-full px-4 py-3"
-                  placeholder="node@network.com"
+                  placeholder="your@email.com"
                   value={formData.returnAddr}
                   onChange={(e) => setFormData({...formData, returnAddr: e.target.value})}
                 />
               </div>
               <div>
-                <label className="block text-xs text-terminal-dim uppercase tracking-widest mb-2">{">"}_ INPUT PAYLOAD</label>
+                <label htmlFor="contact-message" className="block text-xs text-terminal-dim uppercase tracking-widest mb-2">{">"}_ INPUT PAYLOAD</label>
                 <textarea 
+                  id="contact-message"
+                  name="message"
                   rows={4}
+                  required
                   className="w-full px-4 py-3 resize-none"
-                  placeholder="Encrypting message..."
+                  placeholder="Your message..."
                   value={formData.payload}
                   onChange={(e) => setFormData({...formData, payload: e.target.value})}
                 />
+              </div>
+              <div aria-live="polite" aria-atomic="true" className="sr-only">
+                {status === 'success' && 'Message sent successfully.'}
+                {status === 'error' && 'Failed to send message. Please try again.'}
               </div>
               <motion.button
                 whileTap={status === 'idle' ? { scale: 0.98 } : {}}
                 type="button"
                 onClick={handleTransmit}
                 disabled={status === 'submitting'}
+                aria-disabled={status === 'submitting'}
                 className={`w-full mt-1 lg:mt-2 py-2 lg:py-3 text-sm lg:text-base flex items-center justify-center gap-2 ${
                   status === 'idle' ? 'hacker-btn glitch-hover' : 
                   status === 'submitting' ? 'bg-gray-200 dark:bg-[#111] text-terminal-dim border border-gray-200 dark:border-gray-800' :

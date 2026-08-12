@@ -4,21 +4,24 @@ import { Terminal } from "lucide-react";
 export function Experience() {
   const experiences = [
     {
-      company: "DataArt Solutions, Inc. (www.dataart.com)",
+      company: "DataArt Solutions, Inc.",
+      companyUrl: "https://www.dataart.com",
       role: "SENIOR ANDROID ENGINEER",
-      period: "2021 - PRESENT",
-      description: "Leading the development of multi-module Android applications using Jetpack Compose and modern architecture. Mentoring junior developers and implementing CI/CD pipelines."
+      period: "2021 — PRESENT",
+      description: "Leading development of multi-module Android applications using Jetpack Compose and modern architecture. Mentoring junior developers, conducting code reviews, and implementing CI/CD pipelines with GitHub Actions."
     },
     {
       company: "Unicreo",
+      companyUrl: null,
       role: "ANDROID DEVELOPER",
-      period: "2016 - 2021",
-      description: "Application development from the initial stage of project estimation, designing architecture and components to the GooglePlay delivery"
+      period: "2016 — 2021",
+      description: "Full-cycle Android development from project estimation and architecture design through to Google Play delivery. Owned feature development, code quality, and release management."
     },
     {
       company: "Digital Horizon",
+      companyUrl: null,
       role: "JUNIOR SOFTWARE ENGINEER",
-      period: "2017 - 2016",
+      period: "2014 — 2016",
       description: "Contributed to cross-platform and native Android projects. Gained deep experience with Java, XML layouts, and REST API integrations."
     }
   ];
@@ -52,7 +55,18 @@ export function Experience() {
                 </span>
               </div>
               
-              <p className="text-gray-900 dark:text-gray-200 font-mono text-[10px] md:text-xs lg:text-sm mb-1 lg:mb-2">{exp.company}</p>
+              {exp.companyUrl ? (
+                <a
+                  href={exp.companyUrl}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="text-gray-900 dark:text-gray-200 font-mono text-[10px] md:text-xs lg:text-sm mb-1 lg:mb-2 hover:text-terminal-green transition-colors underline underline-offset-2 decoration-terminal-green/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terminal-green focus-visible:ring-offset-1 inline-block"
+                >
+                  {exp.company}
+                </a>
+              ) : (
+                <p className="text-gray-900 dark:text-gray-200 font-mono text-[10px] md:text-xs lg:text-sm mb-1 lg:mb-2">{exp.company}</p>
+              )}
               
               <p className="text-gray-600 dark:text-gray-400 font-mono text-[10px] md:text-xs leading-snug md:leading-relaxed line-clamp-3 md:line-clamp-4">
                 {">"} {exp.description}

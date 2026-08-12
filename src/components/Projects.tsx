@@ -4,31 +4,31 @@ import { ExternalLink, Github, FolderGit2 } from "lucide-react";
 export function Projects() {
   const projects = [
     {
-      title: "VitaFit Mobile Engine",
+      title: "VitaFit",
       status: "ONLINE",
-      description: "Real-time biometric visualization matrix and multi-device synchronization engine across secure channels.",
-      tech: ["Compose", "Health API"],
-      image: "https://picsum.photos/seed/vitafithack/800/600",
-      link: "#",
-      github: "#"
+      description: "Health & fitness Android app with real-time biometric tracking, multi-device sync, and offline-first architecture built with Jetpack Compose and Health API.",
+      tech: ["Kotlin", "Compose", "Health API", "Flow"],
+      image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80",
+      link: "https://github.com/koza4e4ok",
+      github: "https://github.com/koza4e4ok"
     },
     {
-      title: "CryptoEdge Protocol",
+      title: "CryptoEdge",
       status: "SECURE",
-      description: "Secure wallet architecture initialized with biometric protocols and offline synchronization algorithms.",
-      tech: ["Security", "MVVM"],
-      image: "https://picsum.photos/seed/cryptohack/800/600",
-      link: "#",
-      github: "#"
+      description: "Secure crypto wallet for Android featuring biometric authentication, offline transaction signing, and MVVM clean architecture with encrypted local storage.",
+      tech: ["Kotlin", "MVVM", "Biometrics", "Room"],
+      image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&q=80",
+      link: "https://github.com/koza4e4ok",
+      github: "https://github.com/koza4e4ok"
     },
     {
-      title: "FlowSync Task Daemon",
+      title: "FlowSync",
       status: "ACTIVE",
-      description: "Project management ecosystem using RoomDB daemons and background thread execution.",
-      tech: ["Room DB", "WorkManager"],
-      image: "https://picsum.photos/seed/taskerhack/800/600",
-      link: "#",
-      github: "#"
+      description: "Task management Android app using WorkManager for reliable background scheduling, RoomDB for local persistence, and Kotlin Coroutines for async processing.",
+      tech: ["Kotlin", "WorkManager", "Room DB", "Coroutines"],
+      image: "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=800&q=80",
+      link: "https://github.com/koza4e4ok",
+      github: "https://github.com/koza4e4ok"
     }
   ];
 
@@ -58,8 +58,10 @@ export function Projects() {
               <img
                 src={project.image}
                 alt={project.title}
+                loading="lazy"
+                width={800}
+                height={600}
                 className="w-full h-full object-cover grayscale contrast-125 group-hover:grayscale-0 transition-all duration-500 scale-105 group-hover:scale-100"
-                referrerPolicy="no-referrer"
               />
               <div className="absolute top-4 right-4 z-20 flex gap-2">
                  <span className="w-3 h-3 rounded-full bg-red-500 border border-red-900 shadow-lg" />
@@ -89,10 +91,22 @@ export function Projects() {
               </div>
 
               <div className="flex gap-1.5 pt-1 flex-shrink-0">
-                <a href={project.link} className="hacker-btn flex-1 px-1 py-1 text-[9px] text-center glitch-hover flex items-center justify-center min-h-[26px]">
+                <a
+                  href={project.link}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  aria-label={`View ${project.title} project`}
+                  className="hacker-btn flex-1 px-1 py-1 text-[9px] text-center glitch-hover flex items-center justify-center min-h-[26px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terminal-green focus-visible:ring-offset-1"
+                >
                   <ExternalLink size={10} className="mr-1 hidden sm:block" /> OPEN
                 </a>
-                <a href={project.github} className="hacker-btn hacker-btn-alt px-1 py-1 glitch-hover flex items-center justify-center min-w-[32px] min-h-[26px]">
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  aria-label={`View ${project.title} on GitHub`}
+                  className="hacker-btn hacker-btn-alt px-1 py-1 glitch-hover flex items-center justify-center min-w-[32px] min-h-[26px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terminal-green focus-visible:ring-offset-1"
+                >
                   <Github size={12} />
                 </a>
               </div>

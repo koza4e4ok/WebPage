@@ -24,11 +24,11 @@ export function Hero() {
           </h1>
           
           <h2 className="text-lg md:text-xl font-mono text-gray-800 dark:text-gray-300 font-bold mb-3 md:mb-4">
-            Android Developer
+            Senior Android Engineer
           </h2>
           
           <p className="text-sm md:text-base text-gray-600 dark:text-gray-400 font-mono mb-6 lg:mb-8 max-w-xl leading-relaxed lg:leading-relaxed">
-            Senior Android Engineer building high-performance applications with Kotlin and modern architecture. Bridging the gap between robust systems and elegant UI.
+            12+ years delivering reliable Kotlin and Jetpack Compose products. I lead modular architecture, improve delivery pipelines, and turn complex requirements into maintainable Android experiences.
           </p>
 
           <div className="flex flex-wrap gap-4 font-mono">
@@ -68,10 +68,11 @@ export function Hero() {
               <div className="w-full aspect-square rounded-lg overflow-hidden relative border border-terminal-green/20 bg-white dark:bg-[#0a0a0a]">
                 <div className="absolute inset-0 bg-terminal-green/10 mix-blend-color z-10 pointer-events-none" />
                 <img 
-                  src="avatar.webp"
+                  src="/avatar.webp"
                   alt="Portrait of Andrii Kozakov"
+                  width={400}
+                  height={400}
                   className="w-full h-full object-cover grayscale contrast-125"
-                  referrerPolicy="no-referrer"
                 />
               </div>
             </div>
