@@ -3,6 +3,9 @@ import { Github, Mail, Menu, X, TerminalSquare, Activity } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useActiveSection } from "../hooks/useActiveSection";
 import { ScanlineWipe } from "./ScanlineWipe";
+import { SoundToggle } from "./SoundToggle";
+import { playTick, playNavSelect } from "../lib/audioEngine";
+import { haptic } from "../hooks/useHaptic";
 
 const SECTION_IDS = ["hero", "skills", "projects", "experience", "contact"];
 
@@ -32,12 +35,21 @@ export function Navbar() {
     { icon: <Mail size={16} />, href: "mailto:koza4e4ok@gmail.com", label: "Send email" },
   ];
 
+  const handleNavClick = () => {
+    playNavSelect();
+    haptic("nav");
+  };
+
+  const handleSocialClick = () => {
+    playTick();
+    haptic("tick");
+  };
+
   return (
     <>
       <ScanlineWipe trigger={activeSection} />
 
       <nav className="w-full relative z-50 bg-white dark:bg-[#050505] rounded-2xl md:rounded-full border-2 border-gray-300 dark:border-[#111] shadow-[0_4px_30px_rgba(0,255,65,0.05)]">
-        {/* Top Edge Highlight */}
         <div className="absolute top-0 left-6 right-6 h-[1px] bg-gradient-to-r from-transparent via-terminal-green/30 dark:via-terminal-green/10 to-transparent opacity-80" />
 
         <div className="px-4 md:px-8 h-14 md:h-16 flex items-center justify-between">
@@ -46,6 +58,7 @@ export function Navbar() {
           <div className="flex items-center gap-6">
             <motion.a
               href="#hero"
+              onClick={handleNavClick}
               className="flex items-center gap-2 text-xl md:text-2xl font-terminal font-bold text-terminal-green glitch-hover"
             >
               <div className="bg-terminal-green text-black p-1 block">
@@ -72,6 +85,8 @@ export function Navbar() {
                 <a
                   key={link.name}
                   href={link.href}
+                  onClick={handleNavClick}
+                  onMouseEnter={() => { playTick(); haptic("tick"); }}
                   className={`px-4 py-2 rounded-full transition-all duration-300 glitch-hover uppercase relative flex items-center ${
                     isActive
                       ? "text-terminal-green bg-terminal-green/10 border-b-2 border-terminal-green"
@@ -100,20 +115,30 @@ export function Navbar() {
                   target="_blank"
                   rel="noreferrer noopener"
                   aria-label={link.label}
+                  onClick={handleSocialClick}
+                  onMouseEnter={() => { playTick(); haptic("tick"); }}
                   className="w-8 h-8 rounded-full flex items-center justify-center bg-gray-50 dark:bg-[#0a0a0a] border border-gray-200 dark:border-gray-800 text-gray-600 dark:text-gray-400 hover:text-terminal-green hover:border-terminal-green hover:shadow-[0_0_10px_rgba(0,255,65,0.2)] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terminal-green focus-visible:ring-offset-2"
                 >
                   {link.icon}
                 </a>
               ))}
+
+              {/* Sound toggle */}
+              <SoundToggle />
             </div>
           </div>
 
           {/* Mobile menu button */}
-          <div className="flex items-center gap-4 lg:hidden">
+          <div className="flex items-center gap-3 lg:hidden">
             <span className="text-terminal-green/70 font-terminal text-lg tracking-widest">{time}</span>
+            <SoundToggle />
             <button
               className="text-terminal-green rounded-full bg-gray-50 dark:bg-[#0a0a0a] border border-gray-200 dark:border-gray-800 hover:border-terminal-green hover:shadow-[0_0_10px_rgba(0,255,65,0.2)] hover:bg-terminal-green/10 p-2 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terminal-green focus-visible:ring-offset-2"
-              onClick={() => setIsOpen(!isOpen)}
+              onClick={() => {
+                setIsOpen(!isOpen);
+                playTick();
+                haptic("tick");
+              }}
               aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
               aria-expanded={isOpen}
             >
@@ -141,7 +166,11 @@ export function Navbar() {
                   <a
                     key={link.name}
                     href={link.href}
-                    onClick={() => setIsOpen(false)}
+                    onClick={() => {
+                      setIsOpen(false);
+                      handleNavClick();
+                    }}
+                    onMouseEnter={() => { playTick(); haptic("tick"); }}
                     className={`glitch-hover uppercase text-sm flex items-center p-3 transition-colors rounded-xl border ${
                       isActive
                         ? "text-terminal-green bg-terminal-green/10 border-terminal-green/40"
@@ -163,6 +192,7 @@ export function Navbar() {
                   target="_blank"
                   rel="noreferrer noopener"
                   aria-label={link.label}
+                  onClick={handleSocialClick}
                   className="p-3 w-12 h-12 flex items-center justify-center rounded-full text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-[#0a0a0a] border border-gray-200 dark:border-gray-800 hover:border-terminal-green hover:shadow-[0_0_10px_rgba(0,255,65,0.2)] hover:text-terminal-green transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terminal-green focus-visible:ring-offset-2"
                 >
                   {link.icon}

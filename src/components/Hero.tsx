@@ -4,6 +4,8 @@ import { Terminal, Download, Cpu } from "lucide-react";
 import { TypewriterText } from "./TypewriterText";
 import { MagneticButton } from "./MagneticButton";
 import { useCountUp } from "../hooks/useCountUp";
+import { playConfirm, playTick } from "../lib/audioEngine";
+import { haptic } from "../hooks/useHaptic";
 
 export function Hero() {
   const [nameTyped, setNameTyped] = useState(false);
@@ -80,6 +82,8 @@ export function Hero() {
                   as="a"
                   href="#projects"
                   className="hacker-btn glitch-hover"
+                  onClick={() => { playConfirm(); haptic("confirm"); }}
+                  onMouseEnter={() => { playTick(); haptic("tick"); }}
                 >
                   <Terminal size={18} />
                   View Projects
@@ -89,6 +93,8 @@ export function Hero() {
                   href={`${import.meta.env.BASE_URL}andriikozakov.pdf`}
                   download="andriikozakov.pdf"
                   className="hacker-btn hacker-btn-alt glitch-hover"
+                  onClick={() => { playConfirm(); haptic("confirm"); }}
+                  onMouseEnter={() => { playTick(); haptic("tick"); }}
                 >
                   <Download size={18} />
                   Fetch CV
@@ -120,7 +126,6 @@ export function Hero() {
                 </div>
               </div>
 
-              {/* Animated counter badge */}
               <div className="absolute -bottom-6 -left-6 z-20 hacker-card px-6 py-4 flex items-center gap-4 bg-gray-50 dark:bg-[#0a0a0a]">
                 <div className="p-3 bg-terminal-green/10 rounded-lg text-terminal-green border border-terminal-green/20">
                   <Cpu size={24} />

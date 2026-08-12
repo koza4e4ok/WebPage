@@ -1,5 +1,7 @@
 import { motion } from "motion/react";
 import { ExternalLink, Github, FolderGit2 } from "lucide-react";
+import { playConfirm, playHover, playTick } from "../lib/audioEngine";
+import { haptic } from "../hooks/useHaptic";
 
 const containerVariants = {
   hidden: {},
@@ -80,6 +82,7 @@ export function Projects() {
             <motion.div
               key={project.title}
               variants={itemVariants}
+              onMouseEnter={playHover}
               className="bg-white dark:bg-[#050505] border border-gray-200 dark:border-gray-800 rounded-xl flex flex-row md:flex-col group overflow-hidden hover:border-terminal-green/50 hover:shadow-[0_4px_20px_rgba(0,255,65,0.08)] transition-all duration-300 flex-1 min-h-0"
             >
               <div className="hidden lg:block w-full lg:h-24 xl:h-32 relative overflow-hidden border-b border-terminal-green/20 bg-white dark:bg-[#050505] flex-shrink-0">
@@ -128,6 +131,8 @@ export function Projects() {
                     target="_blank"
                     rel="noreferrer noopener"
                     aria-label={`View ${project.title} project`}
+                    onClick={() => { playConfirm(); haptic("confirm"); }}
+                    onMouseEnter={playTick}
                     className="hacker-btn flex-1 px-1 py-1 text-[9px] text-center glitch-hover flex items-center justify-center min-h-[26px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terminal-green focus-visible:ring-offset-1"
                   >
                     <ExternalLink size={10} className="mr-1 hidden sm:block" /> OPEN
@@ -137,6 +142,8 @@ export function Projects() {
                     target="_blank"
                     rel="noreferrer noopener"
                     aria-label={`View ${project.title} on GitHub`}
+                    onClick={() => { playConfirm(); haptic("confirm"); }}
+                    onMouseEnter={playTick}
                     className="hacker-btn hacker-btn-alt px-1 py-1 glitch-hover flex items-center justify-center min-w-[32px] min-h-[26px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terminal-green focus-visible:ring-offset-1"
                   >
                     <Github size={12} />

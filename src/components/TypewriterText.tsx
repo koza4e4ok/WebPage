@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { playKeypress } from "../lib/audioEngine";
 
 interface TypewriterTextProps {
   text: string;
@@ -25,6 +26,7 @@ export function TypewriterText({
     const id = setInterval(() => {
       i++;
       setDisplayed(text.slice(0, i));
+      playKeypress();
       if (i >= text.length) {
         clearInterval(id);
         setDone(true);

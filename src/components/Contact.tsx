@@ -1,6 +1,8 @@
 import { motion } from "motion/react";
 import { Mail, Send, TerminalSquare, Loader2, CheckCircle2, AlertCircle } from "lucide-react";
 import { useState } from "react";
+import { playConfirm, playError, playSuccess, playTick } from "../lib/audioEngine";
+import { haptic } from "../hooks/useHaptic";
 
 const containerVariants = {
   hidden: {},
@@ -21,10 +23,14 @@ export function Contact() {
 
   const handleTransmit = async () => {
     if (!formData.returnAddr || !formData.payload) {
+      playError();
+      haptic("error");
       setStatus("error");
       setTimeout(() => setStatus("idle"), 3000);
       return;
     }
+    playConfirm();
+    haptic("confirm");
     setStatus("submitting");
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
@@ -40,12 +46,18 @@ export function Contact() {
       });
       const json = await response.json();
       if (json.success) {
+        playSuccess();
+        haptic("success");
         setStatus("success");
         setFormData({ name: "", returnAddr: "", payload: "" });
       } else {
+        playError();
+        haptic("error");
         setStatus("error");
       }
     } catch {
+      playError();
+      haptic("error");
       setStatus("error");
     }
     setTimeout(() => setStatus("idle"), 4000);
@@ -79,7 +91,13 @@ export function Contact() {
             </motion.p>
 
             <div className="space-y-4 lg:space-y-6 font-mono">
-              <motion.a variants={itemVariants} href={`mailto:${email}`} className="flex items-center gap-3 lg:gap-4 group">
+              <motion.a
+                variants={itemVariants}
+                href={`mailto:${email}`}
+                onClick={() => { playTick(); haptic("tick"); }}
+                onMouseEnter={playTick}
+                className="flex items-center gap-3 lg:gap-4 group"
+              >
                 <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-lg bg-gray-200 dark:bg-[#111] border border-terminal-green/20 flex items-center justify-center group-hover:bg-terminal-green/10 group-hover:border-terminal-green transition-all glitch-hover">
                   <Mail className="text-gray-600 dark:text-gray-400 group-hover:text-terminal-green transition-colors" size={18} />
                 </div>
@@ -89,7 +107,15 @@ export function Contact() {
                 </div>
               </motion.a>
 
-              <motion.a variants={itemVariants} href="https://t.me/koza4e4ok" target="_blank" rel="noreferrer noopener" className="flex items-center gap-3 lg:gap-4 group">
+              <motion.a
+                variants={itemVariants}
+                href="https://t.me/koza4e4ok"
+                target="_blank"
+                rel="noreferrer noopener"
+                onClick={() => { playTick(); haptic("tick"); }}
+                onMouseEnter={playTick}
+                className="flex items-center gap-3 lg:gap-4 group"
+              >
                 <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-lg bg-gray-200 dark:bg-[#111] border border-[#00ffff]/20 flex items-center justify-center group-hover:bg-[#00ffff]/10 group-hover:border-[#00ffff] transition-all glitch-hover">
                   <Send className="text-gray-600 dark:text-gray-400 group-hover:text-[#00ffff] transition-colors" size={18} />
                 </div>
@@ -119,6 +145,7 @@ export function Contact() {
                   className="w-full px-4 py-3"
                   placeholder="Your name"
                   value={formData.name}
+                  onFocus={() => { playTick(); haptic("tick"); }}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 />
               </div>
@@ -135,6 +162,7 @@ export function Contact() {
                   className="w-full px-4 py-3"
                   placeholder="your@email.com"
                   value={formData.returnAddr}
+                  onFocus={() => { playTick(); haptic("tick"); }}
                   onChange={(e) => setFormData({ ...formData, returnAddr: e.target.value })}
                 />
               </div>
@@ -150,6 +178,7 @@ export function Contact() {
                   className="w-full px-4 py-3 resize-none"
                   placeholder="Your message..."
                   value={formData.payload}
+                  onFocus={() => { playTick(); haptic("tick"); }}
                   onChange={(e) => setFormData({ ...formData, payload: e.target.value })}
                 />
               </div>
