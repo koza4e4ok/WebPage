@@ -238,3 +238,26 @@ textarea:focus-visible,
   position: absolute;
   inset: 0;
 }
+
+/* Fixed hero boot-sequence slots prevent staged content from shifting the viewport. */
+.hero-subtitle-slot {
+  min-height: 2rem;
+  margin-bottom: 0.75rem;
+}
+.hero-copy-slot {
+  min-height: 7.5rem;
+  margin-bottom: 1.5rem;
+}
+.hero-cta-slot {
+  min-height: 3rem;
+}
+@media (min-width: 1024px) {
+  .hero-subtitle-slot {
+    min-height: 2rem;
+    margin-bottom: 1rem;
+  }
+  .hero-copy-slot {
+    min-height: 5rem;
+    margin-bottom: 2rem;
+  }
+}

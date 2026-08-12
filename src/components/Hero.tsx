@@ -33,52 +33,58 @@ export function Hero() {
               />
             </h1>
 
-            {nameTyped && (
-              <div className="hero-fade-in">
-                <h2 className="text-lg md:text-xl font-mono text-gray-800 dark:text-gray-300 font-bold mb-3 md:mb-4">
-                  <TypewriterText
-                    text="Senior Android Engineer"
-                    speed={35}
-                    onComplete={() => setSubtitleTyped(true)}
-                    showCursor={!subtitleTyped}
-                  />
-                </h2>
-              </div>
-            )}
+            <div className="hero-subtitle-slot">
+              {nameTyped && (
+                <div className="hero-fade-in">
+                  <h2 className="text-lg md:text-xl font-mono text-gray-800 dark:text-gray-300 font-bold">
+                    <TypewriterText
+                      text="Senior Android Engineer"
+                      speed={35}
+                      onComplete={() => setSubtitleTyped(true)}
+                      showCursor={!subtitleTyped}
+                    />
+                  </h2>
+                </div>
+              )}
+            </div>
 
-            {subtitleTyped && (
-              <p className="hero-rise-in text-sm md:text-base text-gray-600 dark:text-gray-400 font-mono mb-6 lg:mb-8 max-w-xl leading-relaxed">
-                12+ years delivering reliable Kotlin and Jetpack Compose products.
-                I lead modular architecture, improve delivery pipelines, and turn
-                complex requirements into maintainable Android experiences.
-              </p>
-            )}
+            <div className="hero-copy-slot">
+              {subtitleTyped && (
+                <p className="hero-rise-in text-sm md:text-base text-gray-600 dark:text-gray-400 font-mono max-w-xl leading-relaxed">
+                  12+ years delivering reliable Kotlin and Jetpack Compose products.
+                  I lead modular architecture, improve delivery pipelines, and turn
+                  complex requirements into maintainable Android experiences.
+                </p>
+              )}
+            </div>
 
-            {subtitleTyped && (
-              <div className="hero-rise-in hero-delay flex flex-wrap gap-4 font-mono">
-                <MagneticButton
-                  as="a"
-                  href="#projects"
-                  className="hacker-btn glitch-hover"
-                  onClick={() => { playConfirm(); haptic("confirm"); }}
-                  onMouseEnter={() => { playTick(); haptic("tick"); }}
-                >
-                  <Terminal size={18} />
-                  View Projects
-                </MagneticButton>
-                <MagneticButton
-                  as="a"
-                  href={`${import.meta.env.BASE_URL}andriikozakov.pdf`}
-                  download="andriikozakov.pdf"
-                  className="hacker-btn hacker-btn-alt glitch-hover"
-                  onClick={() => { playConfirm(); haptic("confirm"); }}
-                  onMouseEnter={() => { playTick(); haptic("tick"); }}
-                >
-                  <Download size={18} />
-                  Fetch CV
-                </MagneticButton>
-              </div>
-            )}
+            <div className="hero-cta-slot">
+              {subtitleTyped && (
+                <div className="hero-rise-in hero-delay flex flex-wrap gap-4 font-mono">
+                  <MagneticButton
+                    as="a"
+                    href="#projects"
+                    className="hacker-btn glitch-hover"
+                    onClick={() => { playConfirm(); haptic("confirm"); }}
+                    onMouseEnter={() => { playTick(); haptic("tick"); }}
+                  >
+                    <Terminal size={18} />
+                    View Projects
+                  </MagneticButton>
+                  <MagneticButton
+                    as="a"
+                    href={`${import.meta.env.BASE_URL}andriikozakov.pdf`}
+                    download="andriikozakov.pdf"
+                    className="hacker-btn hacker-btn-alt glitch-hover"
+                    onClick={() => { playConfirm(); haptic("confirm"); }}
+                    onMouseEnter={() => { playTick(); haptic("tick"); }}
+                  >
+                    <Download size={18} />
+                    Fetch CV
+                  </MagneticButton>
+                </div>
+              )}
+            </div>
           </div>
 
           <div className="hero-visual-enter relative hidden lg:block">
