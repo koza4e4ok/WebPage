@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { motion } from "motion/react";
 import { Terminal, Download, Cpu } from "lucide-react";
 import { TypewriterText } from "./TypewriterText";
 import { MagneticButton } from "./MagneticButton";
@@ -19,14 +18,7 @@ export function Hero() {
     >
       <div className="w-full max-w-6xl mx-auto h-full hero-card-pulse hacker-card p-4 md:p-8 lg:p-12 flex flex-col justify-center relative z-10 overflow-hidden">
         <div className="grid lg:grid-cols-2 gap-6 lg:gap-12 items-center w-full min-h-0">
-
-          {/* Left: text content */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="relative z-10"
-          >
+          <div className="hero-enter relative z-10">
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-terminal-green/10 border border-terminal-green/30 rounded-full text-terminal-green text-xs font-mono uppercase tracking-widest mb-8">
               <span className="w-2 h-2 bg-terminal-green animate-pulse rounded-full" />
               System Secure &amp; Ready
@@ -42,11 +34,7 @@ export function Hero() {
             </h1>
 
             {nameTyped && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.3 }}
-              >
+              <div className="hero-fade-in">
                 <h2 className="text-lg md:text-xl font-mono text-gray-800 dark:text-gray-300 font-bold mb-3 md:mb-4">
                   <TypewriterText
                     text="Senior Android Engineer"
@@ -55,29 +43,19 @@ export function Hero() {
                     showCursor={!subtitleTyped}
                   />
                 </h2>
-              </motion.div>
+              </div>
             )}
 
             {subtitleTyped && (
-              <motion.p
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4 }}
-                className="text-sm md:text-base text-gray-600 dark:text-gray-400 font-mono mb-6 lg:mb-8 max-w-xl leading-relaxed"
-              >
+              <p className="hero-rise-in text-sm md:text-base text-gray-600 dark:text-gray-400 font-mono mb-6 lg:mb-8 max-w-xl leading-relaxed">
                 12+ years delivering reliable Kotlin and Jetpack Compose products.
                 I lead modular architecture, improve delivery pipelines, and turn
                 complex requirements into maintainable Android experiences.
-              </motion.p>
+              </p>
             )}
 
             {subtitleTyped && (
-              <motion.div
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 0.1 }}
-                className="flex flex-wrap gap-4 font-mono"
-              >
+              <div className="hero-rise-in hero-delay flex flex-wrap gap-4 font-mono">
                 <MagneticButton
                   as="a"
                   href="#projects"
@@ -99,17 +77,11 @@ export function Hero() {
                   <Download size={18} />
                   Fetch CV
                 </MagneticButton>
-              </motion.div>
+              </div>
             )}
-          </motion.div>
+          </div>
 
-          {/* Right: portrait + counter */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative hidden lg:block"
-          >
+          <div className="hero-visual-enter relative hidden lg:block">
             <div className="relative w-full max-w-[280px] lg:max-w-[400px] mx-auto">
               <div className="absolute inset-0 bg-terminal-green/20 blur-[80px] rounded-full" />
 
@@ -121,6 +93,8 @@ export function Hero() {
                     alt="Portrait of Andrii Kozakov"
                     width={400}
                     height={400}
+                    decoding="async"
+                    fetchPriority="high"
                     className="w-full h-full object-cover grayscale contrast-125"
                   />
                 </div>
@@ -138,8 +112,7 @@ export function Hero() {
                 </div>
               </div>
             </div>
-          </motion.div>
-
+          </div>
         </div>
       </div>
     </section>

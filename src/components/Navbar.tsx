@@ -1,4 +1,3 @@
-import { motion } from "motion/react";
 import { Github, Mail, Menu, X, TerminalSquare, Activity } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useActiveSection } from "../hooks/useActiveSection";
@@ -56,7 +55,7 @@ export function Navbar() {
 
           {/* Left: Logo & Status */}
           <div className="flex items-center gap-6">
-            <motion.a
+            <a
               href="#hero"
               onClick={handleNavClick}
               className="flex items-center gap-2 text-xl md:text-2xl font-terminal font-bold text-terminal-green glitch-hover"
@@ -65,7 +64,7 @@ export function Navbar() {
                 <TerminalSquare size={20} />
               </div>
               <span>ANDRII_K<span className="blink">_</span></span>
-            </motion.a>
+            </a>
 
             <div className="hidden lg:flex items-center gap-3 px-4 py-1.5 bg-gray-50 dark:bg-[#0a0a0a] rounded-full border border-gray-200 dark:border-gray-800 text-[11px] uppercase font-mono text-gray-600 dark:text-gray-400 tracking-wider shadow-inner ml-4">
               <div className="flex items-center gap-1.5 text-terminal-green">
@@ -96,10 +95,7 @@ export function Navbar() {
                   <span className="text-terminal-dim opacity-50 mr-1.5">{">"}</span>
                   {link.name}
                   {isActive && (
-                    <motion.span
-                      layoutId="nav-indicator"
-                      className="absolute bottom-0 left-2 right-2 h-[2px] bg-terminal-green rounded-full"
-                    />
+                    <span className="nav-indicator absolute bottom-0 left-2 right-2 h-[2px] bg-terminal-green rounded-full" />
                   )}
                 </a>
               );
@@ -149,10 +145,8 @@ export function Navbar() {
 
         {/* Mobile Nav Drawer */}
         {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: -10 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            className="lg:hidden bg-white dark:bg-[#050505] rounded-3xl border-2 border-gray-300 dark:border-[#111] mt-2 font-mono flex flex-col overflow-hidden shadow-[0_10px_30px_rgba(0,255,65,0.1)] absolute top-full left-0 right-0 z-40 mx-2"
+          <div
+            className="mobile-nav-enter lg:hidden bg-white dark:bg-[#050505] rounded-3xl border-2 border-gray-300 dark:border-[#111] mt-2 font-mono flex flex-col overflow-hidden shadow-[0_10px_30px_rgba(0,255,65,0.1)] absolute top-full left-0 right-0 z-40 mx-2"
           >
             <div className="px-5 py-3 bg-gray-50 dark:bg-[#0a0a0a] border-b border-gray-200 dark:border-gray-800 flex items-center gap-2 text-xs text-gray-500 uppercase tracking-widest font-terminal">
               <Activity size={12} className="text-terminal-green animate-pulse" />
@@ -199,7 +193,7 @@ export function Navbar() {
                 </a>
               ))}
             </div>
-          </motion.div>
+          </div>
         )}
       </nav>
     </>

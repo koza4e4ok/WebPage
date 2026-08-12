@@ -1,5 +1,4 @@
-import React, { useRef, useState } from "react";
-import { motion, useSpring } from "motion/react";
+import React, { useRef } from "react";
 
 type MagneticButtonProps = {
   children: React.ReactNode;
@@ -10,6 +9,10 @@ type MagneticButtonProps = {
   Partial<React.AnchorHTMLAttributes<HTMLAnchorElement>> &
   Partial<React.ButtonHTMLAttributes<HTMLButtonElement>>;
 
+/**
+ * Cursor-responsive CTA without a runtime animation dependency. The transform
+ * is updated directly on the compositor-only span rather than through React state.
+ */
 export function MagneticButton({
   children,
   strength = 6,
@@ -18,42 +21,34 @@ export function MagneticButton({
   ...rest
 }: MagneticButtonProps) {
   const ref = useRef<HTMLElement>(null);
-  const x = useSpring(0, { stiffness: 150, damping: 15 });
-  const y = useSpring(0, { stiffness: 150, damping: 15 });
-  const [hovered, setHovered] = useState(false);
+  const contentRef = useRef<HTMLSpanElement>(null);
+  const Comp = Tag as React.ElementType;
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
-    if (!ref.current) return;
-    const rect = ref.current.getBoundingClientRect();
-    const cx = rect.left + rect.width / 2;
-    const cy = rect.top + rect.height / 2;
-    x.set(((e.clientX - cx) / rect.width) * strength * 2);
-    y.set(((e.clientY - cy) / rect.height) * strength * 2);
+  const handleMouseMove = (event: React.MouseEvent<HTMLElement>) => {
+    const element = ref.current;
+    const content = contentRef.current;
+    if (!element || !content) return;
+    const rect = element.getBoundingClientRect();
+    const x = ((event.clientX - (rect.left + rect.width / 2)) / rect.width) * strength * 2;
+    const y = ((event.clientY - (rect.top + rect.height / 2)) / rect.height) * strength * 2;
+    content.style.transform = `translate3d(${x}px, ${y}px, 0)`;
   };
 
   const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
-    setHovered(false);
+    if (contentRef.current) contentRef.current.style.transform = "translate3d(0, 0, 0)";
   };
-
-  const Comp = Tag as React.ElementType;
 
   return (
     <Comp
       ref={ref}
       onMouseMove={handleMouseMove}
-      onMouseEnter={() => setHovered(true)}
       onMouseLeave={handleMouseLeave}
-      className={`relative overflow-hidden ${className}`}
+      className={`magnetic-trigger relative overflow-hidden ${className}`}
       {...rest}
     >
-      <motion.span
-        style={{ x, y, display: "inline-flex", alignItems: "center", gap: "0.5rem" }}
-        className={`transition-shadow duration-200 ${hovered ? "drop-shadow-[0_0_8px_rgba(0,153,34,0.6)]" : ""}`}
-      >
+      <span ref={contentRef} className="magnetic-content inline-flex items-center gap-2">
         {children}
-      </motion.span>
+      </span>
     </Comp>
   );
 }
