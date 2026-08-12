@@ -3,12 +3,17 @@ import { playKeypress } from "../lib/audioEngine";
 
 interface TypewriterTextProps {
   text: string;
-  speed?: number;          // ms per character
+  speed?: number;
   className?: string;
   onComplete?: () => void;
   showCursor?: boolean;
 }
 
+/**
+ * Reserves the final string width before typing begins. The visible text is
+ * absolutely overlaid on an aria-hidden measurement copy, preventing layout
+ * shifts as characters are appended on narrower viewports.
+ */
 export function TypewriterText({
   text,
   speed = 60,
@@ -22,12 +27,12 @@ export function TypewriterText({
   useEffect(() => {
     setDisplayed("");
     setDone(false);
-    let i = 0;
+    let index = 0;
     const id = setInterval(() => {
-      i++;
-      setDisplayed(text.slice(0, i));
+      index++;
+      setDisplayed(text.slice(0, index));
       playKeypress();
-      if (i >= text.length) {
+      if (index >= text.length) {
         clearInterval(id);
         setDone(true);
         onComplete?.();
@@ -36,12 +41,15 @@ export function TypewriterText({
     return () => clearInterval(id);
   }, [text, speed, onComplete]);
 
+  const cursor = showCursor ? "_" : "";
+
   return (
-    <span className={className}>
-      {displayed}
-      {showCursor && (
-        <span className={done ? "blink" : "opacity-100"}>_</span>
-      )}
+    <span className={`typewriter-reserved ${className}`}>
+      <span aria-hidden="true" className="typewriter-measure">{text}{cursor}</span>
+      <span className="typewriter-output" aria-live="off">
+        {displayed}
+        {showCursor && <span className={done ? "blink" : "opacity-100"}>_</span>}
+      </span>
     </span>
   );
 }

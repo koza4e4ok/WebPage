@@ -225,3 +225,16 @@ textarea:focus-visible,
   will-change: transform;
   animation: scanline-sweep 250ms ease-in-out both;
 }
+
+/* Reserve the full typewriter footprint to prevent character-by-character CLS. */
+.typewriter-reserved {
+  position: relative;
+  display: inline-block;
+}
+.typewriter-measure {
+  visibility: hidden;
+}
+.typewriter-output {
+  position: absolute;
+  inset: 0;
+}
