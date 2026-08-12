@@ -18,7 +18,7 @@ function SectionPlaceholder({ id, forwardedRef }: { id: string; forwardedRef?: R
 
 /**
  * Keeps the snap-scroll geometry intact while delaying a section’s JavaScript,
- * DOM, images, and in-view animations until it is within roughly two viewports.
+ * DOM, images, and in-view animations until it actually enters the scroll viewport.
  */
 export function DeferredSection({ id, children }: DeferredSectionProps) {
   const placeholderRef = useRef<HTMLElement>(null);
@@ -35,7 +35,7 @@ export function DeferredSection({ id, children }: DeferredSectionProps) {
           observer.disconnect();
         }
       },
-      { root, rootMargin: "150% 0px", threshold: 0.01 }
+      { root, rootMargin: "0px", threshold: 0.01 }
     );
     observer.observe(target);
     return () => observer.disconnect();
