@@ -168,6 +168,11 @@ textarea:focus-visible,
   .glitch-hover:focus {
     animation: none;
   }
+  /* Show hero content immediately — no staged reveal when motion is reduced. */
+  .hero-after-name {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
 
 /* Lightweight replacements for initial-route animation-library effects. */
@@ -239,25 +244,15 @@ textarea:focus-visible,
   inset: 0;
 }
 
-/* Fixed hero boot-sequence slots prevent staged content from shifting the viewport. */
-.hero-subtitle-slot {
-  min-height: 2rem;
-  margin-bottom: 0.75rem;
+/* After the name finishes typing, reveal the remaining hero content in one smooth fade. */
+.hero-after-name {
+  opacity: 0;
+  transform: translate3d(0, 10px, 0);
+  transition: opacity 500ms ease-out, transform 500ms ease-out;
+  /* Reserve the approximate height so the layout is stable before the name types. */
+  min-height: 14rem;
 }
-.hero-copy-slot {
-  min-height: 7.5rem;
-  margin-bottom: 1.5rem;
-}
-.hero-cta-slot {
-  min-height: 3rem;
-}
-@media (min-width: 1024px) {
-  .hero-subtitle-slot {
-    min-height: 2rem;
-    margin-bottom: 1rem;
-  }
-  .hero-copy-slot {
-    min-height: 5rem;
-    margin-bottom: 2rem;
-  }
+.hero-after-name--visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
 }
