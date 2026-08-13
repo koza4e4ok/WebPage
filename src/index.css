@@ -168,10 +168,19 @@ textarea:focus-visible,
   .glitch-hover:focus {
     animation: none;
   }
-  /* Show hero content immediately — no staged reveal when motion is reduced. */
-  .hero-after-name {
+  /* Show all hero content immediately — no staged reveal when motion is reduced. */
+  .hero-item {
+    animation: none !important;
     opacity: 1 !important;
     transform: none !important;
+  }
+  .hero-typewriter-name {
+    animation: none !important;
+    clip-path: none !important;
+  }
+  .hero-cursor {
+    animation: none !important;
+    opacity: 1 !important;
   }
 }
 
@@ -185,27 +194,53 @@ textarea:focus-visible,
   filter: drop-shadow(0 0 8px rgba(0, 153, 34, 0.55));
 }
 
-@keyframes hero-enter {
-  from { opacity: 0; transform: translate3d(0, 16px, 0); }
-  to { opacity: 1; transform: translate3d(0, 0, 0); }
+/* ─── Hero CSS-only animation system ───────────────────────────────────────
+   All hero items use a single fade-up keyframe with staggered delays.
+   The name uses a clip-path typewriter that reveals characters left-to-right.
+   No JavaScript state gating, no blank-space reservations needed.
+   ──────────────────────────────────────────────────────────────────────── */
+
+@keyframes hero-item-in {
+  from { opacity: 0; transform: translate3d(0, 12px, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0,    0); }
 }
-@keyframes hero-visual-enter {
-  from { opacity: 0; transform: scale(0.96); }
-  to { opacity: 1; transform: scale(1); }
+
+/* Each .hero-item-N has a progressively longer delay */
+.hero-item {
+  animation: hero-item-in 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
-@keyframes hero-fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
+.hero-item-1 { animation-delay:  80ms; }
+.hero-item-2 { animation-delay: 180ms; }
+.hero-item-3 { animation-delay: 900ms; }  /* after name finishes ~750 ms */
+.hero-item-4 { animation-delay:1050ms; }
+.hero-item-5 { animation-delay:1200ms; }
+
+/* CSS typewriter: clip the name from left to right using ch units.
+   --name-chars is set inline on the element from the component. */
+@keyframes hero-type {
+  from { clip-path: inset(0 100% 0 0); }
+  to   { clip-path: inset(0   0% 0 0); }
 }
-@keyframes hero-rise-in {
-  from { opacity: 0; transform: translate3d(0, 8px, 0); }
-  to { opacity: 1; transform: translate3d(0, 0, 0); }
+.hero-typewriter-name {
+  display: inline-block;
+  clip-path: inset(0 100% 0 0);
+  animation:
+    hero-type calc(var(--name-chars, 14) * 55ms) steps(var(--name-chars, 14), end)
+    180ms both;
+  white-space: nowrap;
 }
-.hero-enter { animation: hero-enter 500ms ease-out both; }
-.hero-visual-enter { animation: hero-visual-enter 800ms ease-out 150ms both; }
-.hero-fade-in { animation: hero-fade-in 300ms ease-out both; }
-.hero-rise-in { animation: hero-rise-in 400ms ease-out both; }
-.hero-delay { animation-delay: 100ms; }
+
+/* Cursor blinks after the name finishes typing */
+@keyframes hero-cursor-blink {
+  0%, 49% { opacity: 1; }
+  50%,100% { opacity: 0; }
+}
+.hero-cursor {
+  /* delay = name start delay + typing duration */
+  animation: hero-cursor-blink 700ms step-end
+    calc(180ms + var(--name-chars, 14) * 55ms) infinite;
+  opacity: 0; /* hidden until typing completes */
+}
 
 @keyframes nav-indicator-in {
   from { transform: scaleX(0.45); opacity: 0.35; }
@@ -231,28 +266,4 @@ textarea:focus-visible,
   animation: scanline-sweep 250ms ease-in-out both;
 }
 
-/* Reserve the full typewriter footprint to prevent character-by-character CLS. */
-.typewriter-reserved {
-  position: relative;
-  display: inline-block;
-}
-.typewriter-measure {
-  visibility: hidden;
-}
-.typewriter-output {
-  position: absolute;
-  inset: 0;
-}
 
-/* After the name finishes typing, reveal the remaining hero content in one smooth fade. */
-.hero-after-name {
-  opacity: 0;
-  transform: translate3d(0, 10px, 0);
-  transition: opacity 500ms ease-out, transform 500ms ease-out;
-  /* Reserve the approximate height so the layout is stable before the name types. */
-  min-height: 14rem;
-}
-.hero-after-name--visible {
-  opacity: 1;
-  transform: translate3d(0, 0, 0);
-}
