@@ -168,17 +168,18 @@ textarea:focus-visible,
   .glitch-hover:focus {
     animation: none;
   }
-  /* Show all hero content immediately — no staged reveal when motion is reduced. */
+  /* Show all hero content immediately when motion is reduced. */
   .hero-item {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;
   }
-  .hero-typewriter-name {
-    animation: none !important;
-    clip-path: none !important;
+  .hero-content-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
   }
-  .hero-cursor {
+  .hero-cursor-blink {
     animation: none !important;
     opacity: 1 !important;
   }
@@ -194,52 +195,50 @@ textarea:focus-visible,
   filter: drop-shadow(0 0 8px rgba(0, 153, 34, 0.55));
 }
 
-/* ─── Hero CSS-only animation system ───────────────────────────────────────
-   All hero items use a single fade-up keyframe with staggered delays.
-   The name uses a clip-path typewriter that reveals characters left-to-right.
-   No JavaScript state gating, no blank-space reservations needed.
-   ──────────────────────────────────────────────────────────────────────── */
+/* ─── Hero animation system ──────────────────────────────────────────────────
+   hero-item-N: badge and name fade up on entry.
+   hero-content-reveal: role/bio/CTAs are always in the DOM (no layout
+     reservation needed) and transition in once the name finishes typing.
+   hero-cursor-solid: visible solid underscore during typing.
+   hero-cursor-blink: blinking underscore after typing completes.
+   ────────────────────────────────────────────────────────────────────── */
 
 @keyframes hero-item-in {
-  from { opacity: 0; transform: translate3d(0, 12px, 0); }
+  from { opacity: 0; transform: translate3d(0, 14px, 0); }
   to   { opacity: 1; transform: translate3d(0, 0,    0); }
 }
-
-/* Each .hero-item-N has a progressively longer delay */
 .hero-item {
-  animation: hero-item-in 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: hero-item-in 480ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
-.hero-item-1 { animation-delay:  80ms; }
-.hero-item-2 { animation-delay: 180ms; }
-.hero-item-3 { animation-delay: 900ms; }  /* after name finishes ~750 ms */
-.hero-item-4 { animation-delay:1050ms; }
-.hero-item-5 { animation-delay:1200ms; }
+.hero-item-1 { animation-delay: 100ms; }
+.hero-item-2 { animation-delay: 220ms; }
 
-/* CSS typewriter: clip the name from left to right using ch units.
-   --name-chars is set inline on the element from the component. */
-@keyframes hero-type {
-  from { clip-path: inset(0 100% 0 0); }
-  to   { clip-path: inset(0   0% 0 0); }
+/* Role, bio, CTAs: hidden until typing completes, then smooth fade-up */
+.hero-content-reveal {
+  opacity: 0;
+  transform: translate3d(0, 10px, 0);
+  /* transition fires the moment the --visible class is added */
+  transition: opacity 500ms cubic-bezier(0.22, 1, 0.36, 1),
+              transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
 }
-.hero-typewriter-name {
-  display: inline-block;
-  clip-path: inset(0 100% 0 0);
-  animation:
-    hero-type calc(var(--name-chars, 14) * 55ms) steps(var(--name-chars, 14), end)
-    180ms both;
-  white-space: nowrap;
+.hero-content-reveal--visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
 }
 
-/* Cursor blinks after the name finishes typing */
-@keyframes hero-cursor-blink {
+/* Solid cursor while typing */
+.hero-cursor-solid {
+  opacity: 1;
+}
+
+/* Blinking cursor once typing is done */
+@keyframes hero-blink {
   0%, 49% { opacity: 1; }
-  50%,100% { opacity: 0; }
+  50%, 100% { opacity: 0; }
 }
-.hero-cursor {
-  /* delay = name start delay + typing duration */
-  animation: hero-cursor-blink 700ms step-end
-    calc(180ms + var(--name-chars, 14) * 55ms) infinite;
-  opacity: 0; /* hidden until typing completes */
+.hero-cursor-blink {
+  animation: hero-blink 900ms step-end infinite;
 }
 
 @keyframes nav-indicator-in {
