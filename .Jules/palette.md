@@ -1,0 +1,3 @@
+## 2025-03-09 - Forms and Accessibility
+**Learning:** Forms constructed using standard `<form>` elements but a `type="button"` submit button with an `onClick` handler bypass HTML5 built-in field validation (`required`, `type="email"`, etc) and prevent submitting the form intuitively via the `Enter` key.
+**Action:** Always ensure that standard form elements use native `<form onSubmit={...}>` alongside a `<button type="submit">`. Additionally, if fields are visually grouped but conceptually required, include a visual indicator (like a red asterisk) for sighted users so they know a field must be completed.

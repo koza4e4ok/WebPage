@@ -131,6 +131,10 @@ export function Contact() {
           <motion.form
             variants={itemVariants}
             className="bg-white dark:bg-[#050505] p-5 lg:p-8 rounded-2xl border border-gray-200 dark:border-gray-800 relative z-10 shadow-lg min-h-0 flex flex-col justify-center"
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleTransmit();
+            }}
           >
             <div className="space-y-3 lg:space-y-5 font-mono">
               <div>
@@ -151,7 +155,7 @@ export function Contact() {
               </div>
               <div>
                 <label htmlFor="contact-email" className="block text-xs text-terminal-dim uppercase tracking-widest mb-2">
-                  {">"}_  INPUT RETURN_ADDR
+                  {">"}_  INPUT RETURN_ADDR <span className="text-red-500" aria-hidden="true">*</span>
                 </label>
                 <input
                   id="contact-email"
@@ -168,7 +172,7 @@ export function Contact() {
               </div>
               <div>
                 <label htmlFor="contact-message" className="block text-xs text-terminal-dim uppercase tracking-widest mb-2">
-                  {">"}_  INPUT PAYLOAD
+                  {">"}_  INPUT PAYLOAD <span className="text-red-500" aria-hidden="true">*</span>
                 </label>
                 <textarea
                   id="contact-message"
@@ -190,8 +194,7 @@ export function Contact() {
 
               <motion.button
                 whileTap={status === "idle" ? { scale: 0.98 } : {}}
-                type="button"
-                onClick={handleTransmit}
+                type="submit"
                 disabled={status === "submitting"}
                 aria-disabled={status === "submitting"}
                 className={`w-full mt-1 lg:mt-2 py-2 lg:py-3 text-sm lg:text-base flex items-center justify-center gap-2 rounded-lg font-mono uppercase tracking-widest font-bold border transition-all ${
