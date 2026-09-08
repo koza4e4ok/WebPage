@@ -94,6 +94,7 @@ export function Contact() {
               <motion.a
                 variants={itemVariants}
                 href={`mailto:${email}`}
+                aria-label="Send email"
                 onClick={() => { playTick(); haptic("tick"); }}
                 onMouseEnter={playTick}
                 className="flex items-center gap-3 lg:gap-4 group"
@@ -112,6 +113,7 @@ export function Contact() {
                 href="https://t.me/koza4e4ok"
                 target="_blank"
                 rel="noreferrer noopener"
+                aria-label="Contact on Telegram"
                 onClick={() => { playTick(); haptic("tick"); }}
                 onMouseEnter={playTick}
                 className="flex items-center gap-3 lg:gap-4 group"
