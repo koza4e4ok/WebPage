@@ -131,6 +131,7 @@ export function Projects() {
                     target="_blank"
                     rel="noreferrer noopener"
                     aria-label={`View ${project.title} project`}
+                    title={`View ${project.title} project`}
                     onClick={() => { playConfirm(); haptic("confirm"); }}
                     onMouseEnter={playTick}
                     className="hacker-btn flex-1 px-1 py-1 text-[9px] text-center glitch-hover flex items-center justify-center min-h-[26px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terminal-green focus-visible:ring-offset-1"
@@ -142,6 +143,7 @@ export function Projects() {
                     target="_blank"
                     rel="noreferrer noopener"
                     aria-label={`View ${project.title} on GitHub`}
+                    title={`View ${project.title} on GitHub`}
                     onClick={() => { playConfirm(); haptic("confirm"); }}
                     onMouseEnter={playTick}
                     className="hacker-btn hacker-btn-alt px-1 py-1 glitch-hover flex items-center justify-center min-w-[32px] min-h-[26px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terminal-green focus-visible:ring-offset-1"

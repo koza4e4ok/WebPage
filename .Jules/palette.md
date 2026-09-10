@@ -4,3 +4,6 @@
 ## 2025-03-09 - Accessible Links in Forms
 **Learning:** Adding explicit `aria-label` attributes to social and contact links provides essential context for screen readers when visible text is insufficient or decorative.
 **Action:** Always include an `aria-label` on `<a>` tags describing the destination or action if the link has an icon or minimal text (e.g., "Send email" instead of just the email address).
+## 2024-05-24 - Skip link focus styles in single-page apps
+**Learning:** Adding a skip-to-content link in a full-height container (`h-screen overflow-hidden`) requires careful z-index placement (`z-[100]`) and focus management (`tabIndex={-1}`) on the target container to prevent unsightly default focus rings while preserving screen reader navigation.
+**Action:** When adding skip links to custom scrollbar areas, explicitly style the target container with `focus:outline-none focus-visible:outline-none` and provide `tabIndex={-1}`.
