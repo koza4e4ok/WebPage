@@ -22,7 +22,7 @@ export function Experience() {
     },
     {
       company: "Unicreo",
-      companyUrl: null,
+      companyUrl: "https://unicreo.com/",
       role: "ANDROID DEVELOPER",
       period: "2016 — 2021",
       description:
