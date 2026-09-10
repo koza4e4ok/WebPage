@@ -12,6 +12,13 @@ const Contact = lazy(() => import("./components/Contact").then(({ Contact: Compo
 export default function App() {
   return (
     <div className="h-screen w-full bg-gray-100 dark:bg-[#020202] text-gray-800 dark:text-gray-300 font-mono relative selection:bg-terminal-green selection:text-black flex flex-col overflow-hidden">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 z-[100] px-4 py-2 bg-terminal-green text-black font-bold outline-none ring-2 ring-terminal-green ring-offset-2 ring-offset-white dark:ring-offset-[#020202] rounded-md transition-all"
+      >
+        Skip to main content
+      </a>
+
       <div className="pt-2 md:pt-4 lg:pt-6 px-2 md:px-4 lg:px-6 w-full max-w-[100rem] mx-auto z-50 flex-shrink-0 relative">
         <Navbar />
       </div>
@@ -22,7 +29,7 @@ export default function App() {
           <div className="crt-overlay absolute inset-0 z-40 pointer-events-none" />
           <div className="crt-vignette absolute inset-0 z-30 pointer-events-none" />
 
-          <main className="relative z-10 w-full h-full overflow-y-auto scroll-smooth custom-scrollbar snap-y snap-mandatory flex flex-col">
+          <main id="main-content" tabIndex={-1} className="relative z-10 w-full h-full overflow-y-auto scroll-smooth custom-scrollbar snap-y snap-mandatory flex flex-col focus-visible:outline-none focus-visible:ring-0 focus:outline-none">
             <Hero />
             <DeferredSection id="skills"><Skills /></DeferredSection>
             <DeferredSection id="projects"><Projects /></DeferredSection>

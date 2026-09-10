@@ -111,6 +111,7 @@ export function Navbar() {
                   target="_blank"
                   rel="noreferrer noopener"
                   aria-label={link.label}
+                  title={link.label}
                   onClick={handleSocialClick}
                   onMouseEnter={() => { playTick(); haptic("tick"); }}
                   className="w-8 h-8 rounded-full flex items-center justify-center bg-gray-50 dark:bg-[#0a0a0a] border border-gray-200 dark:border-gray-800 text-gray-600 dark:text-gray-400 hover:text-terminal-green hover:border-terminal-green hover:shadow-[0_0_10px_rgba(0,255,65,0.2)] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terminal-green focus-visible:ring-offset-2"
@@ -136,6 +137,7 @@ export function Navbar() {
                 haptic("tick");
               }}
               aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
+              title={isOpen ? "Close menu" : "Open menu"}
               aria-expanded={isOpen}
             >
               {isOpen ? <X size={20} /> : <Menu size={20} />}
@@ -186,6 +188,7 @@ export function Navbar() {
                   target="_blank"
                   rel="noreferrer noopener"
                   aria-label={link.label}
+                  title={link.label}
                   onClick={handleSocialClick}
                   className="p-3 w-12 h-12 flex items-center justify-center rounded-full text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-[#0a0a0a] border border-gray-200 dark:border-gray-800 hover:border-terminal-green hover:shadow-[0_0_10px_rgba(0,255,65,0.2)] hover:text-terminal-green transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terminal-green focus-visible:ring-offset-2"
                 >
