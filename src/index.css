@@ -25,6 +25,9 @@
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
   body {
     @apply bg-gray-100 dark:bg-[#020202] text-gray-800 dark:text-gray-300 font-mono antialiased overflow-hidden;
   }
@@ -32,13 +35,14 @@
     @apply font-terminal text-terminal-green tracking-wider;
   }
   input, textarea {
-    @apply bg-gray-50 dark:bg-[#0a0a0a] border border-terminal-green/40 text-gray-900 dark:text-gray-200 placeholder:text-gray-600 dark:placeholder:text-gray-400 font-mono focus:border-terminal-green focus:shadow-[0_0_10px_rgba(0,255,65,0.2)] outline-none rounded-lg transition-all;
+    @apply bg-gray-50 dark:bg-[#0a0a0a] border border-terminal-green/40 text-gray-900 dark:text-gray-200 placeholder:text-gray-600 dark:placeholder:text-gray-400 font-mono focus:border-terminal-green focus:shadow-[0_0_10px_rgba(0,255,65,0.2)] outline-none rounded-lg transition-all duration-200;
   }
 }
 
 .custom-scrollbar {
   scrollbar-width: thin;
   scrollbar-color: var(--color-terminal-dim) rgba(0,0,0,0.5);
+  scroll-behavior: smooth;
 }
 .custom-scrollbar::-webkit-scrollbar {
   width: 8px;
@@ -73,7 +77,8 @@
 /* Modern RGB Glitch Hover */
 .glitch-hover {
   position: relative;
-  transition: all 0.2s;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease, text-shadow 0.2s ease;
+  will-change: transform;
 }
 .glitch-hover:hover, .glitch-hover:focus {
   color: #000;
@@ -86,24 +91,31 @@
 }
 
 @keyframes modern-glitch {
-  0% { transform: translate(0); text-shadow: none; }
-  20% { transform: translate(-2px, 1px); text-shadow: 2px 0 red, -2px 0 cyan; }
-  40% { transform: translate(2px, -1px); text-shadow: -2px 0 red, 1px 0 cyan; }
-  60% { transform: translate(0); text-shadow: none; }
-  80% { transform: translate(-1px, -1px); text-shadow: 1px 0 red, -1px 0 cyan; }
-  100% { transform: translate(0); text-shadow: none; }
+  0% { transform: translate3d(0, 0, 0); text-shadow: none; }
+  20% { transform: translate3d(-2px, 1px, 0); text-shadow: 2px 0 red, -2px 0 cyan; }
+  40% { transform: translate3d(2px, -1px, 0); text-shadow: -2px 0 red, 1px 0 cyan; }
+  60% { transform: translate3d(0, 0, 0); text-shadow: none; }
+  80% { transform: translate3d(-1px, -1px, 0); text-shadow: 1px 0 red, -1px 0 cyan; }
+  100% { transform: translate3d(0, 0, 0); text-shadow: none; }
 }
 
-/* User Friendly Hacker Cards & Buttons */
+/* User Friendly Hacker Cards & Buttons with smooth transitions */
 .hacker-card {
-  @apply bg-gray-50 dark:bg-[#0a0a0a] border border-terminal-green/20 rounded-xl hover:border-terminal-green transition-all duration-300;
+  @apply bg-gray-50 dark:bg-[#0a0a0a] border border-terminal-green/20 rounded-xl transition-all duration-300;
+  will-change: border-color, box-shadow, transform;
 }
 .hacker-card:hover {
-  box-shadow: 0 4px 20px rgba(0, 255, 65, 0.1);
+  @apply border-terminal-green;
+  box-shadow: 0 6px 24px rgba(0, 255, 65, 0.12);
+  transform: translate3d(0, -2px, 0);
 }
 
 .hacker-btn {
-  @apply px-6 py-3 border border-terminal-green text-terminal-green rounded-lg bg-terminal-green/5 hover:bg-terminal-green hover:text-white uppercase tracking-widest font-bold transition-all flex items-center justify-center gap-2;
+  @apply px-6 py-3 border border-terminal-green text-terminal-green rounded-lg bg-terminal-green/5 hover:bg-terminal-green hover:text-white uppercase tracking-widest font-bold transition-all duration-200 flex items-center justify-center gap-2 active:scale-95;
+  will-change: transform, background-color, box-shadow;
+}
+.hacker-btn:hover {
+  box-shadow: 0 0 12px rgba(0, 255, 65, 0.3);
 }
 
 .hacker-btn-alt {
@@ -247,14 +259,14 @@ textarea:focus-visible,
 }
 .nav-indicator {
   transform-origin: center;
-  animation: nav-indicator-in 180ms ease-out both;
+  animation: nav-indicator-in 180ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 @keyframes mobile-nav-enter {
   from { opacity: 0; transform: translate3d(0, -10px, 0) scale(0.97); }
   to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
 }
-.mobile-nav-enter { animation: mobile-nav-enter 180ms ease-out both; }
+.mobile-nav-enter { animation: mobile-nav-enter 180ms cubic-bezier(0.16, 1, 0.3, 1) both; }
 
 @keyframes scanline-sweep {
   from { transform: translate3d(-100%, 0, 0); }
@@ -264,5 +276,3 @@ textarea:focus-visible,
   will-change: transform;
   animation: scanline-sweep 250ms ease-in-out both;
 }
-
-

@@ -1,14 +1,18 @@
-import { Github, Mail, Menu, X, TerminalSquare, Activity } from "lucide-react";
+import { Github, Mail, Menu, X, TerminalSquare, Activity, Terminal as TerminalIcon } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useActiveSection } from "../hooks/useActiveSection";
 import { ScanlineWipe } from "./ScanlineWipe";
 import { SoundToggle } from "./SoundToggle";
-import { playTick, playNavSelect } from "../lib/audioEngine";
+import { playTick, playNavSelect, playConfirm } from "../lib/audioEngine";
 import { haptic } from "../hooks/useHaptic";
 
 const SECTION_IDS = ["hero", "skills", "projects", "experience", "contact"];
 
-export function Navbar() {
+interface NavbarProps {
+  onOpenTerminal?: () => void;
+}
+
+export function Navbar({ onOpenTerminal }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [time, setTime] = useState("");
   const activeSection = useActiveSection(SECTION_IDS);
@@ -54,7 +58,7 @@ export function Navbar() {
         <div className="px-4 md:px-8 h-14 md:h-16 flex items-center justify-between">
 
           {/* Left: Logo & Status */}
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-4 lg:gap-6">
             <a
               href="#hero"
               onClick={handleNavClick}
@@ -66,14 +70,27 @@ export function Navbar() {
               <span>ANDRII_K<span className="blink">_</span></span>
             </a>
 
-            <div className="hidden lg:flex items-center gap-3 px-4 py-1.5 bg-gray-50 dark:bg-[#0a0a0a] rounded-full border border-gray-200 dark:border-gray-800 text-[11px] uppercase font-mono text-gray-600 dark:text-gray-400 tracking-wider shadow-inner ml-4">
+            {/* Clickable Status Badge launching Terminal Easter Egg */}
+            <button
+              onClick={() => {
+                playConfirm();
+                haptic("confirm");
+                onOpenTerminal?.();
+              }}
+              title="Launch Interactive Terminal Shell [Press ~ or click]"
+              aria-label="Open Interactive Terminal Easter Egg"
+              className="hidden lg:flex items-center gap-2 px-3 py-1 bg-gray-50 dark:bg-[#0a0a0a] hover:bg-terminal-green/10 rounded-full border border-gray-200 dark:border-gray-800 hover:border-terminal-green/50 text-[11px] uppercase font-mono text-gray-600 dark:text-gray-400 tracking-wider shadow-inner ml-2 transition-all cursor-pointer group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terminal-green"
+            >
               <div className="flex items-center gap-1.5 text-terminal-green">
                 <Activity size={12} className="animate-pulse" />
-                <span className="text-terminal-green">SYS.ON</span>
+                <span className="text-terminal-green font-bold group-hover:underline">SYS.ON</span>
               </div>
               <div className="w-[1px] h-3 bg-gray-700" />
               <span className="text-gray-500 font-terminal text-sm">{time}</span>
-            </div>
+              <span className="hidden xl:inline text-[9px] px-1.5 py-0.5 rounded bg-terminal-green/20 text-terminal-green font-mono border border-terminal-green/30 ml-1">
+                SHELL [~]
+              </span>
+            </button>
           </div>
 
           {/* Right: Desktop Nav */}
@@ -104,6 +121,20 @@ export function Navbar() {
             <div className="h-6 w-[1px] bg-gray-200 dark:bg-[#111] mx-2" />
 
             <div className="flex items-center gap-2">
+              {/* Terminal Quick Icon Button */}
+              <button
+                onClick={() => {
+                  playConfirm();
+                  haptic("confirm");
+                  onOpenTerminal?.();
+                }}
+                aria-label="Open Interactive CLI Terminal"
+                title="Launch Terminal Shell [~]"
+                className="w-8 h-8 rounded-full flex items-center justify-center bg-gray-50 dark:bg-[#0a0a0a] border border-gray-200 dark:border-gray-800 text-gray-600 dark:text-gray-400 hover:text-terminal-green hover:border-terminal-green hover:shadow-[0_0_10px_rgba(0,255,65,0.2)] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terminal-green focus-visible:ring-offset-2"
+              >
+                <TerminalIcon size={14} />
+              </button>
+
               {socialLinks.map((link) => (
                 <a
                   key={link.label}
@@ -127,6 +158,18 @@ export function Navbar() {
 
           {/* Mobile menu button */}
           <div className="flex items-center gap-3 lg:hidden">
+            <button
+              onClick={() => {
+                playConfirm();
+                haptic("confirm");
+                onOpenTerminal?.();
+              }}
+              aria-label="Open Terminal Shell"
+              title="Launch Terminal"
+              className="p-1.5 rounded-lg bg-gray-50 dark:bg-[#0a0a0a] border border-gray-200 dark:border-gray-800 text-terminal-green"
+            >
+              <TerminalIcon size={16} />
+            </button>
             <span className="text-terminal-green/70 font-terminal text-lg tracking-widest">{time}</span>
             <SoundToggle />
             <button
@@ -150,9 +193,20 @@ export function Navbar() {
           <div
             className="mobile-nav-enter lg:hidden bg-white dark:bg-[#050505] rounded-3xl border-2 border-gray-300 dark:border-[#111] mt-2 font-mono flex flex-col overflow-hidden shadow-[0_10px_30px_rgba(0,255,65,0.1)] absolute top-full left-0 right-0 z-40 mx-2"
           >
-            <div className="px-5 py-3 bg-gray-50 dark:bg-[#0a0a0a] border-b border-gray-200 dark:border-gray-800 flex items-center gap-2 text-xs text-gray-500 uppercase tracking-widest font-terminal">
-              <Activity size={12} className="text-terminal-green animate-pulse" />
-              System Interface Menu
+            <div className="px-5 py-3 bg-gray-50 dark:bg-[#0a0a0a] border-b border-gray-200 dark:border-gray-800 flex items-center justify-between text-xs text-gray-500 uppercase tracking-widest font-terminal">
+              <div className="flex items-center gap-2">
+                <Activity size={12} className="text-terminal-green animate-pulse" />
+                System Interface Menu
+              </div>
+              <button
+                onClick={() => {
+                  setIsOpen(false);
+                  onOpenTerminal?.();
+                }}
+                className="text-terminal-green font-mono text-[10px] px-2 py-0.5 rounded bg-terminal-green/10 border border-terminal-green/30"
+              >
+                CLI SHELL
+              </button>
             </div>
 
             <div className="flex flex-col p-4 gap-2">
