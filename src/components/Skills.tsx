@@ -103,30 +103,40 @@ export function Skills() {
               </h4>
 
               <div className="flex flex-col gap-2 flex-grow">
-                {cat.skills.map((skill) => (
-                  <div key={skill.name}>
-                    <div className="flex justify-between items-center mb-0.5">
-                      <span className="text-xs font-mono text-gray-800 dark:text-gray-300">
-                        {skill.name}
-                      </span>
-                      <span className="text-[10px] font-mono text-terminal-dim opacity-70">
-                        {skill.level}%
-                      </span>
+                {cat.skills.map((skill) => {
+                  const skillId = `skill-${skill.name.toLowerCase().replace(/\s+/g, '-')}`;
+                  return (
+                    <div key={skill.name}>
+                      <div className="flex justify-between items-center mb-0.5">
+                        <span id={skillId} className="text-xs font-mono text-gray-800 dark:text-gray-300">
+                          {skill.name}
+                        </span>
+                        <span className="text-[10px] font-mono text-terminal-dim opacity-70" aria-hidden="true">
+                          {skill.level}%
+                        </span>
+                      </div>
+                      <div
+                        className="h-[3px] w-full bg-gray-200 dark:bg-[#1a1a1a] rounded-full overflow-hidden"
+                        role="progressbar"
+                        aria-valuenow={skill.level}
+                        aria-valuemin={0}
+                        aria-valuemax={100}
+                        aria-labelledby={skillId}
+                      >
+                        <motion.div
+                          className="h-full bg-terminal-green rounded-full relative"
+                          initial={{ width: 0 }}
+                          whileInView={{ width: `${skill.level}%` }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.9, ease: "easeOut", delay: 0.1 }}
+                          style={{
+                            boxShadow: "0 0 6px rgba(0,153,34,0.6)",
+                          }}
+                        />
+                      </div>
                     </div>
-                    <div className="h-[3px] w-full bg-gray-200 dark:bg-[#1a1a1a] rounded-full overflow-hidden">
-                      <motion.div
-                        className="h-full bg-terminal-green rounded-full relative"
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${skill.level}%` }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.9, ease: "easeOut", delay: 0.1 }}
-                        style={{
-                          boxShadow: "0 0 6px rgba(0,153,34,0.6)",
-                        }}
-                      />
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </motion.div>
           ))}
