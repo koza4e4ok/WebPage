@@ -7,6 +7,9 @@
 ## 2024-05-24 - Skip link focus styles in single-page apps
 **Learning:** Adding a skip-to-content link in a full-height container (`h-screen overflow-hidden`) requires careful z-index placement (`z-[100]`) and focus management (`tabIndex={-1}`) on the target container to prevent unsightly default focus rings while preserving screen reader navigation.
 **Action:** When adding skip links to custom scrollbar areas, explicitly style the target container with `focus:outline-none focus-visible:outline-none` and provide `tabIndex={-1}`.
+## 2025-03-09 - Accessible Progress Bars
+**Learning:** Visual progress bars represented by plain `<div>` elements are not announced to screen readers, making quantitative progress invisible to non-sighted users. The visible percentage text alone isn't robust without a contextual semantic role.
+**Action:** Always add `role="progressbar"`, `aria-valuenow`, `aria-valuemin`, and `aria-valuemax` to custom visual progress elements. Use `aria-labelledby` pointing to the item name, and consider adding `aria-hidden="true"` to the redundant visible percentage text to avoid double-reading.
 ## 2025-03-09 - Interactive Global Hotkey Listeners
 **Learning:** Adding global keyboard shortcut listeners (e.g. Konami code or backtick `~` triggers) in single-page apps can accidentally interfere with user text entry in forms or inputs if target elements are not checked.
 **Action:** Always check `event.target.tagName` or active element focus state before handling global keyboard shortcuts to bypass when the user is actively typing in an `<input>` or `<textarea>`.
