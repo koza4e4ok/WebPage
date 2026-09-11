@@ -13,3 +13,6 @@
 ## 2025-03-09 - Interactive Global Hotkey Listeners
 **Learning:** Adding global keyboard shortcut listeners (e.g. Konami code or backtick `~` triggers) in single-page apps can accidentally interfere with user text entry in forms or inputs if target elements are not checked.
 **Action:** Always check `event.target.tagName` or active element focus state before handling global keyboard shortcuts to bypass when the user is actively typing in an `<input>` or `<textarea>`.
+## 2025-03-09 - Documenting Keyboard Shortcuts for Assistive Tech
+**Learning:** Even when global keyboard shortcuts are supported by an app, screen readers have no automatic way of discovering them unless they are explicitly declared on the relevant trigger elements.
+**Action:** Always add the `aria-keyshortcuts` attribute to buttons or actions that can also be triggered via a keyboard shortcut (e.g. `aria-keyshortcuts="~"`).

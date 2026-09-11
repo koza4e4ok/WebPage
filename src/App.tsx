@@ -116,6 +116,7 @@ export default function App() {
                 {/* Floating terminal trigger hint in footer */}
                 <button
                   onClick={openTerminal}
+                  aria-keyshortcuts="~"
                   className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gray-100 dark:bg-[#0a0a0a] border border-terminal-green/30 text-terminal-green text-xs font-mono hover:bg-terminal-green/10 transition-all group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terminal-green"
                 >
                   <TerminalIcon size={12} className="animate-pulse" />
