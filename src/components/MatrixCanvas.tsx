@@ -2,11 +2,12 @@ import { useEffect, useRef } from "react";
 
 const CHARS = "01アイウエオカキクケコABCDEF0123456789";
 const FONT_SIZE = 13;
-const OPACITY = 0.032;
-// Eight frames per second is visually sufficient for a background matrix field.
-const FRAME_DELAY = 125;
 
-export function MatrixCanvas() {
+interface MatrixCanvasProps {
+  isOverdrive?: boolean;
+}
+
+export function MatrixCanvas({ isOverdrive = false }: MatrixCanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -21,6 +22,9 @@ export function MatrixCanvas() {
     let scheduled = false;
     let documentVisible = !document.hidden;
     let drops: number[] = [];
+
+    const frameDelay = isOverdrive ? 45 : 125;
+    const opacity = isOverdrive ? 0.12 : 0.032;
 
     const columnCount = () => Math.max(1, Math.floor(canvas.width / FONT_SIZE));
 
@@ -37,17 +41,17 @@ export function MatrixCanvas() {
 
     const renderFrame = () => {
       context.fillStyle = document.documentElement.classList.contains("dark")
-        ? "rgba(2,2,2,0.18)"
-        : "rgba(243,244,246,0.18)";
+        ? isOverdrive ? "rgba(2,2,2,0.08)" : "rgba(2,2,2,0.18)"
+        : isOverdrive ? "rgba(243,244,246,0.08)" : "rgba(243,244,246,0.18)";
       context.fillRect(0, 0, canvas.width, canvas.height);
 
-      context.fillStyle = `rgba(0,153,34,${OPACITY})`;
+      context.fillStyle = isOverdrive ? `rgba(0,255,65,${opacity})` : `rgba(0,153,34,${opacity})`;
       context.font = `${FONT_SIZE}px "JetBrains Mono", monospace`;
 
       for (let i = 0; i < drops.length; i++) {
         const char = CHARS[Math.floor(Math.random() * CHARS.length)];
         context.fillText(char, i * FONT_SIZE, drops[i] * FONT_SIZE);
-        if (drops[i] * FONT_SIZE > canvas.height && Math.random() > 0.975) {
+        if (drops[i] * FONT_SIZE > canvas.height && Math.random() > (isOverdrive ? 0.92 : 0.975)) {
           drops[i] = 0;
         }
         drops[i]++;
@@ -64,7 +68,7 @@ export function MatrixCanvas() {
           renderFrame();
           scheduleFrame();
         });
-      }, FRAME_DELAY);
+      }, frameDelay);
     };
 
     const onVisibilityChange = () => {
@@ -91,7 +95,7 @@ export function MatrixCanvas() {
       window.removeEventListener("resize", resize);
       document.removeEventListener("visibilitychange", onVisibilityChange);
     };
-  }, []);
+  }, [isOverdrive]);
 
   return (
     <canvas
