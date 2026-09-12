@@ -13,3 +13,6 @@
 ## 2025-03-09 - Interactive Global Hotkey Listeners
 **Learning:** Adding global keyboard shortcut listeners (e.g. Konami code or backtick `~` triggers) in single-page apps can accidentally interfere with user text entry in forms or inputs if target elements are not checked.
 **Action:** Always check `event.target.tagName` or active element focus state before handling global keyboard shortcuts to bypass when the user is actively typing in an `<input>` or `<textarea>`.
+## 2025-03-09 - Active Navigation State Accessibility
+**Learning:** Visual indicators for the currently active navigation link (like highlights or underlines) are invisible to screen readers, leaving non-sighted users without context on their current position.
+**Action:** Always add `aria-current="page"` (or `"true"` for sections) to the active `<a>` tag in navigation menus alongside the visual active state classes.

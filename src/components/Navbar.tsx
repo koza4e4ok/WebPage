@@ -103,6 +103,7 @@ export function Navbar({ onOpenTerminal }: NavbarProps) {
                   href={link.href}
                   onClick={handleNavClick}
                   onMouseEnter={() => { playTick(); haptic("tick"); }}
+                  aria-current={isActive ? "page" : undefined}
                   className={`px-4 py-2 rounded-full transition-all duration-300 glitch-hover uppercase relative flex items-center ${
                     isActive
                       ? "text-terminal-green bg-terminal-green/10 border-b-2 border-terminal-green"
@@ -221,6 +222,7 @@ export function Navbar({ onOpenTerminal }: NavbarProps) {
                       handleNavClick();
                     }}
                     onMouseEnter={() => { playTick(); haptic("tick"); }}
+                  aria-current={isActive ? "page" : undefined}
                     className={`glitch-hover uppercase text-sm flex items-center p-3 transition-colors rounded-xl border ${
                       isActive
                         ? "text-terminal-green bg-terminal-green/10 border-terminal-green/40"
