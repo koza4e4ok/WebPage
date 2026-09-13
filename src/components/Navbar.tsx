@@ -79,6 +79,7 @@ export function Navbar({ onOpenTerminal }: NavbarProps) {
               }}
               title="Launch Interactive Terminal Shell [Press ~ or click]"
               aria-label="Open Interactive Terminal Easter Egg"
+              aria-keyshortcuts="~"
               className="hidden lg:flex items-center gap-2 px-3 py-1 bg-gray-50 dark:bg-[#0a0a0a] hover:bg-terminal-green/10 rounded-full border border-gray-200 dark:border-gray-800 hover:border-terminal-green/50 text-[11px] uppercase font-mono text-gray-600 dark:text-gray-400 tracking-wider shadow-inner ml-2 transition-all cursor-pointer group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terminal-green"
             >
               <div className="flex items-center gap-1.5 text-terminal-green">
@@ -103,6 +104,7 @@ export function Navbar({ onOpenTerminal }: NavbarProps) {
                   href={link.href}
                   onClick={handleNavClick}
                   onMouseEnter={() => { playTick(); haptic("tick"); }}
+                  aria-current={isActive ? "page" : undefined}
                   className={`px-4 py-2 rounded-full transition-all duration-300 glitch-hover uppercase relative flex items-center ${
                     isActive
                       ? "text-terminal-green bg-terminal-green/10 border-b-2 border-terminal-green"
@@ -129,6 +131,7 @@ export function Navbar({ onOpenTerminal }: NavbarProps) {
                   onOpenTerminal?.();
                 }}
                 aria-label="Open Interactive CLI Terminal"
+                aria-keyshortcuts="~"
                 title="Launch Terminal Shell [~]"
                 className="w-8 h-8 rounded-full flex items-center justify-center bg-gray-50 dark:bg-[#0a0a0a] border border-gray-200 dark:border-gray-800 text-gray-600 dark:text-gray-400 hover:text-terminal-green hover:border-terminal-green hover:shadow-[0_0_10px_rgba(0,255,65,0.2)] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terminal-green focus-visible:ring-offset-2"
               >
@@ -165,6 +168,7 @@ export function Navbar({ onOpenTerminal }: NavbarProps) {
                 onOpenTerminal?.();
               }}
               aria-label="Open Terminal Shell"
+              aria-keyshortcuts="~"
               title="Launch Terminal"
               className="p-1.5 rounded-lg bg-gray-50 dark:bg-[#0a0a0a] border border-gray-200 dark:border-gray-800 text-terminal-green"
             >
@@ -221,6 +225,7 @@ export function Navbar({ onOpenTerminal }: NavbarProps) {
                       handleNavClick();
                     }}
                     onMouseEnter={() => { playTick(); haptic("tick"); }}
+                  aria-current={isActive ? "page" : undefined}
                     className={`glitch-hover uppercase text-sm flex items-center p-3 transition-colors rounded-xl border ${
                       isActive
                         ? "text-terminal-green bg-terminal-green/10 border-terminal-green/40"
