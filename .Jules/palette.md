@@ -16,3 +16,6 @@
 ## 2025-03-09 - Active Navigation State Accessibility
 **Learning:** Visual indicators for the currently active navigation link (like highlights or underlines) are invisible to screen readers, leaving non-sighted users without context on their current position.
 **Action:** Always add `aria-current="page"` (or `"true"` for sections) to the active `<a>` tag in navigation menus alongside the visual active state classes.
+## 2025-03-09 - Documenting Keyboard Shortcuts for Assistive Tech
+**Learning:** Even when global keyboard shortcuts are supported by an app, screen readers have no automatic way of discovering them unless they are explicitly declared on the relevant trigger elements.
+**Action:** Always add the `aria-keyshortcuts` attribute to buttons or actions that can also be triggered via a keyboard shortcut (e.g. `aria-keyshortcuts="~"`).
