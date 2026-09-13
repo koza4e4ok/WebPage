@@ -13,3 +13,6 @@
 ## 2025-03-09 - Interactive Global Hotkey Listeners
 **Learning:** Adding global keyboard shortcut listeners (e.g. Konami code or backtick `~` triggers) in single-page apps can accidentally interfere with user text entry in forms or inputs if target elements are not checked.
 **Action:** Always check `event.target.tagName` or active element focus state before handling global keyboard shortcuts to bypass when the user is actively typing in an `<input>` or `<textarea>`.
+## 2024-05-15 - [Accessible Terminal]
+**Learning:** Custom terminal UI components need `role="log"` and `aria-live="polite"` on the output container to ensure screen readers automatically announce new appended terminal lines.
+**Action:** Always add ARIA live regions to custom terminal output or log views.

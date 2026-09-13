@@ -316,7 +316,11 @@ export function TerminalModal({
         </div>
 
         {/* Output area */}
-        <div className="flex-1 p-4 md:p-6 overflow-y-auto custom-scrollbar font-mono text-sm leading-relaxed space-y-3 bg-[#030303]">
+        <div
+          role="log"
+          aria-live="polite"
+          className="flex-1 p-4 md:p-6 overflow-y-auto custom-scrollbar font-mono text-sm leading-relaxed space-y-3 bg-[#030303]"
+        >
           {history.map((item) => (
             <div key={item.id} className="space-y-1">
               {item.command && (
@@ -349,6 +353,8 @@ export function TerminalModal({
           />
           <button
             onClick={() => handleCommand(inputVal)}
+            title="Execute command (Enter)"
+            aria-label="Execute command"
             className={`px-3 py-1 rounded text-xs font-bold font-mono border transition-all ${themeTextClass} border-current hover:bg-white/10`}
           >
             EXEC

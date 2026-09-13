@@ -165,6 +165,7 @@ export function Contact() {
                   type="email"
                   autoComplete="email"
                   required
+                  aria-invalid={status === "error"}
                   className="w-full px-4 py-3"
                   placeholder="your@email.com"
                   value={formData.returnAddr}
@@ -181,6 +182,7 @@ export function Contact() {
                   name="message"
                   rows={4}
                   required
+                  aria-invalid={status === "error"}
                   className="w-full px-4 py-3 resize-none"
                   placeholder="Your message..."
                   value={formData.payload}
