@@ -89,7 +89,7 @@ export function Projects() {
                 <div className="absolute inset-0 bg-terminal-green/20 mix-blend-color group-hover:opacity-0 transition-opacity z-10 pointer-events-none" />
                 <img
                   src={project.image}
-                  alt={project.title}
+                  alt={`Screenshot of ${project.title} project interface`}
                   loading="lazy"
                   width={800}
                   height={600}

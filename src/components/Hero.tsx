@@ -103,7 +103,7 @@ export function Hero() {
                   <div className="absolute inset-0 bg-terminal-green/10 mix-blend-color z-10 pointer-events-none" />
                   <img
                     src="/avatar.webp"
-                    alt="Portrait of Andrii Kozakov"
+                    alt="Portrait of Andrii Kozakov, Senior Android Engineer"
                     width={400}
                     height={400}
                     decoding="async"
