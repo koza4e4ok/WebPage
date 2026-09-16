@@ -148,7 +148,8 @@ export function Contact() {
                   name="name"
                   type="text"
                   autoComplete="name"
-                  className="w-full px-4 py-3"
+                  disabled={status === "submitting"}
+                  className="w-full px-4 py-3 disabled:opacity-50 disabled:cursor-not-allowed"
                   placeholder="Your name"
                   value={formData.name}
                   onFocus={() => { playTick(); haptic("tick"); }}
@@ -165,8 +166,9 @@ export function Contact() {
                   type="email"
                   autoComplete="email"
                   required
+                  disabled={status === "submitting"}
                   aria-invalid={status === "error"}
-                  className="w-full px-4 py-3"
+                  className="w-full px-4 py-3 disabled:opacity-50 disabled:cursor-not-allowed"
                   placeholder="your@email.com"
                   value={formData.returnAddr}
                   onFocus={() => { playTick(); haptic("tick"); }}
@@ -182,8 +184,9 @@ export function Contact() {
                   name="message"
                   rows={4}
                   required
+                  disabled={status === "submitting"}
                   aria-invalid={status === "error"}
-                  className="w-full px-4 py-3 resize-none"
+                  className="w-full px-4 py-3 resize-none disabled:opacity-50 disabled:cursor-not-allowed"
                   placeholder="Your message..."
                   value={formData.payload}
                   onFocus={() => { playTick(); haptic("tick"); }}
