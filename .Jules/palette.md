@@ -22,6 +22,9 @@
 ## 2025-03-09 - Documenting Keyboard Shortcuts for Assistive Tech
 **Learning:** Even when global keyboard shortcuts are supported by an app, screen readers have no automatic way of discovering them unless they are explicitly declared on the relevant trigger elements.
 **Action:** Always add the `aria-keyshortcuts` attribute to buttons or actions that can also be triggered via a keyboard shortcut (e.g. `aria-keyshortcuts="~"`).
+## 2025-03-09 - Form Field Integrity During Submission
+**Learning:** If form inputs remain active during an asynchronous submission, users might alter their input data before the request completes, causing confusion if the initial state is what actually sent or resulting in unexpected resubmissions.
+**Action:** Always disable text fields, textareas, and other input controls when a form enters a "submitting" state to lock user interaction, and provide visual indicators (like `opacity-50` and `cursor-not-allowed`) to clarify the form is processing.
 ## 2025-03-09 - Async Form Submission Interactions
 **Learning:** During asynchronous form submissions, keeping form inputs enabled can lead to users modifying data mid-submission or becoming confused if the request takes a long time.
 **Action:** Always disable text inputs and textareas (along with the submit button) when a form is actively submitting to lock user input, and provide clear disabled visual styles (`opacity-50 cursor-not-allowed`) to indicate the non-interactive state.
