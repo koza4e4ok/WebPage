@@ -28,3 +28,6 @@
 ## 2025-03-09 - Async Form Submission Interactions
 **Learning:** During asynchronous form submissions, keeping form inputs enabled can lead to users modifying data mid-submission or becoming confused if the request takes a long time.
 **Action:** Always disable text inputs and textareas (along with the submit button) when a form is actively submitting to lock user input, and provide clear disabled visual styles (`opacity-50 cursor-not-allowed`) to indicate the non-interactive state.
+## 2025-03-09 - Form Field Character Limits and Counters
+**Learning:** Without explicit character limits and visual counters on free-text inputs (like textareas), users may unknowingly exceed system limits and encounter frustrating submission errors, especially in rigid terminal-style UIs.
+**Action:** Always provide explicit limits (`maxLength`) on textareas along with a visible dynamic character counter (e.g., `current/max`) that visually alerts the user when they approach or hit the limit.
