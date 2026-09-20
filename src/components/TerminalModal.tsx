@@ -76,6 +76,8 @@ export function TerminalModal({
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!isOpen) return;
       if (e.key === "Escape") {
+        playConfirm();
+        haptic("confirm");
         onClose();
       }
     };
@@ -266,10 +268,17 @@ export function TerminalModal({
       role="dialog"
       aria-modal="true"
       aria-label="System Terminal Easter Egg"
-      className="fixed inset-0 z-[1000] flex items-center justify-center p-2 sm:p-4 md:p-6 bg-black/80 backdrop-blur-sm transition-all"
+      className="fixed inset-0 z-[1000] flex items-center justify-center p-2 sm:p-4 md:p-6 bg-black/80 backdrop-blur-sm transition-all cursor-pointer"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) {
+          playConfirm();
+          haptic("confirm");
+          onClose();
+        }
+      }}
     >
       <div
-        className={`w-full bg-[#050505] border-2 rounded-xl flex flex-col overflow-hidden transition-all duration-300 ${themeClasses} ${
+        className={`w-full bg-[#050505] border-2 rounded-xl flex flex-col overflow-hidden transition-all duration-300 cursor-default ${themeClasses} ${
           isExpanded ? "h-[96vh] max-w-[98vw]" : "h-[80vh] max-w-4xl"
         }`}
       >
@@ -297,6 +306,7 @@ export function TerminalModal({
                 haptic("confirm");
               }}
               aria-label={isExpanded ? "Minimize terminal size" : "Maximize terminal size"}
+              title={isExpanded ? "Minimize" : "Maximize"}
               className="text-gray-400 hover:text-white p-1 rounded hover:bg-white/10 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-terminal-green"
             >
               {isExpanded ? <Minimize2 size={16} /> : <Maximize2 size={16} />}
@@ -308,6 +318,7 @@ export function TerminalModal({
                 haptic("confirm");
               }}
               aria-label="Close terminal modal"
+              title="Close terminal"
               className="text-gray-400 hover:text-red-400 p-1 rounded hover:bg-red-500/10 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-red-400"
             >
               <X size={18} />
