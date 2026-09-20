@@ -176,14 +176,20 @@ export function Contact() {
                 />
               </div>
               <div>
-                <label htmlFor="contact-message" className="block text-xs text-terminal-dim uppercase tracking-widest mb-2">
-                  {">"}_  INPUT PAYLOAD <span className="text-red-500" aria-hidden="true">*</span>
-                </label>
+                <div className="flex justify-between items-end mb-2">
+                  <label htmlFor="contact-message" className="block text-xs text-terminal-dim uppercase tracking-widest">
+                    {">"}_  INPUT PAYLOAD <span className="text-red-500" aria-hidden="true">*</span>
+                  </label>
+                  <span className={`text-[10px] ${formData.payload.length >= 500 ? 'text-red-500' : 'text-terminal-dim/70'}`}>
+                    {formData.payload.length}/500
+                  </span>
+                </div>
                 <textarea
                   id="contact-message"
                   name="message"
                   rows={4}
                   required
+                  maxLength={500}
                   disabled={status === "submitting"}
                   aria-invalid={status === "error"}
                   className="w-full px-4 py-3 resize-none disabled:opacity-50 disabled:cursor-not-allowed"

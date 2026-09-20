@@ -28,6 +28,9 @@
 ## 2025-03-09 - Async Form Submission Interactions
 **Learning:** During asynchronous form submissions, keeping form inputs enabled can lead to users modifying data mid-submission or becoming confused if the request takes a long time.
 **Action:** Always disable text inputs and textareas (along with the submit button) when a form is actively submitting to lock user input, and provide clear disabled visual styles (`opacity-50 cursor-not-allowed`) to indicate the non-interactive state.
+## 2025-03-09 - Form Field Character Limits and Counters
+**Learning:** Without explicit character limits and visual counters on free-text inputs (like textareas), users may unknowingly exceed system limits and encounter frustrating submission errors, especially in rigid terminal-style UIs.
+**Action:** Always provide explicit limits (`maxLength`) on textareas along with a visible dynamic character counter (e.g., `current/max`) that visually alerts the user when they approach or hit the limit.
 ## 2025-03-09 - Consistent Modal Dismissal Feedback
 **Learning:** Users dismiss modals in three primary ways: clicking an explicit "close" button, pressing the `Escape` key, or clicking the backdrop area. When closing a modal via a keyboard shortcut or background click doesn't produce the same sensory feedback (audio/haptics) as clicking the explicit close button, the interaction feels broken or incomplete, especially in an immersive experience. Additionally, relying solely on `aria-label`s for icon-only buttons hides their purpose from sighted users relying on a mouse.
 **Action:** Always provide identical audio and haptic feedback across all modal dismissal methods (button, `Escape` key, backdrop click). Implement backdrop click dismissal using `e.target === e.currentTarget` on the modal overlay container to improve accessibility. Ensure icon-only buttons include `title` tooltips for sighted mouse users in addition to their `aria-label`s.
