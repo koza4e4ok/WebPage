@@ -226,9 +226,7 @@ export function TerminalModal({
 
   const handleKeyDownInput = (e: React.KeyboardEvent<HTMLInputElement>) => {
     playKeypress();
-    if (e.key === "Enter") {
-      handleCommand(inputVal);
-    } else if (e.key === "ArrowUp") {
+    if (e.key === "ArrowUp") {
       e.preventDefault();
       if (cmdHistory.length > 0) {
         const nextIdx = cmdHistoryIndex === -1 ? cmdHistory.length - 1 : Math.max(0, cmdHistoryIndex - 1);
@@ -248,6 +246,11 @@ export function TerminalModal({
         }
       }
     }
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    handleCommand(inputVal);
   };
 
   // Dynamic theme styles
@@ -347,7 +350,10 @@ export function TerminalModal({
         </div>
 
         {/* Input prompt footer */}
-        <div className="p-3 md:p-4 bg-[#0a0a0a] border-t border-gray-800 flex items-center gap-2 font-mono">
+        <form
+          onSubmit={handleSubmit}
+          className="p-3 md:p-4 bg-[#0a0a0a] border-t border-gray-800 flex items-center gap-2 font-mono"
+        >
           <span className={`${themeTextClass} text-xs md:text-sm font-bold shrink-0`}>
             visitor@andrii-os:~$
           </span>
@@ -363,14 +369,14 @@ export function TerminalModal({
             autoFocus
           />
           <button
-            onClick={() => handleCommand(inputVal)}
+            type="submit"
             title="Execute command (Enter)"
             aria-label="Execute command"
             className={`px-3 py-1 rounded text-xs font-bold font-mono border transition-all ${themeTextClass} border-current hover:bg-white/10`}
           >
             EXEC
           </button>
-        </div>
+        </form>
       </div>
     </div>
   );
