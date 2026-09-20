@@ -38,7 +38,7 @@ export function SoundToggle() {
   return (
     <button
       onClick={toggle}
-      aria-label={on ? "Mute sound effects" : "Enable sound effects"}
+      aria-label="Toggle sound effects"
       aria-pressed={on}
       title={on ? "Sound ON — click to mute" : "Sound OFF — click to enable"}
       className={`w-8 h-8 rounded-full flex items-center justify-center border transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terminal-green focus-visible:ring-offset-2 ${
