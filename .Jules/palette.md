@@ -37,3 +37,6 @@
 ## 2026-09-16 - Static aria-label with aria-pressed
 **Learning:** When using `aria-pressed` to communicate a toggle button's state to screen readers, the `aria-label` should remain static. Changing both the name and the pressed state simultaneously causes screen readers to announce redundant and confusing states (e.g., "Mute sound effects, pressed").
 **Action:** Always verify that `aria-pressed` is paired with a static accessible name representing the feature being toggled, rather than the action to perform next.
+## 2026-09-21 - Connecting Visual Limits to Screen Readers
+**Learning:** Visual character limits and counters positioned next to textareas are typically not announced by screen readers when the user focuses the textarea, depriving them of important constraint information.
+**Action:** Always link visual counters (like a `<span>` showing `0/500`) to the input using `aria-describedby` so the screen reader announces the limit and current count when the input is focused.
