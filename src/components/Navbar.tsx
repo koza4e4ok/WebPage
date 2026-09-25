@@ -183,7 +183,7 @@ export function Navbar({ onOpenTerminal }: NavbarProps) {
                 playTick();
                 haptic("tick");
               }}
-              aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
+              aria-label="Navigation menu"
               title={isOpen ? "Close menu" : "Open menu"}
               aria-expanded={isOpen}
             >
