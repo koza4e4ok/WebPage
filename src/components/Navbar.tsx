@@ -183,7 +183,8 @@ export function Navbar({ onOpenTerminal }: NavbarProps) {
                 playTick();
                 haptic("tick");
               }}
-              aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
+              aria-label="Navigation menu"
+              aria-controls="mobile-menu"
               title={isOpen ? "Close menu" : "Open menu"}
               aria-expanded={isOpen}
             >
@@ -195,6 +196,7 @@ export function Navbar({ onOpenTerminal }: NavbarProps) {
         {/* Mobile Nav Drawer */}
         {isOpen && (
           <div
+            id="mobile-menu"
             className="mobile-nav-enter lg:hidden bg-white dark:bg-[#050505] rounded-3xl border-2 border-gray-300 dark:border-[#111] mt-2 font-mono flex flex-col overflow-hidden shadow-[0_10px_30px_rgba(0,255,65,0.1)] absolute top-full left-0 right-0 z-40 mx-2"
           >
             <div className="px-5 py-3 bg-gray-50 dark:bg-[#0a0a0a] border-b border-gray-200 dark:border-gray-800 flex items-center justify-between text-xs text-gray-500 uppercase tracking-widest font-terminal">
