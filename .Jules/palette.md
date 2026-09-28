@@ -46,3 +46,6 @@
 ## 2026-09-21 - Connecting Visual Limits to Screen Readers
 **Learning:** Visual character limits and counters positioned next to textareas are typically not announced by screen readers when the user focuses the textarea, depriving them of important constraint information.
 **Action:** Always link visual counters (like a `<span>` showing `0/500`) to the input using `aria-describedby` so the screen reader announces the limit and current count when the input is focused.
+## 2025-03-09 - Accessible Links in Repeated Components
+**Learning:** Adding explicit `aria-label` attributes to anchor tags rendering external link text provides essential context for screen readers when the text alone may lack clarity or context in repeated components (like a list of experiences).
+**Action:** Always include an `aria-label` on `<a>` tags describing the destination or action even if text is present, to ensure clarity out of context for screen readers.

@@ -103,6 +103,7 @@ export function Experience() {
                       href={exp.companyUrl}
                       target="_blank"
                       rel="noreferrer noopener"
+                      aria-label={`Visit ${exp.company} website`}
                       className="text-gray-900 dark:text-gray-200 font-mono text-[10px] md:text-xs lg:text-sm mb-1 lg:mb-2 hover:text-terminal-green transition-colors underline underline-offset-2 decoration-terminal-green/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terminal-green focus-visible:ring-offset-1 inline-block"
                     >
                       {exp.company}
