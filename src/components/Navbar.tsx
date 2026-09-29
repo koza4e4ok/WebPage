@@ -184,7 +184,6 @@ export function Navbar({ onOpenTerminal }: NavbarProps) {
                 haptic("tick");
               }}
               aria-label="Navigation menu"
-              aria-controls="mobile-menu"
               title={isOpen ? "Close menu" : "Open menu"}
               aria-expanded={isOpen}
             >

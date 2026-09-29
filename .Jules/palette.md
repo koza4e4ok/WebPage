@@ -49,3 +49,6 @@
 ## 2026-09-26 - Static aria-label with aria-expanded
 **Learning:** When using `aria-expanded` to communicate a mobile menu toggle button's state to screen readers, the `aria-label` should remain static (e.g., "Navigation menu"). Changing both the name (e.g., "Open navigation menu" to "Close navigation menu") and the expanded state simultaneously causes screen readers to announce redundant and confusing states. Also, `aria-controls` should be provided and point to the `id` of the menu being controlled.
 **Action:** Always verify that `aria-expanded` is paired with a static accessible name representing the feature being toggled, and add `aria-controls` pointing to the collapsible container's `id`.
+## 2025-03-09 - Static aria-label with aria-expanded
+**Learning:** When using `aria-expanded` to communicate a mobile navigation menu toggle's state to screen readers, the `aria-label` should remain static. Changing both the label (e.g., from "Open menu" to "Close menu") and the expanded state simultaneously causes screen readers to announce redundant states.
+**Action:** Always verify that `aria-expanded` is paired with a static accessible name representing the menu being toggled, rather than the action to perform next.
