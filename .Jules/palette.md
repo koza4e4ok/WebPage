@@ -46,6 +46,9 @@
 ## 2026-09-21 - Connecting Visual Limits to Screen Readers
 **Learning:** Visual character limits and counters positioned next to textareas are typically not announced by screen readers when the user focuses the textarea, depriving them of important constraint information.
 **Action:** Always link visual counters (like a `<span>` showing `0/500`) to the input using `aria-describedby` so the screen reader announces the limit and current count when the input is focused.
+## 2025-03-09 - Static aria-label with aria-expanded
+**Learning:** When using `aria-expanded` to communicate a toggle button's state to screen readers (like a mobile menu), the `aria-label` should remain static (e.g., "Navigation menu"). Changing both the label and the expanded state simultaneously causes screen readers to announce confusing states. Furthermore, `aria-controls` is required to associate the button with the expanding menu container.
+**Action:** Always verify that `aria-expanded` is paired with a static accessible name representing the controlled section. Always add an `id` to the controlled element and `aria-controls` to the button.
 ## 2026-09-26 - Static aria-label with aria-expanded
 **Learning:** When using `aria-expanded` to communicate a mobile menu toggle button's state to screen readers, the `aria-label` should remain static (e.g., "Navigation menu"). Changing both the name (e.g., "Open navigation menu" to "Close navigation menu") and the expanded state simultaneously causes screen readers to announce redundant and confusing states. Also, `aria-controls` should be provided and point to the `id` of the menu being controlled.
 **Action:** Always verify that `aria-expanded` is paired with a static accessible name representing the feature being toggled, and add `aria-controls` pointing to the collapsible container's `id`.
