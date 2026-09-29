@@ -186,6 +186,7 @@ export function Navbar({ onOpenTerminal }: NavbarProps) {
               aria-label="Navigation menu"
               title={isOpen ? "Close menu" : "Open menu"}
               aria-expanded={isOpen}
+              aria-controls="mobile-nav-menu"
             >
               {isOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
