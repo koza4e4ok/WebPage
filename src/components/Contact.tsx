@@ -180,10 +180,8 @@ export function Contact() {
                   <label htmlFor="contact-message" className="block text-xs text-terminal-dim uppercase tracking-widest">
                     {">"}_  INPUT PAYLOAD <span className="text-red-500" aria-hidden="true">*</span>
                   </label>
-                  <span id="payload-char-count" className={`text-[10px] ${formData.payload.length >= 500 ? 'text-red-500' : 'text-terminal-dim/70'}`}>
-                    {formData.payload.length}/500 characters
                   <span id="contact-message-counter" className={`text-[10px] ${formData.payload.length >= 500 ? 'text-red-500' : 'text-terminal-dim/70'}`}>
-                    {formData.payload.length}/500
+                    {formData.payload.length}/500 characters
                   </span>
                 </div>
                 <textarea
