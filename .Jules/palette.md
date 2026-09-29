@@ -46,3 +46,4 @@
 ## 2026-09-21 - Connecting Visual Limits to Screen Readers
 **Learning:** Visual character limits and counters positioned next to textareas are typically not announced by screen readers when the user focuses the textarea, depriving them of important constraint information.
 **Action:** Always link visual counters (like a `<span>` showing `0/500`) to the input using `aria-describedby` so the screen reader announces the limit and current count when the input is focused.
+## 2025-03-09 - Accessible Mobile Nav Menu\n**Learning:** The mobile navigation hamburger menu toggle lacked an `aria-controls` attribute and the target menu lacked an `id`, meaning screen readers couldn't identify what the button controls.\n**Action:** Always add an `id` to dynamic menu containers and an `aria-controls` attribute to the toggle button pointing to that `id`.
