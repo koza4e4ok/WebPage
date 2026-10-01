@@ -7,16 +7,21 @@ import { TerminalModal } from "./components/TerminalModal";
 import { playConfirm, playSuccess } from "./lib/audioEngine";
 import { haptic } from "./hooks/useHaptic";
 import { Terminal as TerminalIcon } from "lucide-react";
+import { profile, testimonials } from "./content/profile";
 
 const loadSkills = () => import("./components/Skills");
 const loadProjects = () => import("./components/Projects");
 const loadExperience = () => import("./components/Experience");
 const loadContact = () => import("./components/Contact");
+const loadTestimonials = () => import("./components/Testimonials");
 
 const Skills = lazy(() => loadSkills().then(({ Skills: Component }) => ({ default: Component })));
 const Projects = lazy(() => loadProjects().then(({ Projects: Component }) => ({ default: Component })));
 const Experience = lazy(() => loadExperience().then(({ Experience: Component }) => ({ default: Component })));
 const Contact = lazy(() => loadContact().then(({ Contact: Component }) => ({ default: Component })));
+const Testimonials = lazy(() => loadTestimonials().then(({ Testimonials: Component }) => ({ default: Component })));
+
+const hasTestimonials = testimonials.length > 0;
 
 const KONAMI_CODE = [
   "ArrowUp", "ArrowUp",
@@ -52,6 +57,7 @@ export default function App() {
       loadProjects();
       loadExperience();
       loadContact();
+      if (hasTestimonials) loadTestimonials();
     };
 
     if (typeof window !== "undefined" && "requestIdleCallback" in window) {
@@ -116,12 +122,12 @@ export default function App() {
         Skip to main content
       </a>
 
-      <div className="pt-1 md:pt-4 lg:pt-6 px-1 md:px-4 lg:px-6 w-full max-w-[100rem] mx-auto z-50 flex-shrink-0 relative">
+      <div className="pt-1 md:pt-4 lg:pt-6 compact:pt-2 px-1 md:px-4 lg:px-6 w-full max-w-[100rem] mx-auto z-50 flex-shrink-0 relative">
         <Navbar onOpenTerminal={openTerminal} />
       </div>
 
-      <div className="p-1 md:p-4 lg:p-6 pb-1 md:pb-4 lg:pb-6 flex-1 w-full max-w-[100rem] mx-auto flex flex-col min-h-0">
-        <div className="relative flex-1 bg-white dark:bg-[#050505] rounded-xl lg:rounded-[2rem] border-2 sm:border-[6px] md:border-[12px] border-gray-300 dark:border-[#111] overflow-hidden shadow-[0_4px_30px_rgba(0,255,65,0.05),inset_0_0_60px_rgba(0,0,0,0.05)] flex flex-col min-h-0">
+      <div className="p-1 md:p-4 lg:p-6 pb-1 md:pb-4 lg:pb-6 compact:p-2 flex-1 w-full max-w-[100rem] mx-auto flex flex-col min-h-0">
+        <div className="relative flex-1 bg-white dark:bg-[#050505] rounded-xl lg:rounded-[2rem] border-2 sm:border-[6px] md:border-[12px] compact:border-[6px] border-gray-300 dark:border-[#111] overflow-hidden shadow-[0_4px_30px_rgba(0,255,65,0.05),inset_0_0_60px_rgba(0,0,0,0.05)] flex flex-col min-h-0">
           <HackerBackground isMatrixOverdrive={isMatrixOverdrive} />
           <div className="crt-overlay absolute inset-0 z-40 pointer-events-none" />
           <div className="crt-vignette absolute inset-0 z-30 pointer-events-none" />
@@ -131,12 +137,13 @@ export default function App() {
             <DeferredSection id="skills"><Skills /></DeferredSection>
             <DeferredSection id="projects"><Projects /></DeferredSection>
             <DeferredSection id="experience"><Experience /></DeferredSection>
+            {hasTestimonials && <DeferredSection id="testimonials"><Testimonials /></DeferredSection>}
             <DeferredSection id="contact"><Contact /></DeferredSection>
 
-            <section className="w-full h-full flex-shrink-0 snap-start snap-always p-2 md:p-4 lg:p-8 flex items-center justify-center">
-              <footer className="w-full max-w-6xl mx-auto h-full hacker-card p-6 md:p-12 flex flex-col items-center justify-center text-center text-gray-500 text-sm">
+            <section className="w-full h-full flex-shrink-0 snap-start snap-always p-2 md:p-4 lg:p-8 compact:p-2 flex items-center justify-center">
+              <footer className="w-full max-w-6xl mx-auto h-full hacker-card p-6 md:p-12 compact:p-6 flex flex-col items-center justify-center text-center text-gray-500 text-sm">
                 <p className="font-terminal text-3xl md:text-5xl text-terminal-dim mb-4 glitch-hover">{">"}_ SYSTEM_HALTED // EOF</p>
-                <p className="font-mono text-base mb-6">© {new Date().getFullYear()} Andrii Kozakov. All systems operational.</p>
+                <p className="font-mono text-base mb-6">© {new Date().getFullYear()} {profile.name}. All systems operational.</p>
 
                 {/* Floating terminal trigger hint in footer */}
                 <button

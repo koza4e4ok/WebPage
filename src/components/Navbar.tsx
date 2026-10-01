@@ -1,12 +1,22 @@
-import { Github, Mail, Menu, X, TerminalSquare, Activity, Terminal as TerminalIcon } from "lucide-react";
+import { Github, Mail, Menu, X, TerminalSquare, Activity, Terminal as TerminalIcon, Linkedin } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useActiveSection } from "../hooks/useActiveSection";
 import { ScanlineWipe } from "./ScanlineWipe";
 import { SoundToggle } from "./SoundToggle";
 import { playTick, playNavSelect, playConfirm } from "../lib/audioEngine";
 import { haptic } from "../hooks/useHaptic";
+import { profile, testimonials } from "../content/profile";
 
-const SECTION_IDS = ["hero", "skills", "projects", "experience", "contact"];
+const NAV_LINKS = [
+  { name: "ABOUT", href: "#hero", id: "hero" },
+  { name: "SKILLS", href: "#skills", id: "skills" },
+  { name: "PROJECTS", href: "#projects", id: "projects" },
+  { name: "EXPERIENCE", href: "#experience", id: "experience" },
+  ...(testimonials.length > 0 ? [{ name: "REFERENCES", href: "#testimonials", id: "testimonials" }] : []),
+  { name: "CONTACT", href: "#contact", id: "contact" },
+];
+
+const SECTION_IDS = NAV_LINKS.map((link) => link.id);
 
 interface NavbarProps {
   onOpenTerminal?: () => void;
@@ -25,17 +35,14 @@ export function Navbar({ onOpenTerminal }: NavbarProps) {
     return () => clearInterval(interval);
   }, []);
 
-  const navLinks = [
-    { name: "ABOUT", href: "#hero", id: "hero" },
-    { name: "SKILLS", href: "#skills", id: "skills" },
-    { name: "PROJECTS", href: "#projects", id: "projects" },
-    { name: "EXPERIENCE", href: "#experience", id: "experience" },
-    { name: "CONTACT", href: "#contact", id: "contact" },
-  ];
+  const navLinks = NAV_LINKS;
 
   const socialLinks = [
-    { icon: <Github size={16} />, href: "https://github.com/koza4e4ok", label: "GitHub profile" },
-    { icon: <Mail size={16} />, href: "mailto:koza4e4ok@gmail.com", label: "Send email" },
+    { icon: <Github size={16} />, href: profile.links.github, label: "GitHub profile" },
+    ...(profile.links.linkedin
+      ? [{ icon: <Linkedin size={16} />, href: profile.links.linkedin, label: "LinkedIn profile" }]
+      : []),
+    { icon: <Mail size={16} />, href: `mailto:${profile.links.email}`, label: "Send email" },
   ];
 
   const handleNavClick = () => {

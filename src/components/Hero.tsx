@@ -4,12 +4,13 @@ import { MagneticButton } from "./MagneticButton";
 import { useCountUp } from "../hooks/useCountUp";
 import { playConfirm, playTick } from "../lib/audioEngine";
 import { haptic } from "../hooks/useHaptic";
+import { profile } from "../content/profile";
 
-const NAME = "ANDRII KOZAKOV";
+const NAME = profile.name.toUpperCase();
 const CHAR_DELAY = 60; // ms per character
 
 export function Hero() {
-  const years = useCountUp(12, 1400);
+  const years = useCountUp(profile.yearsExperience, 1400);
   const [typed, setTyped] = useState("");
   const [done, setDone] = useState(false);
   const indexRef = useRef(0);
@@ -33,21 +34,21 @@ export function Hero() {
   return (
     <section
       id="hero"
-      className="w-full h-full flex-shrink-0 snap-start snap-always p-1 sm:p-2 md:p-4 lg:p-8 flex items-center justify-center"
+      className="w-full h-full flex-shrink-0 snap-start snap-always p-1 sm:p-2 md:p-4 lg:p-8 compact:p-2 flex items-center justify-center"
     >
-      <div className="w-full max-w-6xl mx-auto h-full hero-card-pulse hacker-card p-3 sm:p-4 md:p-8 lg:p-12 flex flex-col justify-center relative z-10 overflow-hidden">
+      <div className="w-full max-w-6xl mx-auto h-full hero-card-pulse hacker-card p-3 sm:p-4 md:p-8 lg:p-12 compact:p-6 flex flex-col justify-center relative z-10 overflow-hidden">
         <div className="grid lg:grid-cols-2 gap-4 lg:gap-12 items-center w-full min-h-0">
 
           {/* ── Left column ── */}
           <div className="relative z-10">
 
             {/* Mobile portrait + uptime — the desktop portrait column is hidden below lg */}
-            <div className="hero-item hero-item-1 lg:hidden [@media(max-height:500px)]:hidden flex items-center gap-4 mb-5 short:mb-3">
+            <div className={`hero-item hero-item-1 lg:hidden [@media(max-height:500px)]:hidden ${profile.proofPoints.length > 0 ? "short:hidden" : ""} flex items-center gap-4 mb-5 short:mb-3`}>
               <div className="relative w-20 h-20 short:w-16 short:h-16 shrink-0 rounded-xl overflow-hidden border border-terminal-green/30 bg-white dark:bg-[#0a0a0a] shadow-[0_0_20px_rgba(0,255,65,0.12)]">
                 <div className="absolute inset-0 bg-terminal-green/10 mix-blend-color z-10 pointer-events-none" />
                 <img
                   src="/avatar.webp"
-                  alt="Portrait of Andrii Kozakov, Senior Android Engineer"
+                  alt={`Portrait of ${profile.name}, ${profile.title}`}
                   width={80}
                   height={80}
                   decoding="async"
@@ -68,13 +69,13 @@ export function Hero() {
             </div>
 
             {/* Status badge */}
-            <div className="hero-item hero-item-1 inline-flex items-center gap-2 px-2 py-0.5 sm:px-3 sm:py-1 bg-terminal-green/10 border border-terminal-green/30 rounded-full text-terminal-green text-[11px] sm:text-xs font-mono uppercase tracking-widest mb-3 short:mb-2 md:mb-8">
+            <div className="hero-item hero-item-1 inline-flex items-center gap-2 px-2 py-0.5 sm:px-3 sm:py-1 bg-terminal-green/10 border border-terminal-green/30 rounded-full text-terminal-green text-[11px] sm:text-xs font-mono uppercase tracking-widest mb-3 short:mb-2 md:mb-8 compact:mb-4">
               <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-terminal-green animate-pulse rounded-full" />
-              System Secure &amp; Ready
+              {profile.statusBadge}
             </div>
 
             {/* Name — typed character by character, cursor blinks when done */}
-            <h1 className="hero-item hero-item-2 text-[2.5rem] short:text-4xl sm:text-5xl md:text-6xl font-terminal mb-2 sm:mb-3 md:mb-4 leading-none uppercase drop-shadow-[0_0_8px_rgba(0,255,65,0.3)]">
+            <h1 className="hero-item hero-item-2 text-[2.5rem] short:text-4xl sm:text-5xl md:text-6xl compact:text-5xl font-terminal mb-2 sm:mb-3 md:mb-4 leading-none uppercase drop-shadow-[0_0_8px_rgba(0,255,65,0.3)]">
               {typed}
               <span
                 aria-hidden="true"
@@ -85,13 +86,11 @@ export function Hero() {
             {/* Role, bio, CTAs — always in DOM, revealed by CSS class once name is done */}
             <div className={`hero-content-reveal ${done ? "hero-content-reveal--visible" : ""}`}>
               <h2 className="text-lg md:text-xl font-mono text-gray-800 dark:text-gray-300 font-bold mb-3 short:mb-2 sm:mb-4 md:mb-5">
-                Senior Android Engineer
+                {profile.title}
               </h2>
 
-              <p className="text-sm md:text-base text-gray-600 dark:text-gray-400 font-mono max-w-xl leading-relaxed short:leading-snug mb-6 short:mb-4 md:mb-8">
-                12+ years delivering reliable Kotlin and Jetpack Compose products.
-                I lead modular architecture, improve delivery pipelines, and turn
-                complex requirements into maintainable Android experiences.
+              <p className="text-sm md:text-base text-gray-600 dark:text-gray-400 font-mono max-w-xl leading-relaxed short:leading-snug mb-6 short:mb-4 md:mb-8 compact:mb-5">
+                {profile.bio}
               </p>
 
               <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3 sm:gap-4 font-mono">
@@ -107,29 +106,45 @@ export function Hero() {
                 </MagneticButton>
                 <MagneticButton
                   as="a"
-                  href={`${import.meta.env.BASE_URL}andriikozakov.pdf`}
-                  download="andriikozakov.pdf"
+                  href={`${import.meta.env.BASE_URL}${profile.cvPath}`}
+                  download={profile.cvPath}
                   className="hacker-btn hacker-btn-alt glitch-hover w-full sm:w-auto"
                   onClick={() => { playConfirm(); haptic("confirm"); }}
                   onMouseEnter={() => { playTick(); haptic("tick"); }}
                 >
                   <Download size={18} />
-                  Fetch CV
+                  Download CV
                 </MagneticButton>
               </div>
+
+              {profile.proofPoints.length > 0 && (
+                <dl className="grid grid-cols-3 gap-3 sm:gap-6 mt-6 short:mt-4 md:mt-8 compact:mt-5 max-w-xl">
+                  {profile.proofPoints.slice(0, 3).map((point) => (
+                    <div key={point.label} className="border-l-2 border-terminal-green/40 pl-3">
+                      <dt className="sr-only">{point.label}</dt>
+                      <dd className="text-2xl short:text-xl md:text-3xl font-terminal text-gray-900 dark:text-gray-200 leading-none">
+                        {point.value}
+                      </dd>
+                      <dd aria-hidden="true" className="text-[11px] md:text-xs font-mono text-gray-500 leading-snug mt-1">
+                        {point.label}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              )}
             </div>
           </div>
 
           {/* ── Right column: portrait ── */}
           <div className="hero-item hero-item-2 relative hidden lg:block">
-            <div className="relative w-full max-w-[280px] lg:max-w-[400px] mx-auto">
+            <div className="relative w-full max-w-[280px] lg:max-w-[400px] compact:max-w-[300px] mx-auto">
               <div className="absolute inset-0 bg-terminal-green/20 blur-[80px] rounded-full" />
               <div className="hacker-card p-2 relative z-10 bg-white dark:bg-[#050505]">
                 <div className="w-full aspect-square rounded-lg overflow-hidden relative border border-terminal-green/20 bg-white dark:bg-[#0a0a0a]">
                   <div className="absolute inset-0 bg-terminal-green/10 mix-blend-color z-10 pointer-events-none" />
                   <img
                     src="/avatar.webp"
-                    alt="Portrait of Andrii Kozakov, Senior Android Engineer"
+                    alt={`Portrait of ${profile.name}, ${profile.title}`}
                     width={400}
                     height={400}
                     decoding="async"

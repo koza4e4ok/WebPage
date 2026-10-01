@@ -1,8 +1,9 @@
 import { motion } from "motion/react";
-import { Mail, Send, TerminalSquare, Loader2, CheckCircle2, AlertCircle } from "lucide-react";
+import { Mail, Send, TerminalSquare, Loader2, CheckCircle2, AlertCircle, Linkedin } from "lucide-react";
 import { useState } from "react";
 import { playConfirm, playError, playSuccess, playTick } from "../lib/audioEngine";
 import { haptic } from "../hooks/useHaptic";
+import { profile } from "../content/profile";
 
 const containerVariants = {
   hidden: {},
@@ -15,7 +16,7 @@ const itemVariants = {
 };
 
 export function Contact() {
-  const email = "koza4e4ok@gmail.com";
+  const { email, telegram, telegramHandle, linkedin } = profile.links;
   const ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_KEY || "";
 
   const [formData, setFormData] = useState({ name: "", returnAddr: "", payload: "" });
@@ -41,7 +42,7 @@ export function Contact() {
           name: formData.name || "Guest_User",
           email: formData.returnAddr,
           message: formData.payload,
-          subject: `[System Ping] Connection from ${formData.name || "node@network.com"}`,
+          subject: `Portfolio contact from ${formData.name || formData.returnAddr}`,
         }),
       });
       const json = await response.json();
@@ -66,9 +67,9 @@ export function Contact() {
   return (
     <section
       id="contact"
-      className="w-full h-full flex-shrink-0 snap-start snap-always p-1 sm:p-2 md:p-4 lg:p-8 flex items-center justify-center"
+      className="w-full h-full flex-shrink-0 snap-start snap-always p-1 sm:p-2 md:p-4 lg:p-8 compact:p-2 flex items-center justify-center"
     >
-      <div className="w-full max-w-6xl mx-auto h-full hacker-card p-2.5 sm:p-4 md:p-8 lg:p-12 flex flex-col justify-center relative z-10 overflow-hidden">
+      <div className="w-full max-w-6xl mx-auto h-full hacker-card p-2.5 sm:p-4 md:p-8 lg:p-12 compact:p-6 flex flex-col justify-center relative z-10 overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-terminal-green/5 blur-[100px] -translate-y-1/2 translate-x-1/2 rounded-full pointer-events-none z-0" />
 
         <motion.div
@@ -83,14 +84,14 @@ export function Contact() {
             <motion.h2 variants={itemVariants} className="text-[11px] sm:text-xs lg:text-sm font-mono text-terminal-green uppercase tracking-widest mb-1 flex items-center gap-2">
               <TerminalSquare size={12} /> Establish Connection
             </motion.h2>
-            <motion.h3 variants={itemVariants} className="text-3xl short:text-2xl sm:text-3xl md:text-5xl font-terminal mb-2 lg:mb-4 text-gray-900 dark:text-gray-200">
+            <motion.h3 variants={itemVariants} className="text-3xl short:text-2xl sm:text-3xl md:text-5xl compact:text-4xl font-terminal mb-2 lg:mb-4 compact:mb-2 text-gray-900 dark:text-gray-200">
               Open a new socket.
             </motion.h3>
-            <motion.p variants={itemVariants} className="text-gray-600 dark:text-gray-400 font-mono text-sm lg:text-sm mb-4 lg:mb-10 max-w-md leading-relaxed short:hidden">
+            <motion.p variants={itemVariants} className="text-gray-600 dark:text-gray-400 font-mono text-sm lg:text-sm mb-4 lg:mb-10 compact:mb-4 max-w-md leading-relaxed short:hidden">
               Ready to deploy new solutions or optimize existing ones. Drop a ping and I&apos;ll confirm reception.
             </motion.p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3 short:gap-2 sm:gap-4 lg:gap-6 font-mono mb-4 short:mb-3 lg:mb-0">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3 short:gap-2 sm:gap-4 lg:gap-6 compact:gap-3 font-mono mb-4 short:mb-3 lg:mb-0">
               <motion.a
                 variants={itemVariants}
                 href={`mailto:${email}`}
@@ -103,14 +104,14 @@ export function Contact() {
                   <Mail className="text-gray-600 dark:text-gray-400 group-hover:text-terminal-green transition-colors" size={16} />
                 </div>
                 <div className="min-w-0">
-                  <div className="text-[11px] lg:text-xs text-gray-500 uppercase tracking-widest mb-0.5">Email Endpoint</div>
+                  <div className="text-[11px] lg:text-xs text-gray-500 uppercase tracking-widest mb-0.5">Email</div>
                   <div className="text-sm lg:text-base text-gray-900 dark:text-gray-200 glitch-hover truncate">{email}</div>
                 </div>
               </motion.a>
 
               <motion.a
                 variants={itemVariants}
-                href="https://t.me/koza4e4ok"
+                href={telegram}
                 target="_blank"
                 rel="noreferrer noopener"
                 aria-label="Contact on Telegram"
@@ -122,26 +123,47 @@ export function Contact() {
                   <Send className="text-gray-600 dark:text-gray-400 group-hover:text-[#00ffff] transition-colors" size={16} />
                 </div>
                 <div className="min-w-0">
-                  <div className="text-[11px] lg:text-xs text-gray-500 uppercase tracking-widest mb-0.5">Telegram Secure Line</div>
-                  <div className="text-sm lg:text-base text-gray-900 dark:text-gray-200 glitch-hover truncate">@koza4e4ok</div>
+                  <div className="text-[11px] lg:text-xs text-gray-500 uppercase tracking-widest mb-0.5">Telegram</div>
+                  <div className="text-sm lg:text-base text-gray-900 dark:text-gray-200 glitch-hover truncate">{telegramHandle}</div>
                 </div>
               </motion.a>
+
+              {linkedin && (
+                <motion.a
+                  variants={itemVariants}
+                  href={linkedin}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  aria-label="View LinkedIn profile"
+                  onClick={() => { playTick(); haptic("tick"); }}
+                  onMouseEnter={playTick}
+                  className="flex items-center gap-2 sm:gap-3 lg:gap-4 group"
+                >
+                  <div className="w-10 h-10 short:w-9 short:h-9 lg:w-12 lg:h-12 rounded-lg bg-gray-200 dark:bg-[#111] border border-[#0a66c2]/30 flex items-center justify-center group-hover:bg-[#0a66c2]/10 group-hover:border-[#0a66c2] transition-all glitch-hover shrink-0">
+                    <Linkedin className="text-gray-600 dark:text-gray-400 group-hover:text-[#0a66c2] transition-colors" size={16} />
+                  </div>
+                  <div className="min-w-0">
+                    <div className="text-[11px] lg:text-xs text-gray-500 uppercase tracking-widest mb-0.5">LinkedIn</div>
+                    <div className="text-sm lg:text-base text-gray-900 dark:text-gray-200 glitch-hover truncate">{linkedin.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "")}</div>
+                  </div>
+                </motion.a>
+              )}
             </div>
           </div>
 
           {/* Right: contact form */}
           <motion.form
             variants={itemVariants}
-            className="bg-white dark:bg-[#050505] p-4 short:p-3 sm:p-5 lg:p-8 rounded-2xl border border-gray-200 dark:border-gray-800 relative z-10 shadow-lg min-h-0 flex flex-col justify-center"
+            className="bg-white dark:bg-[#050505] p-4 short:p-3 sm:p-5 lg:p-8 compact:p-5 rounded-2xl border border-gray-200 dark:border-gray-800 relative z-10 shadow-lg min-h-0 flex flex-col justify-center"
             onSubmit={(e) => {
               e.preventDefault();
               handleTransmit();
             }}
           >
-            <div className="space-y-3 short:space-y-2 lg:space-y-5 font-mono">
+            <div className="space-y-3 short:space-y-2 lg:space-y-5 compact:space-y-3 font-mono">
               <div>
                 <label htmlFor="contact-name" className="block text-[11px] sm:text-xs text-terminal-dim uppercase tracking-widest mb-1 sm:mb-2">
-                  {">"}_  INPUT NAME
+                  <span aria-hidden="true">{">_"}</span> Name
                 </label>
                 <input
                   id="contact-name"
@@ -149,7 +171,7 @@ export function Contact() {
                   type="text"
                   autoComplete="name"
                   disabled={status === "submitting"}
-                  className="w-full px-3 py-2.5 short:py-2 sm:px-4 sm:py-3 text-base sm:text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full px-3 py-2.5 short:py-2 sm:px-4 sm:py-3 compact:py-2 text-base sm:text-sm disabled:opacity-50 disabled:cursor-not-allowed"
                   placeholder="Your name"
                   value={formData.name}
                   onFocus={() => { playTick(); haptic("tick"); }}
@@ -158,7 +180,7 @@ export function Contact() {
               </div>
               <div>
                 <label htmlFor="contact-email" className="block text-[11px] sm:text-xs text-terminal-dim uppercase tracking-widest mb-1 sm:mb-2">
-                  {">"}_  INPUT RETURN_ADDR <span className="text-red-500" aria-hidden="true">*</span>
+                  <span aria-hidden="true">{">_"}</span> Email <span className="text-red-500" aria-hidden="true">*</span>
                 </label>
                 <input
                   id="contact-email"
@@ -168,7 +190,7 @@ export function Contact() {
                   required
                   disabled={status === "submitting"}
                   aria-invalid={status === "error"}
-                  className="w-full px-3 py-2.5 short:py-2 sm:px-4 sm:py-3 text-base sm:text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full px-3 py-2.5 short:py-2 sm:px-4 sm:py-3 compact:py-2 text-base sm:text-sm disabled:opacity-50 disabled:cursor-not-allowed"
                   placeholder="your@email.com"
                   value={formData.returnAddr}
                   onFocus={() => { playTick(); haptic("tick"); }}
@@ -178,7 +200,7 @@ export function Contact() {
               <div>
                 <div className="flex justify-between items-end mb-1 sm:mb-2">
                   <label htmlFor="contact-message" className="block text-[11px] sm:text-xs text-terminal-dim uppercase tracking-widest">
-                    {">"}_  INPUT PAYLOAD <span className="text-red-500" aria-hidden="true">*</span>
+                    <span aria-hidden="true">{">_"}</span> Message <span className="text-red-500" aria-hidden="true">*</span>
                   </label>
                   <span id="contact-message-counter" className={`text-[10px] ${formData.payload.length >= 500 ? 'text-red-500' : 'text-terminal-dim/70'}`}>
                     {formData.payload.length}/500
@@ -193,7 +215,7 @@ export function Contact() {
                   disabled={status === "submitting"}
                   aria-invalid={status === "error"}
                   aria-describedby="contact-message-counter"
-                  className="w-full h-24 short:h-16 sm:h-auto px-3 py-2.5 short:py-2 sm:px-4 sm:py-3 text-base sm:text-sm resize-none disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full h-24 short:h-16 sm:h-auto px-3 py-2.5 short:py-2 sm:px-4 sm:py-3 compact:py-2 text-base sm:text-sm resize-none disabled:opacity-50 disabled:cursor-not-allowed"
                   placeholder="Your message..."
                   value={formData.payload}
                   onFocus={() => { playTick(); haptic("tick"); }}
@@ -221,10 +243,10 @@ export function Contact() {
                     : "bg-red-900/20 text-red-500 border-red-900"
                 }`}
               >
-                {status === "idle" && <>Execute Transmit <Send size={18} /></>}
-                {status === "submitting" && <>Transmitting... <Loader2 size={18} className="animate-spin" /></>}
-                {status === "success" && <>Payload Delivered <CheckCircle2 size={18} /></>}
-                {status === "error" && <>Transmission Failed <AlertCircle size={18} /></>}
+                {status === "idle" && <>Send message <Send size={18} /></>}
+                {status === "submitting" && <>Sending... <Loader2 size={18} className="animate-spin" /></>}
+                {status === "success" && <>Message sent <CheckCircle2 size={18} /></>}
+                {status === "error" && <>Not sent, try again <AlertCircle size={18} /></>}
               </motion.button>
             </div>
           </motion.form>
