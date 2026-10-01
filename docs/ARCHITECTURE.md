@@ -72,10 +72,12 @@ React’s `lazy` API defers component code until the component first renders, an
 | [`Navbar.tsx`](../src/components/Navbar.tsx) | Anchored navigation, active state, scanline transition, and feedback controls. | Uses active-section tracking that must tolerate sections mounting after page load. |
 | [`Hero.tsx`](../src/components/Hero.tsx) | Primary identity, hero calls to action, count-up badge, and CSS-first entrance treatment. | Hero slot reservations are intentional stability safeguards, especially on mobile. |
 | [`TypewriterText.tsx`](../src/components/TypewriterText.tsx) | Types copy while reserving the final line’s footprint. | Do not replace the measurement span with an unreserved text node or CLS will regress. |
-| [`Skills.tsx`](../src/components/Skills.tsx) | Technical capability groups and skill-level display. | Loaded only when first needed; animation belongs in the deferred path. |
-| [`Projects.tsx`](../src/components/Projects.tsx) | Selected work and project links. | Replace placeholder destinations with verified public URLs. |
+| [`Skills.tsx`](../src/components/Skills.tsx) | Technical capability groups shown as skill chips (no self-rated levels). | Loaded only when first needed; animation belongs in the deferred path. |
+| [`Projects.tsx`](../src/components/Projects.tsx) | Selected work, project links, and optional case-study links. | Cards adapt to optional screenshot, link, and repository fields. |
 | [`Experience.tsx`](../src/components/Experience.tsx) | Career timeline. | Timeline draw animation must retain a reduced-motion equivalent. |
 | [`Contact.tsx`](../src/components/Contact.tsx) | Direct channels and optional Web3Forms submission. | Keep labels, required attributes, and the live status region aligned with visual form changes. |
+| [`Testimonials.tsx`](../src/components/Testimonials.tsx) | Colleague quotes. | Rendered, and added to navigation, only when `testimonials` has entries. |
+| [`CaseStudyPage.tsx`](../src/work/CaseStudyPage.tsx) | Long-form case study at `/work/<slug>/`, a separate `work.html` entry. | Pages are emitted per published study by [`vite-plugins/portfolioPages.ts`](../vite-plugins/portfolioPages.ts). |
 | [`HackerBackground.tsx`](../src/components/HackerBackground.tsx) | Hosts decorative canvas layers inside the terminal screen. | This layer must remain noninteractive from an accessibility and pointer-events perspective. |
 | [`MatrixCanvas.tsx`](../src/components/MatrixCanvas.tsx) | Low-rate falling character effect. | It must pause while hidden and when reduced motion is requested. |
 | [`InteractiveCanvas.tsx`](../src/components/InteractiveCanvas.tsx) | Pointer-responsive particles and cursor trail. | It must remain idle without pointer activity and never capture input events. |
