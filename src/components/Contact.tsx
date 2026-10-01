@@ -66,9 +66,9 @@ export function Contact() {
   return (
     <section
       id="contact"
-      className="w-full h-full flex-shrink-0 snap-start snap-always p-2 md:p-4 lg:p-8 flex items-center justify-center"
+      className="w-full h-full flex-shrink-0 snap-start snap-always p-1 sm:p-2 md:p-4 lg:p-8 flex items-center justify-center"
     >
-      <div className="w-full max-w-6xl mx-auto h-full hacker-card p-4 md:p-8 lg:p-12 flex flex-col justify-center relative z-10 overflow-hidden">
+      <div className="w-full max-w-6xl mx-auto h-full hacker-card p-2.5 sm:p-4 md:p-8 lg:p-12 flex flex-col justify-center relative z-10 overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-terminal-green/5 blur-[100px] -translate-y-1/2 translate-x-1/2 rounded-full pointer-events-none z-0" />
 
         <motion.div
@@ -76,14 +76,14 @@ export function Contact() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.15 }}
-          className="relative z-10 grid lg:grid-cols-2 gap-6 lg:gap-12 items-center w-full min-h-0"
+          className="relative z-10 grid lg:grid-cols-2 gap-3 lg:gap-12 items-center w-full min-h-0"
         >
           {/* Left: contact info */}
           <div className="flex flex-col justify-center">
-            <motion.h2 variants={itemVariants} className="text-xs lg:text-sm font-mono text-terminal-green uppercase tracking-widest mb-1 flex items-center gap-2">
-              <TerminalSquare size={14} /> Establish Connection
+            <motion.h2 variants={itemVariants} className="text-[10px] sm:text-xs lg:text-sm font-mono text-terminal-green uppercase tracking-widest mb-0.5 sm:mb-1 flex items-center gap-2">
+              <TerminalSquare size={12} /> Establish Connection
             </motion.h2>
-            <motion.h3 variants={itemVariants} className="text-2xl sm:text-3xl md:text-5xl font-terminal mb-2 lg:mb-4 text-gray-900 dark:text-gray-200">
+            <motion.h3 variants={itemVariants} className="text-xl sm:text-3xl md:text-5xl font-terminal mb-1 lg:mb-4 text-gray-900 dark:text-gray-200">
               Open a new socket.
             </motion.h3>
             <motion.p variants={itemVariants} className="text-gray-600 dark:text-gray-400 font-mono text-xs lg:text-sm mb-3 lg:mb-10 max-w-md leading-relaxed hidden sm:block">

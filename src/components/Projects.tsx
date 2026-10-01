@@ -50,22 +50,22 @@ export function Projects() {
   return (
     <section
       id="projects"
-      className="w-full h-full flex-shrink-0 snap-start snap-always p-2 md:p-4 lg:p-8 flex items-center justify-center"
+      className="w-full h-full flex-shrink-0 snap-start snap-always p-1 sm:p-2 md:p-4 lg:p-8 flex items-center justify-center"
     >
-      <div className="w-full max-w-6xl mx-auto h-full hacker-card p-4 md:p-8 lg:p-12 flex flex-col justify-center relative z-10 overflow-hidden">
+      <div className="w-full max-w-6xl mx-auto h-full hacker-card p-2.5 sm:p-4 md:p-8 lg:p-12 flex flex-col justify-center relative z-10 overflow-hidden">
 
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
-          className="flex flex-col md:flex-row md:items-end justify-between mb-3 lg:mb-8 gap-2 lg:gap-8 w-full shrink-0"
+          className="flex flex-col md:flex-row md:items-end justify-between mb-2 lg:mb-8 gap-2 lg:gap-8 w-full shrink-0"
         >
-          <div className="border-l-4 border-terminal-green pl-3 lg:pl-6">
-            <motion.h2 variants={itemVariants} className="text-xs lg:text-sm font-mono text-terminal-dim uppercase tracking-widest mb-0.5 lg:mb-2">
+          <div className="border-l-4 border-terminal-green pl-2.5 lg:pl-6">
+            <motion.h2 variants={itemVariants} className="text-[10px] sm:text-xs lg:text-sm font-mono text-terminal-dim uppercase tracking-widest mb-0.5 lg:mb-2">
               {">_"} LS PROJECTS/
             </motion.h2>
-            <motion.h3 variants={itemVariants} className="text-2xl sm:text-3xl md:text-5xl font-terminal text-gray-900 dark:text-gray-200">
+            <motion.h3 variants={itemVariants} className="text-xl sm:text-3xl md:text-5xl font-terminal text-gray-900 dark:text-gray-200">
               Deployed Systems.
             </motion.h3>
           </div>
@@ -102,7 +102,7 @@ export function Projects() {
                 </div>
               </div>
 
-              <div className="p-3 bg-gray-50 dark:bg-[#0a0a0a] min-h-0 flex-1 flex flex-col justify-between">
+              <div className="p-2.5 sm:p-3 bg-gray-50 dark:bg-[#0a0a0a] min-h-0 flex-1 flex flex-col justify-between">
                 <div className="min-h-0 overflow-hidden flex flex-col">
                   <div className="flex gap-1 mb-1.5 flex-wrap shrink-0">
                     {project.tech.map((t) => (

@@ -33,22 +33,22 @@ export function Hero() {
   return (
     <section
       id="hero"
-      className="w-full h-full flex-shrink-0 snap-start snap-always p-2 md:p-4 lg:p-8 flex items-center justify-center"
+      className="w-full h-full flex-shrink-0 snap-start snap-always p-1 sm:p-2 md:p-4 lg:p-8 flex items-center justify-center"
     >
-      <div className="w-full max-w-6xl mx-auto h-full hero-card-pulse hacker-card p-4 md:p-8 lg:p-12 flex flex-col justify-center relative z-10 overflow-hidden">
-        <div className="grid lg:grid-cols-2 gap-6 lg:gap-12 items-center w-full min-h-0">
+      <div className="w-full max-w-6xl mx-auto h-full hero-card-pulse hacker-card p-3 sm:p-4 md:p-8 lg:p-12 flex flex-col justify-center relative z-10 overflow-hidden">
+        <div className="grid lg:grid-cols-2 gap-4 lg:gap-12 items-center w-full min-h-0">
 
           {/* ── Left column ── */}
           <div className="relative z-10">
 
             {/* Status badge */}
-            <div className="hero-item hero-item-1 inline-flex items-center gap-2 px-2.5 py-0.5 sm:px-3 sm:py-1 bg-terminal-green/10 border border-terminal-green/30 rounded-full text-terminal-green text-[10px] sm:text-xs font-mono uppercase tracking-widest mb-3 sm:mb-6 md:mb-8">
-              <span className="w-2 h-2 bg-terminal-green animate-pulse rounded-full" />
+            <div className="hero-item hero-item-1 inline-flex items-center gap-2 px-2 py-0.5 sm:px-3 sm:py-1 bg-terminal-green/10 border border-terminal-green/30 rounded-full text-terminal-green text-[9px] sm:text-xs font-mono uppercase tracking-widest mb-1.5 sm:mb-3 md:mb-8">
+              <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-terminal-green animate-pulse rounded-full" />
               System Secure &amp; Ready
             </div>
 
             {/* Name — typed character by character, cursor blinks when done */}
-            <h1 className="hero-item hero-item-2 text-3xl sm:text-4xl md:text-6xl font-terminal mb-2 sm:mb-3 md:mb-4 leading-none uppercase drop-shadow-[0_0_8px_rgba(0,255,65,0.3)]">
+            <h1 className="hero-item hero-item-2 text-2xl sm:text-4xl md:text-6xl font-terminal mb-1 sm:mb-3 md:mb-4 leading-none uppercase drop-shadow-[0_0_8px_rgba(0,255,65,0.3)]">
               {typed}
               <span
                 aria-hidden="true"
@@ -58,17 +58,17 @@ export function Hero() {
 
             {/* Role, bio, CTAs — always in DOM, revealed by CSS class once name is done */}
             <div className={`hero-content-reveal ${done ? "hero-content-reveal--visible" : ""}`}>
-              <h2 className="text-base sm:text-lg md:text-xl font-mono text-gray-800 dark:text-gray-300 font-bold mb-2 sm:mb-4 md:mb-5">
+              <h2 className="text-sm sm:text-lg md:text-xl font-mono text-gray-800 dark:text-gray-300 font-bold mb-1.5 sm:mb-4 md:mb-5">
                 Senior Android Engineer
               </h2>
 
-              <p className="text-xs sm:text-sm md:text-base text-gray-600 dark:text-gray-400 font-mono max-w-xl leading-relaxed mb-4 sm:mb-6 md:mb-8">
+              <p className="text-[11px] sm:text-sm md:text-base text-gray-600 dark:text-gray-400 font-mono max-w-xl leading-snug sm:leading-relaxed mb-3 sm:mb-6 md:mb-8">
                 12+ years delivering reliable Kotlin and Jetpack Compose products.
                 I lead modular architecture, improve delivery pipelines, and turn
                 complex requirements into maintainable Android experiences.
               </p>
 
-              <div className="flex flex-wrap gap-3 sm:gap-4 font-mono">
+              <div className="flex flex-wrap gap-2 sm:gap-4 font-mono">
                 <MagneticButton
                   as="a"
                   href="#projects"
