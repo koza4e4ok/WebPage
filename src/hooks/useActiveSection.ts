@@ -4,35 +4,41 @@ export function useActiveSection(sectionIds: string[]): string {
   const [active, setActive] = useState(sectionIds[0] ?? "");
 
   useEffect(() => {
-    let observers: IntersectionObserver[] = [];
     const root = document.querySelector("main");
+    if (!root) return;
 
-    const observeSections = () => {
-      observers.forEach((observer) => observer.disconnect());
-      observers = sectionIds.flatMap((id) => {
-        const element = document.getElementById(id);
-        if (!element) return [];
+    const observedElements = new Set<Element>();
 
-        const observer = new IntersectionObserver(
-          ([entry]) => {
-            if (entry.isIntersecting) setActive(id);
-          },
-          { root, threshold: 0.5 }
-        );
-        observer.observe(element);
-        return [observer];
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting && entry.target.id) {
+            setActive(entry.target.id);
+          }
+        }
+      },
+      { root, threshold: 0.5 }
+    );
+
+    const updateObservedSections = () => {
+      sectionIds.forEach((id) => {
+        const el = document.getElementById(id);
+        if (el && !observedElements.has(el)) {
+          observer.observe(el);
+          observedElements.add(el);
+        }
       });
     };
 
-    observeSections();
-    const mutationObserver = root
-      ? new MutationObserver(observeSections)
-      : undefined;
-    mutationObserver?.observe(root, { childList: true, subtree: false });
+    updateObservedSections();
+
+    const mutationObserver = new MutationObserver(updateObservedSections);
+    mutationObserver.observe(root, { childList: true, subtree: false });
 
     return () => {
-      observers.forEach((observer) => observer.disconnect());
-      mutationObserver?.disconnect();
+      observer.disconnect();
+      mutationObserver.disconnect();
+      observedElements.clear();
     };
   }, [sectionIds]);
 

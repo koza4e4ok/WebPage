@@ -100,7 +100,7 @@ export function MatrixCanvas({ isOverdrive = false }: MatrixCanvasProps) {
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 w-full h-full pointer-events-none"
+      className="absolute inset-0 w-full h-full pointer-events-none gpu-layer"
       aria-hidden="true"
     />
   );
