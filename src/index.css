@@ -16,6 +16,8 @@
 
 @import "tailwindcss";
 
+@custom-variant short (@media (max-width: 767px) and (max-height: 700px));
+
 @theme {
   --font-terminal: "VT323", monospace;
   --font-mono: "JetBrains Mono", monospace;
@@ -87,12 +89,18 @@
   transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease, text-shadow 0.2s ease;
   will-change: transform;
 }
-.glitch-hover:hover, .glitch-hover:focus {
+.glitch-hover:focus-visible {
   color: #000;
   animation: modern-glitch 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
 }
+@media (hover: hover) {
+  .glitch-hover:hover {
+    color: #000;
+    animation: modern-glitch 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+  }
+}
 @media (prefers-color-scheme: dark) {
-  .glitch-hover:hover, .glitch-hover:focus {
+  .glitch-hover:hover, .glitch-hover:focus-visible {
     color: #fff;
   }
 }
@@ -111,22 +119,26 @@
   @apply bg-gray-50 dark:bg-[#0a0a0a] border border-terminal-green/20 rounded-xl transition-all duration-300;
   will-change: border-color, box-shadow, transform;
 }
-.hacker-card:hover {
-  @apply border-terminal-green;
-  box-shadow: 0 6px 24px rgba(0, 255, 65, 0.12);
-  transform: translate3d(0, -2px, 0);
+@media (hover: hover) {
+  .hacker-card:hover {
+    @apply border-terminal-green;
+    box-shadow: 0 6px 24px rgba(0, 255, 65, 0.12);
+    transform: translate3d(0, -2px, 0);
+  }
 }
 
 .hacker-btn {
-  @apply px-6 py-3 border border-terminal-green text-terminal-green rounded-lg bg-terminal-green/5 hover:bg-terminal-green hover:text-white uppercase tracking-widest font-bold transition-all duration-200 flex items-center justify-center gap-2 active:scale-95;
+  @apply px-4 sm:px-6 py-3 border border-terminal-green text-terminal-green rounded-lg bg-terminal-green/5 hover:bg-terminal-green hover:text-white uppercase tracking-widest font-bold transition-all duration-200 flex items-center justify-center gap-2 active:scale-95;
   will-change: transform, background-color, box-shadow;
 }
-.hacker-btn:hover {
-  box-shadow: 0 0 12px rgba(0, 255, 65, 0.3);
+@media (hover: hover) {
+  .hacker-btn:hover {
+    box-shadow: 0 0 12px rgba(0, 255, 65, 0.3);
+  }
 }
 
 .hacker-btn-alt {
-  @apply bg-gray-50 text-gray-800 border border-gray-600 hover:border-terminal-green hover:text-terminal-green hover:bg-terminal-green/10;
+  @apply bg-gray-50 dark:bg-[#0a0a0a] text-gray-800 dark:text-gray-200 border border-gray-600 dark:border-gray-700 hover:border-terminal-green hover:text-terminal-green hover:bg-terminal-green/10;
 }
 
 /* Blinking cursor for text */
@@ -184,7 +196,7 @@ textarea:focus-visible,
     opacity: 1;
   }
   .glitch-hover:hover,
-  .glitch-hover:focus {
+  .glitch-hover:focus-visible {
     animation: none;
   }
   /* Show all hero content immediately when motion is reduced. */
@@ -209,9 +221,13 @@ textarea:focus-visible,
   transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1), filter 180ms ease;
   will-change: transform;
 }
-.magnetic-trigger:hover .magnetic-content,
 .magnetic-trigger:focus-visible .magnetic-content {
   filter: drop-shadow(0 0 8px rgba(0, 153, 34, 0.55));
+}
+@media (hover: hover) {
+  .magnetic-trigger:hover .magnetic-content {
+    filter: drop-shadow(0 0 8px rgba(0, 153, 34, 0.55));
+  }
 }
 
 /* ─── Hero animation system ──────────────────────────────────────────────────
@@ -282,4 +298,14 @@ textarea:focus-visible,
 .scanline-wipe {
   will-change: transform;
   animation: scanline-sweep 250ms ease-in-out both;
+}
+
+/* Carousels show dot indicators on phones, so the scrollbar is redundant there. */
+@media (max-width: 767px) {
+  .mobile-scrollbar-none {
+    scrollbar-width: none;
+  }
+  .mobile-scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
 }

@@ -1,4 +1,5 @@
 import { motion } from "motion/react";
+import { useState } from "react";
 
 const containerVariants = {
   hidden: {},
@@ -11,6 +12,7 @@ const itemVariants = {
 };
 
 export function Experience() {
+  const [expanded, setExpanded] = useState<string | null>(null);
   const experiences = [
     {
       company: "DataArt Solutions, Inc.",
@@ -51,12 +53,12 @@ export function Experience() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
-            className="text-center mb-1.5 sm:mb-6 lg:mb-10 shrink-0"
+            className="text-center mb-4 short:mb-2 sm:mb-6 lg:mb-10 shrink-0"
           >
-            <motion.h2 variants={itemVariants} className="text-[10px] sm:text-xs lg:text-sm font-mono text-terminal-dim uppercase tracking-widest mb-0.5 lg:mb-2">
+            <motion.h2 variants={itemVariants} className="text-[11px] sm:text-xs lg:text-sm font-mono text-terminal-dim uppercase tracking-widest mb-1 lg:mb-2">
               {"//"} Execution Logs
             </motion.h2>
-            <motion.h3 variants={itemVariants} className="text-xl sm:text-3xl md:text-5xl font-terminal text-gray-900 dark:text-gray-200">
+            <motion.h3 variants={itemVariants} className="text-3xl short:text-2xl sm:text-3xl md:text-5xl font-terminal text-gray-900 dark:text-gray-200">
               System Timeline.
             </motion.h3>
           </motion.div>
@@ -89,11 +91,11 @@ export function Experience() {
                   {/* Timeline dot */}
                   <div className="absolute -left-[5.5px] top-[4px] md:top-[6px] w-[10px] h-[10px] rounded-full bg-gray-200 dark:bg-[#111] border border-terminal-green group-hover:bg-terminal-green transition-colors shadow-[0_0_8px_rgba(0,255,65,0.5)] z-10" />
 
-                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-end mb-0.5 md:mb-2 gap-0.5 sm:gap-4">
-                    <h4 className="text-xs sm:text-sm md:text-lg lg:text-xl font-terminal text-terminal-green leading-none glitch-hover">
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-end mb-1 md:mb-2 gap-1 sm:gap-4">
+                    <h4 className="text-lg short:text-base md:text-lg lg:text-xl font-terminal text-terminal-green leading-none glitch-hover">
                       {exp.role}
                     </h4>
-                    <span className="text-[8px] sm:text-[9px] md:text-xs font-mono text-gray-500 bg-gray-200 dark:bg-[#111] px-1.5 py-0.5 rounded border border-gray-200 dark:border-gray-800 leading-none shrink-0 inline-block w-fit">
+                    <span className="text-[11px] md:text-xs font-mono text-gray-500 bg-gray-200 dark:bg-[#111] px-1.5 py-0.5 rounded border border-gray-200 dark:border-gray-800 leading-none shrink-0 inline-block w-fit">
                       {exp.period}
                     </span>
                   </div>
@@ -104,19 +106,33 @@ export function Experience() {
                       target="_blank"
                       rel="noreferrer noopener"
                       aria-label={`Visit ${exp.company} website`}
-                      className="text-gray-900 dark:text-gray-200 font-mono text-[10px] md:text-xs lg:text-sm mb-0.5 lg:mb-2 hover:text-terminal-green transition-colors underline underline-offset-2 decoration-terminal-green/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terminal-green focus-visible:ring-offset-1 inline-block"
+                      className="text-gray-900 dark:text-gray-200 font-mono text-sm md:text-xs lg:text-sm mb-1 lg:mb-2 hover:text-terminal-green transition-colors underline underline-offset-2 decoration-terminal-green/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terminal-green focus-visible:ring-offset-1 inline-block"
                     >
                       {exp.company}
                     </a>
                   ) : (
-                    <p className="text-gray-900 dark:text-gray-200 font-mono text-[10px] md:text-xs lg:text-sm mb-0.5 lg:mb-2">
+                    <p className="text-gray-900 dark:text-gray-200 font-mono text-sm md:text-xs lg:text-sm mb-1 lg:mb-2">
                       {exp.company}
                     </p>
                   )}
 
-                  <p className="text-gray-600 dark:text-gray-400 font-mono text-[10px] md:text-xs leading-tight sm:leading-snug md:leading-relaxed line-clamp-2 sm:line-clamp-3 md:line-clamp-4">
+                  <p
+                    id={`exp-desc-${exp.company.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}
+                    className={`text-gray-600 dark:text-gray-400 font-mono text-[13px] md:text-xs leading-snug md:leading-relaxed md:line-clamp-4 ${
+                      expanded === exp.company ? "" : "short:line-clamp-2"
+                    }`}
+                  >
                     {">"} {exp.description}
                   </p>
+                  <button
+                    type="button"
+                    onClick={() => setExpanded(expanded === exp.company ? null : exp.company)}
+                    aria-expanded={expanded === exp.company}
+                    aria-controls={`exp-desc-${exp.company.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}
+                    className="hidden short:inline-flex py-1 text-[11px] font-mono uppercase tracking-widest text-terminal-green focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terminal-green rounded"
+                  >
+                    {expanded === exp.company ? "< less" : "> more"}
+                  </button>
                 </motion.div>
               ))}
             </motion.div>

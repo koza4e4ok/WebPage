@@ -41,14 +41,40 @@ export function Hero() {
           {/* ── Left column ── */}
           <div className="relative z-10">
 
+            {/* Mobile portrait + uptime — the desktop portrait column is hidden below lg */}
+            <div className="hero-item hero-item-1 lg:hidden [@media(max-height:500px)]:hidden flex items-center gap-4 mb-5 short:mb-3">
+              <div className="relative w-20 h-20 short:w-16 short:h-16 shrink-0 rounded-xl overflow-hidden border border-terminal-green/30 bg-white dark:bg-[#0a0a0a] shadow-[0_0_20px_rgba(0,255,65,0.12)]">
+                <div className="absolute inset-0 bg-terminal-green/10 mix-blend-color z-10 pointer-events-none" />
+                <img
+                  src="/avatar.webp"
+                  alt="Portrait of Andrii Kozakov, Senior Android Engineer"
+                  width={80}
+                  height={80}
+                  decoding="async"
+                  className="w-full h-full object-cover grayscale contrast-125"
+                />
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-terminal-green/10 rounded-lg text-terminal-green border border-terminal-green/20">
+                  <Cpu size={20} />
+                </div>
+                <div>
+                  <div className="text-2xl font-terminal text-gray-900 dark:text-gray-200 leading-none">
+                    {years}+ YEARS
+                  </div>
+                  <div className="text-xs text-gray-500 font-mono tracking-wider">UPTIME</div>
+                </div>
+              </div>
+            </div>
+
             {/* Status badge */}
-            <div className="hero-item hero-item-1 inline-flex items-center gap-2 px-2 py-0.5 sm:px-3 sm:py-1 bg-terminal-green/10 border border-terminal-green/30 rounded-full text-terminal-green text-[9px] sm:text-xs font-mono uppercase tracking-widest mb-1.5 sm:mb-3 md:mb-8">
+            <div className="hero-item hero-item-1 inline-flex items-center gap-2 px-2 py-0.5 sm:px-3 sm:py-1 bg-terminal-green/10 border border-terminal-green/30 rounded-full text-terminal-green text-[11px] sm:text-xs font-mono uppercase tracking-widest mb-3 short:mb-2 md:mb-8">
               <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-terminal-green animate-pulse rounded-full" />
               System Secure &amp; Ready
             </div>
 
             {/* Name — typed character by character, cursor blinks when done */}
-            <h1 className="hero-item hero-item-2 text-2xl sm:text-4xl md:text-6xl font-terminal mb-1 sm:mb-3 md:mb-4 leading-none uppercase drop-shadow-[0_0_8px_rgba(0,255,65,0.3)]">
+            <h1 className="hero-item hero-item-2 text-[2.5rem] short:text-4xl sm:text-5xl md:text-6xl font-terminal mb-2 sm:mb-3 md:mb-4 leading-none uppercase drop-shadow-[0_0_8px_rgba(0,255,65,0.3)]">
               {typed}
               <span
                 aria-hidden="true"
@@ -58,21 +84,21 @@ export function Hero() {
 
             {/* Role, bio, CTAs — always in DOM, revealed by CSS class once name is done */}
             <div className={`hero-content-reveal ${done ? "hero-content-reveal--visible" : ""}`}>
-              <h2 className="text-sm sm:text-lg md:text-xl font-mono text-gray-800 dark:text-gray-300 font-bold mb-1.5 sm:mb-4 md:mb-5">
+              <h2 className="text-lg md:text-xl font-mono text-gray-800 dark:text-gray-300 font-bold mb-3 short:mb-2 sm:mb-4 md:mb-5">
                 Senior Android Engineer
               </h2>
 
-              <p className="text-[11px] sm:text-sm md:text-base text-gray-600 dark:text-gray-400 font-mono max-w-xl leading-snug sm:leading-relaxed mb-3 sm:mb-6 md:mb-8">
+              <p className="text-sm md:text-base text-gray-600 dark:text-gray-400 font-mono max-w-xl leading-relaxed short:leading-snug mb-6 short:mb-4 md:mb-8">
                 12+ years delivering reliable Kotlin and Jetpack Compose products.
                 I lead modular architecture, improve delivery pipelines, and turn
                 complex requirements into maintainable Android experiences.
               </p>
 
-              <div className="flex flex-wrap gap-2 sm:gap-4 font-mono">
+              <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3 sm:gap-4 font-mono">
                 <MagneticButton
                   as="a"
                   href="#projects"
-                  className="hacker-btn glitch-hover"
+                  className="hacker-btn glitch-hover w-full sm:w-auto"
                   onClick={() => { playConfirm(); haptic("confirm"); }}
                   onMouseEnter={() => { playTick(); haptic("tick"); }}
                 >
@@ -83,7 +109,7 @@ export function Hero() {
                   as="a"
                   href={`${import.meta.env.BASE_URL}andriikozakov.pdf`}
                   download="andriikozakov.pdf"
-                  className="hacker-btn hacker-btn-alt glitch-hover"
+                  className="hacker-btn hacker-btn-alt glitch-hover w-full sm:w-auto"
                   onClick={() => { playConfirm(); haptic("confirm"); }}
                   onMouseEnter={() => { playTick(); haptic("tick"); }}
                 >

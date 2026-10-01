@@ -108,7 +108,7 @@ export default function App() {
   }, [konamiIndex]);
 
   return (
-    <div className="h-screen w-full bg-gray-100 dark:bg-[#020202] text-gray-800 dark:text-gray-300 font-mono relative selection:bg-terminal-green selection:text-black flex flex-col overflow-hidden">
+    <div className="h-dvh w-full bg-gray-100 dark:bg-[#020202] text-gray-800 dark:text-gray-300 font-mono relative selection:bg-terminal-green selection:text-black flex flex-col overflow-hidden">
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 z-[100] px-4 py-2 bg-terminal-green text-black font-bold outline-none ring-2 ring-terminal-green ring-offset-2 ring-offset-white dark:ring-offset-[#020202] rounded-md transition-all"

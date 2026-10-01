@@ -1,6 +1,8 @@
 import React from "react";
 import { motion } from "motion/react";
 import { Smartphone, Layout, Settings } from "lucide-react";
+import { CarouselDots } from "./CarouselDots";
+import { useCarousel } from "../hooks/useCarousel";
 
 const containerVariants = {
   hidden: {},
@@ -24,6 +26,7 @@ interface SkillCategory {
 }
 
 export function Skills() {
+  const carousel = useCarousel<HTMLDivElement>();
   const skillCategories: SkillCategory[] = [
     {
       title: "CORE_ANDROID",
@@ -71,12 +74,12 @@ export function Skills() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
-          className="mb-2 sm:mb-6 lg:mb-10 border-l-4 border-terminal-green pl-2.5 lg:pl-6 w-full shrink-0"
+          className="mb-5 short:mb-3 sm:mb-6 lg:mb-10 border-l-4 border-terminal-green pl-2.5 lg:pl-6 w-full shrink-0"
         >
-          <motion.h2 variants={itemVariants} className="text-[10px] sm:text-xs lg:text-sm font-mono text-terminal-dim uppercase tracking-widest mb-0.5 lg:mb-2">
+          <motion.h2 variants={itemVariants} className="text-[11px] sm:text-xs lg:text-sm font-mono text-terminal-dim uppercase tracking-widest mb-1 lg:mb-2">
             {"//"} SYSTEM_DIAGNOSTICS
           </motion.h2>
-          <motion.h3 variants={itemVariants} className="text-xl sm:text-3xl md:text-5xl font-terminal text-gray-900 dark:text-gray-200">
+          <motion.h3 variants={itemVariants} className="text-3xl short:text-2xl sm:text-3xl md:text-5xl font-terminal text-gray-900 dark:text-gray-200">
             Technical Specs.
           </motion.h3>
         </motion.div>
@@ -86,39 +89,40 @@ export function Skills() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.15 }}
-          className="flex md:grid md:grid-cols-3 overflow-x-auto snap-x snap-mandatory gap-3 md:gap-6 min-h-0 pb-2 md:pb-0 custom-scrollbar -mx-2 px-2 md:mx-0 md:px-0"
+          ref={carousel.ref}
+          className="flex md:grid md:grid-cols-3 overflow-x-auto snap-x snap-mandatory gap-3 md:gap-6 min-h-0 custom-scrollbar mobile-scrollbar-none -mx-2 px-2 md:mx-0 md:px-0"
         >
           {skillCategories.map((cat) => (
             <motion.div
               key={cat.title}
               variants={itemVariants}
-              className="w-[85%] sm:w-[280px] md:w-auto shrink-0 snap-center md:shrink bg-white dark:bg-[#050505] border border-gray-200 dark:border-gray-800 rounded-xl p-2.5 sm:p-4 lg:p-6 group relative hover:border-terminal-green/50 hover:shadow-[0_4px_20px_rgba(0,255,65,0.05)] transition-all duration-300 flex flex-col min-h-0 justify-between"
+              className="w-[85%] sm:w-[280px] md:w-auto shrink-0 snap-center md:shrink bg-white dark:bg-[#050505] border border-gray-200 dark:border-gray-800 rounded-xl p-4 short:p-3 lg:p-6 group relative hover:border-terminal-green/50 hover:shadow-[0_4px_20px_rgba(0,255,65,0.05)] transition-all duration-300 flex flex-col min-h-0 justify-between"
             >
               <div>
-                <div className="w-7 h-7 sm:w-8 sm:h-8 lg:w-10 lg:h-10 rounded-xl bg-gray-200 dark:bg-[#111] border border-terminal-green/20 flex items-center justify-center mb-1.5 sm:mb-2 lg:mb-4 shadow-[0_0_15px_rgba(0,255,65,0.1)] group-hover:scale-110 transition-transform">
+                <div className="w-10 h-10 short:w-8 short:h-8 rounded-xl bg-gray-200 dark:bg-[#111] border border-terminal-green/20 flex items-center justify-center mb-3 short:mb-2 lg:mb-4 shadow-[0_0_15px_rgba(0,255,65,0.1)] group-hover:scale-110 transition-transform">
                   {cat.icon}
                 </div>
 
-                <h4 className="text-base sm:text-lg lg:text-xl font-terminal text-terminal-green mb-2 lg:mb-4">
+                <h4 className="text-xl font-terminal text-terminal-green mb-4 short:mb-2 lg:mb-4">
                   {cat.title}
                 </h4>
               </div>
 
-              <div className="flex flex-col gap-1.5 sm:gap-2 flex-grow justify-center">
+              <div className="flex flex-col gap-3 short:gap-2 md:gap-2 flex-grow justify-center">
                 {cat.skills.map((skill) => {
                   const skillId = `skill-${skill.name.toLowerCase().replace(/\s+/g, '-')}`;
                   return (
                     <div key={skill.name}>
-                      <div className="flex justify-between items-center mb-0.5">
-                        <span id={skillId} className="text-xs font-mono text-gray-800 dark:text-gray-300">
+                      <div className="flex justify-between items-center mb-1 md:mb-0.5">
+                        <span id={skillId} className="text-sm md:text-xs font-mono text-gray-800 dark:text-gray-300">
                           {skill.name}
                         </span>
-                        <span className="text-[10px] font-mono text-terminal-dim opacity-70" aria-hidden="true">
+                        <span className="text-xs md:text-[10px] md:leading-normal font-mono text-terminal-dim opacity-70" aria-hidden="true">
                           {skill.level}%
                         </span>
                       </div>
                       <div
-                        className="h-[3px] w-full bg-gray-200 dark:bg-[#1a1a1a] rounded-full overflow-hidden"
+                        className="h-1 md:h-[3px] w-full bg-gray-200 dark:bg-[#1a1a1a] rounded-full overflow-hidden"
                         role="progressbar"
                         aria-valuenow={skill.level}
                         aria-valuemin={0}
@@ -144,6 +148,12 @@ export function Skills() {
             </motion.div>
           ))}
         </motion.div>
+        <CarouselDots
+          labels={skillCategories.map((cat) => cat.title)}
+          active={carousel.index}
+          onSelect={carousel.scrollToIndex}
+          groupLabel="Skill categories"
+        />
       </div>
     </section>
   );
