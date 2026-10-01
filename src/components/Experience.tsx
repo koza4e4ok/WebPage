@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
 import { useState } from "react";
+import { experience } from "../content/profile";
 
 const containerVariants = {
   hidden: {},
@@ -13,39 +14,13 @@ const itemVariants = {
 
 export function Experience() {
   const [expanded, setExpanded] = useState<string | null>(null);
-  const experiences = [
-    {
-      company: "DataArt Solutions, Inc.",
-      companyUrl: "https://www.dataart.com",
-      role: "SENIOR ANDROID ENGINEER",
-      period: "2021 — PRESENT",
-      description:
-        "Leading development of multi-module Android applications using Jetpack Compose and modern architecture. Mentoring junior developers, conducting code reviews, and implementing CI/CD pipelines with GitHub Actions.",
-    },
-    {
-      company: "Unicreo",
-      companyUrl: "https://unicreo.com/",
-      role: "ANDROID DEVELOPER",
-      period: "2016 — 2021",
-      description:
-        "Full-cycle Android development from project estimation and architecture design through to Google Play delivery. Owned feature development, code quality, and release management.",
-    },
-    {
-      company: "Digital Horizon",
-      companyUrl: null,
-      role: "JUNIOR SOFTWARE ENGINEER",
-      period: "2014 — 2016",
-      description:
-        "Contributed to cross-platform and native Android projects. Gained deep experience with Java, XML layouts, and REST API integrations.",
-    },
-  ];
 
   return (
     <section
       id="experience"
-      className="w-full h-full flex-shrink-0 snap-start snap-always p-1 sm:p-2 md:p-4 lg:p-8 flex items-center justify-center"
+      className="w-full h-full flex-shrink-0 snap-start snap-always p-1 sm:p-2 md:p-4 lg:p-8 compact:p-2 flex items-center justify-center"
     >
-      <div className="w-full max-w-6xl mx-auto h-full hacker-card p-2.5 sm:p-4 md:p-8 lg:p-12 flex flex-col justify-center relative z-10 overflow-hidden text-xs sm:text-sm lg:text-base">
+      <div className="w-full max-w-6xl mx-auto h-full hacker-card p-2.5 sm:p-4 md:p-8 lg:p-12 compact:p-6 flex flex-col justify-center relative z-10 overflow-hidden text-xs sm:text-sm lg:text-base">
         <div className="max-w-4xl w-full mx-auto flex-1 flex flex-col min-h-0">
 
           <motion.div
@@ -53,18 +28,18 @@ export function Experience() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
-            className="text-center mb-4 short:mb-2 sm:mb-6 lg:mb-10 shrink-0"
+            className="text-center mb-4 short:mb-2 sm:mb-6 lg:mb-10 compact:mb-4 shrink-0"
           >
             <motion.h2 variants={itemVariants} className="text-[11px] sm:text-xs lg:text-sm font-mono text-terminal-dim uppercase tracking-widest mb-1 lg:mb-2">
               {"//"} Execution Logs
             </motion.h2>
-            <motion.h3 variants={itemVariants} className="text-3xl short:text-2xl sm:text-3xl md:text-5xl font-terminal text-gray-900 dark:text-gray-200">
+            <motion.h3 variants={itemVariants} className="text-3xl short:text-2xl sm:text-3xl md:text-5xl compact:text-4xl font-terminal text-gray-900 dark:text-gray-200">
               System Timeline.
             </motion.h3>
           </motion.div>
 
           {/* Timeline container */}
-          <div className="relative ml-2 md:ml-6 flex-1 flex flex-col justify-evenly py-1 sm:py-2 min-h-0">
+          <div className={`relative ml-2 md:ml-6 flex-1 flex flex-col justify-evenly py-1 sm:py-2 min-h-0 ${expanded ? "max-md:overflow-y-auto max-md:justify-start compact:overflow-y-auto compact:justify-start mobile-scrollbar-none" : ""}`}>
             {/* Animated timeline line */}
             <motion.div
               className="absolute left-0 top-0 bottom-0 w-px bg-terminal-green/30"
@@ -80,9 +55,13 @@ export function Experience() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.1 }}
-              className="flex flex-col justify-evenly flex-1 min-h-0"
+              className={`flex flex-col justify-evenly flex-1 min-h-0 ${expanded ? "max-md:justify-start max-md:gap-4 compact:justify-start compact:gap-4" : ""}`}
             >
-              {experiences.map((exp) => (
+              {experience.map((exp) => {
+                const isExpanded = expanded === exp.company;
+                const hasHighlights = exp.highlights.length > 0;
+                const descId = `exp-desc-${exp.company.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
+                return (
                 <motion.div
                   key={exp.company}
                   variants={itemVariants}
@@ -116,25 +95,37 @@ export function Experience() {
                     </p>
                   )}
 
-                  <p
-                    id={`exp-desc-${exp.company.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}
-                    className={`text-gray-600 dark:text-gray-400 font-mono text-[13px] md:text-xs leading-snug md:leading-relaxed md:line-clamp-4 ${
-                      expanded === exp.company ? "" : "short:line-clamp-2"
-                    }`}
-                  >
-                    {">"} {exp.description}
-                  </p>
+                  <div id={descId}>
+                    <p
+                      className={`text-gray-600 dark:text-gray-400 font-mono text-[13px] md:text-xs leading-snug md:leading-relaxed md:line-clamp-4 ${
+                        isExpanded ? "" : "short:line-clamp-2 compact:line-clamp-2"
+                      }`}
+                    >
+                      {">"} {exp.summary}
+                    </p>
+                    {hasHighlights && (
+                      <ul className={`${isExpanded ? "block" : "hidden md:block compact:hidden"} mt-1.5 space-y-1 font-mono text-[13px] md:text-xs text-gray-800 dark:text-gray-300 leading-snug`}>
+                        {exp.highlights.map((item) => (
+                          <li key={item} className="flex gap-2">
+                            <span className="text-terminal-green shrink-0" aria-hidden="true">+</span>
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
                   <button
                     type="button"
-                    onClick={() => setExpanded(expanded === exp.company ? null : exp.company)}
-                    aria-expanded={expanded === exp.company}
-                    aria-controls={`exp-desc-${exp.company.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}
-                    className="hidden short:inline-flex py-1 text-[11px] font-mono uppercase tracking-widest text-terminal-green focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terminal-green rounded"
+                    onClick={() => setExpanded(isExpanded ? null : exp.company)}
+                    aria-expanded={isExpanded}
+                    aria-controls={descId}
+                    className={`${hasHighlights ? "inline-flex md:hidden compact:inline-flex" : "hidden short:inline-flex"} py-1 text-[11px] font-mono uppercase tracking-widest text-terminal-green focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terminal-green rounded`}
                   >
-                    {expanded === exp.company ? "< less" : "> more"}
+                    {isExpanded ? "< less" : hasHighlights ? "> results" : "> more"}
                   </button>
                 </motion.div>
-              ))}
+                );
+              })}
             </motion.div>
           </div>
         </div>

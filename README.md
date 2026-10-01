@@ -105,11 +105,12 @@ npm run lint && npm run build
 
 ## Configuration and contact form
 
-The only optional runtime build variable is listed below. Copy `.env.example` to `.env.local` for local development; do not commit `.env.local`.
+The optional build variables are listed below. Copy `.env.example` to `.env.local` for local development; do not commit `.env.local`.
 
 | Variable | Required | Used by | Notes |
 |---|---|---|---|
 | `VITE_WEB3FORMS_KEY` | No | `src/components/Contact.tsx` | Enables direct submission through the Web3Forms endpoint. The form remains visible without it, but delivery will fail until a valid key is configured. |
+| `CF_WEB_ANALYTICS_TOKEN` | No | `vite-plugins/portfolioPages.ts` | Cloudflare Web Analytics site token. When set, production builds include the cookieless beacon on every page; when unset, no analytics code ships. In CI it is read from the `CF_WEB_ANALYTICS_TOKEN` repository **variable**. |
 
 Variables prefixed with `VITE_` are replaced into the client bundle by Vite. Treat the Web3Forms access key as public service configuration, **not as a private server credential**, and never place personal tokens, API secrets, or private keys in this variable. [4]
 
@@ -163,27 +164,30 @@ Sound effects are **opt-in**. The audio toggle defaults to off and persists the 
 
 ## Content maintenance
 
-The portfolio copy is deliberately stored close to its view components, keeping a small personal site straightforward to maintain. Edit the corresponding component and run the build before publishing.
+All portfolio text and links live in one typed file, `src/content/profile.ts`. Components, the terminal easter egg, structured data, case-study pages, and the sitemap all read from it. Optional fields (proof points, experience highlights, LinkedIn, testimonials) render nothing while empty, so the live site never shows filler.
 
 | Update | Primary file |
 |---|---|
-| Hero copy, CV call-to-action, and top-level identity | `src/components/Hero.tsx` |
-| Navigation labels and utility controls | `src/components/Navbar.tsx` |
-| Skill categories and proficiency presentation | `src/components/Skills.tsx` |
-| Featured work, external project URLs, and project summaries | `src/components/Projects.tsx` |
-| Career timeline | `src/components/Experience.tsx` |
-| Email, Telegram, and contact-form copy | `src/components/Contact.tsx` |
-| Metadata, Open Graph images, canonical URL, and JSON-LD | `index.html` |
+| Name, title, bio, proof points, links, skills, projects, experience, testimonials, case studies | `src/content/profile.ts` |
+| Section layout and presentation | `src/components/*.tsx` |
+| Case-study page layout | `src/work/CaseStudyPage.tsx` |
+| Generated pages, JSON-LD, sitemap, analytics beacon | `vite-plugins/portfolioPages.ts` |
+| Static title, description, and social-card tags for the home page | `index.html` |
+| Social preview image (1200×630) | `scripts/og-image.html` → `npm run og-image` → `public/og-image.png` |
 | Global colors, typography, motion rules, and responsive polish | `src/index.css` |
 | Static CV, favicon, fonts, and domain configuration | `public/` |
+
+### Case studies
+
+Each published entry in `caseStudies` becomes a static page at `/work/<slug>/` with its own title, description, canonical URL, and preview card, and is added to `sitemap.xml`. Entries with `draft: true` are viewable only in `npm run dev` (the template is at `/work/template/`) and are never built. Link a case study from a project with `caseStudy: "<slug>"`.
 
 ### Known maintenance items
 
 | Item | Why it matters | Recommended action |
 |---|---|---|
 | `public/avatar.webp` | The current source asset is corrupted and may not render reliably. | Replace it with a valid, optimized WebP portrait, then verify the hero at desktop and mobile widths. |
-| Project links | Placeholder destinations weaken the credibility of a professional portfolio. | Replace placeholders in `Projects.tsx` with real GitHub or case-study URLs. |
-| Professional social link | A LinkedIn endpoint is not yet represented. | Add the verified public profile URL when available. |
+| Project entries | The three projects are placeholders (`placeholder: true`) with stock images and profile-level links. | Replace them in `src/content/profile.ts` with real work, screenshots, and repository or store links. |
+| Professional social link | LinkedIn is supported but empty. | Set `links.linkedin` in `src/content/profile.ts`; navbar, contact, terminal, and JSON-LD pick it up. |
 | Typewriter visual completion | The intentional boot sequence can increase Lighthouse Speed Index even when LCP and CLS pass. | Keep it as a brand choice, or replace it with a CSS-only reveal if a higher lab score is more important. |
 
 Operational guidance, editing routines, and troubleshooting steps are available in [docs/MAINTENANCE.md](docs/MAINTENANCE.md).

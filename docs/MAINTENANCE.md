@@ -18,17 +18,34 @@ The site is a public professional asset. A change should improve the visitor’s
 
 ### Update professional copy
 
-The portfolio is intentionally content-local. Edit the component that renders the relevant content, then run the standard checks.
+All copy and links live in `src/content/profile.ts`. Edit that file, then run the standard checks. Optional fields stay hidden while empty, so add only facts you can back up.
 
-| Content to change | File | Validation focus |
+| Content to change | Field in `src/content/profile.ts` | Validation focus |
 |---|---|---|
-| Name, role, hero message, headline calls to action | `src/components/Hero.tsx` | Desktop and mobile line wrapping; reserved hero slot height; CTA link behavior. |
-| Technical skills and proficiency indicators | `src/components/Skills.tsx` | Category balance, readable labels, color contrast, and reduced-motion presentation. |
-| Project title, description, technology tags, and links | `src/components/Projects.tsx` | URL correctness, descriptive link text, card-height consistency, and external-link safety. |
-| Career roles, employers, and timeline copy | `src/components/Experience.tsx` | Chronology, text density, mobile layout, and motion fallback. |
-| Email, Telegram, and contact-form wording | `src/components/Contact.tsx` | Address accuracy, form labels, submission success/failure messaging, and live-region announcements. |
-| Navigation labels and section structure | `src/components/Navbar.tsx` and section components | Fragment targets, active nav state, keyboard navigation, and scroll snapping. |
-| Title, description, social cards, canonical URL, or structured data | `index.html` | Final generated HTML, sharing-preview tools, schema validity, and correct `<script>` closing tags. |
+| Name, title, bio, status badge, CV file | `profile` | Hero wrapping on a 360×640 phone and a 1366×650 laptop. |
+| Up to three hero figures | `profile.proofPoints` | Short values ("400k", "99.9%") and labels that fit two lines. |
+| GitHub, email, Telegram, LinkedIn | `profile.links` | Every destination opens the intended profile. |
+| Skill groups | `skillGroups` | Group balance; no self-rated percentages. |
+| Projects | `projects` | Real links and screenshots; remove `placeholder` once replaced. |
+| Roles and measurable outcomes | `experience[].summary`, `experience[].highlights` | Two or three one-line results per role; expanded state still reachable on phones. |
+| Colleague quotes | `testimonials` | Under ~300 characters, with the person's permission. |
+| Case studies | `caseStudies` | Replace every bracketed prompt, drop `draft`, link from a project. |
+
+The home page's static `<title>`, description, and social-card tags remain in `index.html`; the Person JSON-LD there is generated from `profile`.
+
+### Regenerate the social preview image
+
+`public/og-image.png` (1200×630) is rendered from `scripts/og-image.html` with headless Chrome on macOS:
+
+```bash
+npm run og-image
+```
+
+Update the HTML when the title or tagline changes, regenerate, and check the result with a sharing-preview debugger after deploying.
+
+### Analytics
+
+Cloudflare Web Analytics is cookieless and off by default. Create a site in the Cloudflare dashboard, copy its token, and add it as the `CF_WEB_ANALYTICS_TOKEN` repository variable (**Settings → Secrets and variables → Actions → Variables**). The next deploy includes the beacon on every page. Remove the variable to switch analytics off.
 
 ### Update projects and social links
 

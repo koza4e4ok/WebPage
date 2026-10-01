@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { X, Terminal as TerminalIcon, Maximize2, Minimize2, Sparkles } from "lucide-react";
 import { playKeypress, playConfirm, playSuccess, playError } from "../lib/audioEngine";
 import { haptic } from "../hooks/useHaptic";
+import { profile, projects, skillGroups } from "../content/profile";
 
 interface TerminalModalProps {
   isOpen: boolean;
@@ -125,7 +126,7 @@ export function TerminalModal({
       playConfirm();
       output = (
         <p className="text-xs md:text-sm font-mono text-gray-300">
-          <span className="text-terminal-green font-bold">[BIO]</span> Andrii Kozakov is a Senior Android Engineer with 12+ years of experience building scalable, modular Android apps using Kotlin, Jetpack Compose, Coroutines, and Clean Architecture.
+          <span className="text-terminal-green font-bold">[BIO]</span> {profile.name}, {profile.title}. {profile.bio}
         </p>
       );
     } else if (cmdLower === "skills") {
@@ -133,9 +134,9 @@ export function TerminalModal({
       output = (
         <div className="text-xs md:text-sm font-mono text-gray-300 space-y-1">
           <p className="text-terminal-green font-bold">[SKILLS MATRIX]</p>
-          <p>• <span className="text-cyan-400">Core Android:</span> Kotlin (97%), Jetpack Compose (92%), Flow &amp; Coroutines (90%)</p>
-          <p>• <span className="text-cyan-400">Architecture:</span> MVVM/MVI (95%), Clean Architecture (92%), Modularity (87%)</p>
-          <p>• <span className="text-cyan-400">Tools &amp; APIs:</span> Retrofit, WorkManager, Room, Dagger Hilt, CI/CD</p>
+          {skillGroups.map((group) => (
+            <p key={group.title}>• <span className="text-cyan-400">{group.title}:</span> {group.skills.join(", ")}</p>
+          ))}
         </div>
       );
     } else if (cmdLower === "projects") {
@@ -143,9 +144,9 @@ export function TerminalModal({
       output = (
         <div className="text-xs md:text-sm font-mono text-gray-300 space-y-1">
           <p className="text-terminal-green font-bold">[DEPLOYED PROJECTS]</p>
-          <p>1. <span className="text-yellow-300 font-bold">VitaFit</span> - Biometric tracking &amp; health app (Jetpack Compose + Health API)</p>
-          <p>2. <span className="text-yellow-300 font-bold">CryptoEdge</span> - Biometric secure crypto wallet (MVVM + Room + Biometrics)</p>
-          <p>3. <span className="text-yellow-300 font-bold">FlowSync</span> - Background task manager (WorkManager + Coroutines)</p>
+          {projects.map((project, i) => (
+            <p key={project.title}>{i + 1}. <span className="text-yellow-300 font-bold">{project.title}</span> - {project.tech.join(" + ")}</p>
+          ))}
         </div>
       );
     } else if (cmdLower === "contact") {
@@ -153,8 +154,12 @@ export function TerminalModal({
       output = (
         <div className="text-xs md:text-sm font-mono text-gray-300 space-y-1">
           <p className="text-terminal-green font-bold">[COMMUNICATION ENDPOINTS]</p>
-          <p>• Email: <a href="mailto:koza4e4ok@gmail.com" className="text-yellow-300 underline">koza4e4ok@gmail.com</a></p>
-          <p>• GitHub: <a href="https://github.com/koza4e4ok" target="_blank" rel="noreferrer" className="text-yellow-300 underline">https://github.com/koza4e4ok</a></p>
+          <p>• Email: <a href={`mailto:${profile.links.email}`} className="text-yellow-300 underline">{profile.links.email}</a></p>
+          <p>• GitHub: <a href={profile.links.github} target="_blank" rel="noreferrer" className="text-yellow-300 underline">{profile.links.github}</a></p>
+          <p>• Telegram: <a href={profile.links.telegram} target="_blank" rel="noreferrer" className="text-yellow-300 underline">{profile.links.telegramHandle}</a></p>
+          {profile.links.linkedin && (
+            <p>• LinkedIn: <a href={profile.links.linkedin} target="_blank" rel="noreferrer" className="text-yellow-300 underline">{profile.links.linkedin}</a></p>
+          )}
         </div>
       );
     } else if (cmdLower === "matrix") {

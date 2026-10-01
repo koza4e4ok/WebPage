@@ -1,9 +1,12 @@
 import { motion } from "motion/react";
-import { ExternalLink, Github, FolderGit2 } from "lucide-react";
+import { ExternalLink, Github, FolderGit2, FileText } from "lucide-react";
 import { playConfirm, playHover, playTick } from "../lib/audioEngine";
 import { haptic } from "../hooks/useHaptic";
 import { useCarousel } from "../hooks/useCarousel";
 import { CarouselDots } from "./CarouselDots";
+import { projects, publishedCaseStudies } from "../content/profile";
+
+const caseStudySlugs = new Set(publishedCaseStudies(import.meta.env.DEV).map((study) => study.slug));
 
 const containerVariants = {
   hidden: {},
@@ -17,58 +20,26 @@ const itemVariants = {
 
 export function Projects() {
   const carousel = useCarousel<HTMLDivElement>();
-  const projects = [
-    {
-      title: "VitaFit",
-      status: "ONLINE",
-      description:
-        "Health & fitness Android app with real-time biometric tracking, multi-device sync, and offline-first architecture built with Jetpack Compose and Health API.",
-      tech: ["Kotlin", "Compose", "Health API", "Flow"],
-      image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80",
-      link: "https://github.com/koza4e4ok",
-      github: "https://github.com/koza4e4ok",
-    },
-    {
-      title: "CryptoEdge",
-      status: "SECURE",
-      description:
-        "Secure crypto wallet for Android featuring biometric authentication, offline transaction signing, and MVVM clean architecture with encrypted local storage.",
-      tech: ["Kotlin", "MVVM", "Biometrics", "Room"],
-      image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&q=80",
-      link: "https://github.com/koza4e4ok",
-      github: "https://github.com/koza4e4ok",
-    },
-    {
-      title: "FlowSync",
-      status: "ACTIVE",
-      description:
-        "Task management Android app using WorkManager for reliable background scheduling, RoomDB for local persistence, and Kotlin Coroutines for async processing.",
-      tech: ["Kotlin", "WorkManager", "Room DB", "Coroutines"],
-      image: "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=800&q=80",
-      link: "https://github.com/koza4e4ok",
-      github: "https://github.com/koza4e4ok",
-    },
-  ];
 
   return (
     <section
       id="projects"
-      className="w-full h-full flex-shrink-0 snap-start snap-always p-1 sm:p-2 md:p-4 lg:p-8 flex items-center justify-center"
+      className="w-full h-full flex-shrink-0 snap-start snap-always p-1 sm:p-2 md:p-4 lg:p-8 compact:p-2 flex items-center justify-center"
     >
-      <div className="w-full max-w-6xl mx-auto h-full hacker-card p-2.5 sm:p-4 md:p-8 lg:p-12 flex flex-col justify-center relative z-10 overflow-hidden">
+      <div className="w-full max-w-6xl mx-auto h-full hacker-card p-2.5 sm:p-4 md:p-8 lg:p-12 compact:p-6 flex flex-col justify-center relative z-10 overflow-hidden">
 
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
-          className="flex flex-col md:flex-row md:items-end justify-between mb-5 short:mb-3 md:mb-2 lg:mb-8 gap-2 lg:gap-8 w-full shrink-0"
+          className="flex flex-col md:flex-row md:items-end justify-between mb-5 short:mb-3 md:mb-2 lg:mb-8 compact:mb-4 gap-2 lg:gap-8 w-full shrink-0"
         >
           <div className="border-l-4 border-terminal-green pl-2.5 lg:pl-6">
             <motion.h2 variants={itemVariants} className="text-[11px] sm:text-xs lg:text-sm font-mono text-terminal-dim uppercase tracking-widest mb-1 lg:mb-2">
               {">_"} LS PROJECTS/
             </motion.h2>
-            <motion.h3 variants={itemVariants} className="text-3xl short:text-2xl sm:text-3xl md:text-5xl font-terminal text-gray-900 dark:text-gray-200">
+            <motion.h3 variants={itemVariants} className="text-3xl short:text-2xl sm:text-3xl md:text-5xl compact:text-4xl font-terminal text-gray-900 dark:text-gray-200">
               Deployed Systems.
             </motion.h3>
           </div>
@@ -128,6 +99,17 @@ export function Projects() {
                     {project.description}
                   </p>
                 </div>
+
+                {project.caseStudy && caseStudySlugs.has(project.caseStudy) && (
+                  <a
+                    href={`${import.meta.env.BASE_URL}work/${project.caseStudy}/`}
+                    onClick={() => { playConfirm(); haptic("confirm"); }}
+                    onMouseEnter={playTick}
+                    className="hacker-btn w-full mb-2 md:mb-1.5 px-1 py-1 text-xs md:text-[9px] md:leading-normal glitch-hover flex items-center justify-center min-h-11 md:min-h-[26px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terminal-green focus-visible:ring-offset-1"
+                  >
+                    <FileText size={12} className="mr-1" /> Case study
+                  </a>
+                )}
 
                 <div className="flex gap-2 md:gap-1.5 pt-1 flex-shrink-0">
                   <a
