@@ -2,6 +2,8 @@ import { motion } from "motion/react";
 import { ExternalLink, Github, FolderGit2 } from "lucide-react";
 import { playConfirm, playHover, playTick } from "../lib/audioEngine";
 import { haptic } from "../hooks/useHaptic";
+import { useCarousel } from "../hooks/useCarousel";
+import { CarouselDots } from "./CarouselDots";
 
 const containerVariants = {
   hidden: {},
@@ -14,6 +16,7 @@ const itemVariants = {
 };
 
 export function Projects() {
+  const carousel = useCarousel<HTMLDivElement>();
   const projects = [
     {
       title: "VitaFit",
@@ -59,13 +62,13 @@ export function Projects() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
-          className="flex flex-col md:flex-row md:items-end justify-between mb-2 lg:mb-8 gap-2 lg:gap-8 w-full shrink-0"
+          className="flex flex-col md:flex-row md:items-end justify-between mb-5 short:mb-3 md:mb-2 lg:mb-8 gap-2 lg:gap-8 w-full shrink-0"
         >
           <div className="border-l-4 border-terminal-green pl-2.5 lg:pl-6">
-            <motion.h2 variants={itemVariants} className="text-[10px] sm:text-xs lg:text-sm font-mono text-terminal-dim uppercase tracking-widest mb-0.5 lg:mb-2">
+            <motion.h2 variants={itemVariants} className="text-[11px] sm:text-xs lg:text-sm font-mono text-terminal-dim uppercase tracking-widest mb-1 lg:mb-2">
               {">_"} LS PROJECTS/
             </motion.h2>
-            <motion.h3 variants={itemVariants} className="text-xl sm:text-3xl md:text-5xl font-terminal text-gray-900 dark:text-gray-200">
+            <motion.h3 variants={itemVariants} className="text-3xl short:text-2xl sm:text-3xl md:text-5xl font-terminal text-gray-900 dark:text-gray-200">
               Deployed Systems.
             </motion.h3>
           </div>
@@ -76,7 +79,8 @@ export function Projects() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
-          className="flex md:grid md:grid-cols-3 overflow-x-auto snap-x snap-mandatory gap-3 md:gap-6 lg:gap-8 min-h-0 flex-1 pb-2 md:pb-0 custom-scrollbar -mx-2 px-2 md:mx-0 md:px-0"
+          ref={carousel.ref}
+          className="flex md:grid md:grid-cols-3 overflow-x-auto snap-x snap-mandatory gap-3 md:gap-6 lg:gap-8 min-h-0 md:flex-1 custom-scrollbar mobile-scrollbar-none -mx-2 px-2 md:mx-0 md:px-0"
         >
           {projects.map((project) => (
             <motion.div
@@ -85,7 +89,7 @@ export function Projects() {
               onMouseEnter={playHover}
               className="w-[85%] sm:w-[280px] md:w-auto shrink-0 snap-center md:shrink bg-white dark:bg-[#050505] border border-gray-200 dark:border-gray-800 rounded-xl flex flex-col group overflow-hidden hover:border-terminal-green/50 hover:shadow-[0_4px_20px_rgba(0,255,65,0.08)] transition-all duration-300 min-h-0"
             >
-              <div className="hidden lg:block w-full lg:h-24 xl:h-32 relative overflow-hidden border-b border-terminal-green/20 bg-white dark:bg-[#050505] flex-shrink-0">
+              <div className="block md:hidden lg:block w-full h-32 short:h-20 lg:h-24 xl:h-32 relative overflow-hidden border-b border-terminal-green/20 bg-white dark:bg-[#050505] flex-shrink-0">
                 <div className="absolute inset-0 bg-terminal-green/20 mix-blend-color group-hover:opacity-0 transition-opacity z-10 pointer-events-none" />
                 <img
                   src={project.image}
@@ -102,30 +106,30 @@ export function Projects() {
                 </div>
               </div>
 
-              <div className="p-2.5 sm:p-3 bg-gray-50 dark:bg-[#0a0a0a] min-h-0 flex-1 flex flex-col justify-between">
+              <div className="p-4 md:p-3 bg-gray-50 dark:bg-[#0a0a0a] min-h-0 flex-1 flex flex-col justify-between">
                 <div className="min-h-0 overflow-hidden flex flex-col">
-                  <div className="flex gap-1 mb-1.5 flex-wrap shrink-0">
+                  <div className="flex gap-1 mb-3 short:mb-2 md:mb-1.5 flex-wrap shrink-0">
                     {project.tech.map((t) => (
                       <span
                         key={t}
-                        className="text-[9px] lg:text-[10px] font-mono text-terminal-green bg-terminal-green/10 px-1 py-0.5 rounded border border-terminal-green/20 whitespace-nowrap"
+                        className="text-[11px] md:text-[9px] lg:text-[10px] font-mono text-terminal-green bg-terminal-green/10 px-1.5 md:px-1 py-0.5 rounded border border-terminal-green/20 whitespace-nowrap"
                       >
                         {t}
                       </span>
                     ))}
                   </div>
 
-                  <h4 className="text-sm lg:text-base font-terminal mb-1 text-gray-900 dark:text-gray-200 flex items-center gap-1.5 shrink-0 truncate">
+                  <h4 className="text-xl md:text-sm lg:text-base font-terminal mb-1 text-gray-900 dark:text-gray-200 flex items-center gap-1.5 shrink-0 truncate">
                     <FolderGit2 size={12} className="text-terminal-dim shrink-0 hidden lg:block" />
                     <span className="truncate">{project.title}</span>
                   </h4>
 
-                  <p className="text-gray-600 dark:text-gray-400 text-[10px] lg:text-xs leading-tight mb-2 font-mono flex-1 line-clamp-2 md:line-clamp-3">
+                  <p className="text-gray-600 dark:text-gray-400 text-[13px] md:text-[10px] lg:text-xs leading-snug md:leading-tight mb-4 short:mb-3 md:mb-2 font-mono flex-1 short:line-clamp-3 md:line-clamp-3">
                     {project.description}
                   </p>
                 </div>
 
-                <div className="flex gap-1.5 pt-1 flex-shrink-0">
+                <div className="flex gap-2 md:gap-1.5 pt-1 flex-shrink-0">
                   <a
                     href={project.link}
                     target="_blank"
@@ -134,9 +138,9 @@ export function Projects() {
                     title={`View ${project.title} project`}
                     onClick={() => { playConfirm(); haptic("confirm"); }}
                     onMouseEnter={playTick}
-                    className="hacker-btn flex-1 px-1 py-1 text-[9px] text-center glitch-hover flex items-center justify-center min-h-[26px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terminal-green focus-visible:ring-offset-1"
+                    className="hacker-btn flex-1 px-1 py-1 text-xs md:text-[9px] md:leading-normal text-center glitch-hover flex items-center justify-center min-h-11 md:min-h-[26px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terminal-green focus-visible:ring-offset-1"
                   >
-                    <ExternalLink size={10} className="mr-1 hidden sm:block" /> OPEN
+                    <ExternalLink size={12} className="mr-1" /> OPEN
                   </a>
                   <a
                     href={project.github}
@@ -146,7 +150,7 @@ export function Projects() {
                     title={`View ${project.title} on GitHub`}
                     onClick={() => { playConfirm(); haptic("confirm"); }}
                     onMouseEnter={playTick}
-                    className="hacker-btn hacker-btn-alt px-1 py-1 glitch-hover flex items-center justify-center min-w-[32px] min-h-[26px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terminal-green focus-visible:ring-offset-1"
+                    className="hacker-btn hacker-btn-alt px-1 py-1 glitch-hover flex items-center justify-center min-w-11 md:min-w-[32px] min-h-11 md:min-h-[26px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terminal-green focus-visible:ring-offset-1"
                   >
                     <Github size={12} />
                   </a>
@@ -155,6 +159,12 @@ export function Projects() {
             </motion.div>
           ))}
         </motion.div>
+        <CarouselDots
+          labels={projects.map((project) => project.title)}
+          active={carousel.index}
+          onSelect={carousel.scrollToIndex}
+          groupLabel="Projects"
+        />
       </div>
     </section>
   );

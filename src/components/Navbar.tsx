@@ -55,7 +55,7 @@ export function Navbar({ onOpenTerminal }: NavbarProps) {
       <nav className="w-full relative z-50 bg-white dark:bg-[#050505] rounded-2xl md:rounded-full border-2 border-gray-300 dark:border-[#111] shadow-[0_4px_30px_rgba(0,255,65,0.05)]">
         <div className="absolute top-0 left-6 right-6 h-[1px] bg-gradient-to-r from-transparent via-terminal-green/30 dark:via-terminal-green/10 to-transparent opacity-80" />
 
-        <div className="px-3 md:px-8 h-11 sm:h-14 md:h-16 flex items-center justify-between">
+        <div className="px-3 md:px-8 h-12 sm:h-14 md:h-16 flex items-center justify-between">
 
           {/* Left: Logo & Status */}
           <div className="flex items-center gap-4 lg:gap-6">
@@ -160,7 +160,7 @@ export function Navbar({ onOpenTerminal }: NavbarProps) {
           </div>
 
           {/* Mobile menu button */}
-          <div className="flex items-center gap-3 lg:hidden">
+          <div className="flex items-center gap-2 lg:hidden">
             <button
               onClick={() => {
                 playConfirm();
@@ -170,14 +170,14 @@ export function Navbar({ onOpenTerminal }: NavbarProps) {
               aria-label="Open Terminal Shell"
               aria-keyshortcuts="~"
               title="Launch Terminal"
-              className="p-1.5 rounded-lg bg-gray-50 dark:bg-[#0a0a0a] border border-gray-200 dark:border-gray-800 text-terminal-green"
+              className="w-10 h-10 flex items-center justify-center rounded-lg bg-gray-50 dark:bg-[#0a0a0a] border border-gray-200 dark:border-gray-800 text-terminal-green"
             >
               <TerminalIcon size={16} />
             </button>
-            <span className="text-terminal-green/70 font-terminal text-lg tracking-widest">{time}</span>
+            <span className="hidden min-[390px]:inline text-terminal-green/70 font-terminal text-lg tracking-widest">{time}</span>
             <SoundToggle />
             <button
-              className="text-terminal-green rounded-full bg-gray-50 dark:bg-[#0a0a0a] border border-gray-200 dark:border-gray-800 hover:border-terminal-green hover:shadow-[0_0_10px_rgba(0,255,65,0.2)] hover:bg-terminal-green/10 p-2 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terminal-green focus-visible:ring-offset-2"
+              className="text-terminal-green rounded-full bg-gray-50 dark:bg-[#0a0a0a] border border-gray-200 dark:border-gray-800 hover:border-terminal-green hover:shadow-[0_0_10px_rgba(0,255,65,0.2)] hover:bg-terminal-green/10 w-10 h-10 flex items-center justify-center transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terminal-green focus-visible:ring-offset-2"
               onClick={() => {
                 setIsOpen(!isOpen);
                 playTick();

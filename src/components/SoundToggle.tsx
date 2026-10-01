@@ -41,7 +41,7 @@ export function SoundToggle() {
       aria-label="Toggle sound effects"
       aria-pressed={on}
       title={on ? "Sound ON — click to mute" : "Sound OFF — click to enable"}
-      className={`w-8 h-8 rounded-full flex items-center justify-center border transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terminal-green focus-visible:ring-offset-2 ${
+      className={`w-10 h-10 lg:w-8 lg:h-8 rounded-full flex items-center justify-center border transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terminal-green focus-visible:ring-offset-2 ${
         on
           ? "bg-terminal-green/10 border-terminal-green text-terminal-green shadow-[0_0_8px_rgba(0,153,34,0.3)]"
           : "bg-gray-50 dark:bg-[#0a0a0a] border-gray-200 dark:border-gray-800 text-gray-400 dark:text-gray-600"
