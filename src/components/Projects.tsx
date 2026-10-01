@@ -59,13 +59,13 @@ export function Projects() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
-          className="flex flex-col md:flex-row md:items-end justify-between mb-4 lg:mb-8 gap-4 lg:gap-8 w-full"
+          className="flex flex-col md:flex-row md:items-end justify-between mb-3 lg:mb-8 gap-2 lg:gap-8 w-full shrink-0"
         >
-          <div className="border-l-4 border-terminal-green pl-4 lg:pl-6">
-            <motion.h2 variants={itemVariants} className="text-xs lg:text-sm font-mono text-terminal-dim uppercase tracking-widest mb-1 lg:mb-2">
+          <div className="border-l-4 border-terminal-green pl-3 lg:pl-6">
+            <motion.h2 variants={itemVariants} className="text-xs lg:text-sm font-mono text-terminal-dim uppercase tracking-widest mb-0.5 lg:mb-2">
               {">_"} LS PROJECTS/
             </motion.h2>
-            <motion.h3 variants={itemVariants} className="text-3xl md:text-5xl font-terminal text-gray-900 dark:text-gray-200">
+            <motion.h3 variants={itemVariants} className="text-2xl sm:text-3xl md:text-5xl font-terminal text-gray-900 dark:text-gray-200">
               Deployed Systems.
             </motion.h3>
           </div>
@@ -76,14 +76,14 @@ export function Projects() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6 lg:gap-8 min-h-0 flex-1 overflow-hidden"
+          className="flex md:grid md:grid-cols-3 overflow-x-auto snap-x snap-mandatory gap-3 md:gap-6 lg:gap-8 min-h-0 flex-1 pb-2 md:pb-0 custom-scrollbar -mx-2 px-2 md:mx-0 md:px-0"
         >
           {projects.map((project) => (
             <motion.div
               key={project.title}
               variants={itemVariants}
               onMouseEnter={playHover}
-              className="bg-white dark:bg-[#050505] border border-gray-200 dark:border-gray-800 rounded-xl flex flex-row md:flex-col group overflow-hidden hover:border-terminal-green/50 hover:shadow-[0_4px_20px_rgba(0,255,65,0.08)] transition-all duration-300 flex-1 min-h-0"
+              className="w-[85%] sm:w-[280px] md:w-auto shrink-0 snap-center md:shrink bg-white dark:bg-[#050505] border border-gray-200 dark:border-gray-800 rounded-xl flex flex-col group overflow-hidden hover:border-terminal-green/50 hover:shadow-[0_4px_20px_rgba(0,255,65,0.08)] transition-all duration-300 min-h-0"
             >
               <div className="hidden lg:block w-full lg:h-24 xl:h-32 relative overflow-hidden border-b border-terminal-green/20 bg-white dark:bg-[#050505] flex-shrink-0">
                 <div className="absolute inset-0 bg-terminal-green/20 mix-blend-color group-hover:opacity-0 transition-opacity z-10 pointer-events-none" />
