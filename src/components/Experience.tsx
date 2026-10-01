@@ -51,18 +51,18 @@ export function Experience() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
-            className="text-center mb-6 lg:mb-10"
+            className="text-center mb-3 sm:mb-6 lg:mb-10 shrink-0"
           >
-            <motion.h2 variants={itemVariants} className="text-xs lg:text-sm font-mono text-terminal-dim uppercase tracking-widest mb-1 lg:mb-2">
+            <motion.h2 variants={itemVariants} className="text-xs lg:text-sm font-mono text-terminal-dim uppercase tracking-widest mb-0.5 lg:mb-2">
               {"//"} Execution Logs
             </motion.h2>
-            <motion.h3 variants={itemVariants} className="text-3xl md:text-5xl font-terminal text-gray-900 dark:text-gray-200">
+            <motion.h3 variants={itemVariants} className="text-2xl sm:text-3xl md:text-5xl font-terminal text-gray-900 dark:text-gray-200">
               System Timeline.
             </motion.h3>
           </motion.div>
 
           {/* Timeline container */}
-          <div className="relative ml-2 md:ml-6 flex-1 overflow-hidden flex flex-col justify-evenly py-2 min-h-0">
+          <div className="relative ml-2 md:ml-6 flex-1 overflow-y-auto custom-scrollbar flex flex-col justify-evenly py-1 sm:py-2 min-h-0">
             {/* Animated timeline line */}
             <motion.div
               className="absolute left-0 top-0 bottom-0 w-px bg-terminal-green/30"
@@ -114,7 +114,7 @@ export function Experience() {
                     </p>
                   )}
 
-                  <p className="text-gray-600 dark:text-gray-400 font-mono text-[10px] md:text-xs leading-snug md:leading-relaxed line-clamp-3 md:line-clamp-4">
+                  <p className="text-gray-600 dark:text-gray-400 font-mono text-[10px] md:text-xs leading-snug md:leading-relaxed line-clamp-2 sm:line-clamp-3 md:line-clamp-4">
                     {">"} {exp.description}
                   </p>
                 </motion.div>

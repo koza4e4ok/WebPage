@@ -42,13 +42,13 @@ export function Hero() {
           <div className="relative z-10">
 
             {/* Status badge */}
-            <div className="hero-item hero-item-1 inline-flex items-center gap-2 px-3 py-1 bg-terminal-green/10 border border-terminal-green/30 rounded-full text-terminal-green text-xs font-mono uppercase tracking-widest mb-6 md:mb-8">
+            <div className="hero-item hero-item-1 inline-flex items-center gap-2 px-2.5 py-0.5 sm:px-3 sm:py-1 bg-terminal-green/10 border border-terminal-green/30 rounded-full text-terminal-green text-[10px] sm:text-xs font-mono uppercase tracking-widest mb-3 sm:mb-6 md:mb-8">
               <span className="w-2 h-2 bg-terminal-green animate-pulse rounded-full" />
               System Secure &amp; Ready
             </div>
 
             {/* Name — typed character by character, cursor blinks when done */}
-            <h1 className="hero-item hero-item-2 text-4xl md:text-6xl font-terminal mb-3 md:mb-4 leading-none uppercase drop-shadow-[0_0_8px_rgba(0,255,65,0.3)]">
+            <h1 className="hero-item hero-item-2 text-3xl sm:text-4xl md:text-6xl font-terminal mb-2 sm:mb-3 md:mb-4 leading-none uppercase drop-shadow-[0_0_8px_rgba(0,255,65,0.3)]">
               {typed}
               <span
                 aria-hidden="true"
@@ -58,17 +58,17 @@ export function Hero() {
 
             {/* Role, bio, CTAs — always in DOM, revealed by CSS class once name is done */}
             <div className={`hero-content-reveal ${done ? "hero-content-reveal--visible" : ""}`}>
-              <h2 className="text-lg md:text-xl font-mono text-gray-800 dark:text-gray-300 font-bold mb-4 md:mb-5">
+              <h2 className="text-base sm:text-lg md:text-xl font-mono text-gray-800 dark:text-gray-300 font-bold mb-2 sm:mb-4 md:mb-5">
                 Senior Android Engineer
               </h2>
 
-              <p className="text-sm md:text-base text-gray-600 dark:text-gray-400 font-mono max-w-xl leading-relaxed mb-6 md:mb-8">
+              <p className="text-xs sm:text-sm md:text-base text-gray-600 dark:text-gray-400 font-mono max-w-xl leading-relaxed mb-4 sm:mb-6 md:mb-8">
                 12+ years delivering reliable Kotlin and Jetpack Compose products.
                 I lead modular architecture, improve delivery pipelines, and turn
                 complex requirements into maintainable Android experiences.
               </p>
 
-              <div className="flex flex-wrap gap-4 font-mono">
+              <div className="flex flex-wrap gap-3 sm:gap-4 font-mono">
                 <MagneticButton
                   as="a"
                   href="#projects"

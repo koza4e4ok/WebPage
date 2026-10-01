@@ -71,12 +71,12 @@ export function Skills() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
-          className="mb-6 lg:mb-10 border-l-4 border-terminal-green pl-4 lg:pl-6 w-full"
+          className="mb-3 sm:mb-6 lg:mb-10 border-l-4 border-terminal-green pl-3 lg:pl-6 w-full shrink-0"
         >
-          <motion.h2 variants={itemVariants} className="text-xs lg:text-sm font-mono text-terminal-dim uppercase tracking-widest mb-1 lg:mb-2">
+          <motion.h2 variants={itemVariants} className="text-xs lg:text-sm font-mono text-terminal-dim uppercase tracking-widest mb-0.5 lg:mb-2">
             {"//"} SYSTEM_DIAGNOSTICS
           </motion.h2>
-          <motion.h3 variants={itemVariants} className="text-3xl md:text-5xl font-terminal text-gray-900 dark:text-gray-200">
+          <motion.h3 variants={itemVariants} className="text-2xl sm:text-3xl md:text-5xl font-terminal text-gray-900 dark:text-gray-200">
             Technical Specs.
           </motion.h3>
         </motion.div>
@@ -86,13 +86,13 @@ export function Skills() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.15 }}
-          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-6 min-h-0"
+          className="flex md:grid md:grid-cols-3 overflow-x-auto snap-x snap-mandatory gap-3 md:gap-6 min-h-0 pb-2 md:pb-0 custom-scrollbar -mx-2 px-2 md:mx-0 md:px-0"
         >
           {skillCategories.map((cat) => (
             <motion.div
               key={cat.title}
               variants={itemVariants}
-              className="bg-white dark:bg-[#050505] border border-gray-200 dark:border-gray-800 rounded-xl p-3 sm:p-4 lg:p-6 group relative hover:border-terminal-green/50 hover:shadow-[0_4px_20px_rgba(0,255,65,0.05)] transition-all duration-300 flex flex-col min-h-0"
+              className="w-[85%] sm:w-[280px] md:w-auto shrink-0 snap-center md:shrink bg-white dark:bg-[#050505] border border-gray-200 dark:border-gray-800 rounded-xl p-3 sm:p-4 lg:p-6 group relative hover:border-terminal-green/50 hover:shadow-[0_4px_20px_rgba(0,255,65,0.05)] transition-all duration-300 flex flex-col min-h-0"
             >
               <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-xl bg-gray-200 dark:bg-[#111] border border-terminal-green/20 flex items-center justify-center mb-2 lg:mb-4 shadow-[0_0_15px_rgba(0,255,65,0.1)] group-hover:scale-110 transition-transform">
                 {cat.icon}
