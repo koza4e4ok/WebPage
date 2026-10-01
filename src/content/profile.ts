@@ -20,16 +20,21 @@ export interface SkillGroup {
 
 export interface Project {
   title: string;
+  /** Short badge in the card header, e.g. "15M+ USERS". */
   status: string;
+  /** Who the product was for; client names stay anonymous under NDA. */
+  client: string;
+  role: string;
   description: string;
   tech: string[];
-  image: string;
-  link: string;
-  github: string;
-  /** Slug of a case study in `caseStudies`; adds a "Case study" button. */
+  /** OPTIONAL — real screenshot only; the card shows a terminal header without it. */
+  image?: string;
+  /** OPTIONAL — public store or product URL. */
+  link?: string;
+  /** OPTIONAL — public repository URL. */
+  github?: string;
+  /** Slug of a case study in `caseStudies`; adds a "Case study" button once published. */
   caseStudy?: string;
-  /** True while the entry is sample content awaiting real work. */
-  placeholder?: boolean;
 }
 
 export interface Role {
@@ -74,28 +79,36 @@ export const profile = {
   title: "Senior Android Engineer",
   statusBadge: "System Secure & Ready",
   yearsExperience: 12,
-  bio: "12+ years shipping Android apps with Kotlin and Jetpack Compose. I lead modular architecture, delivery pipelines, and code review, and turn complex requirements into apps that teams can keep changing safely.",
+  bio: "12+ years building Android apps in Kotlin and Java, from estimation and architecture to Google Play release. I lead teams, design multi-module apps, and ship products with demanding security, offline, and real-time requirements.",
   /** Used in search results and link previews. */
   metaDescription:
-    "Senior Android Engineer with 12+ years of experience building Kotlin and Jetpack Compose applications. Modular architecture, delivery pipelines, and code quality.",
+    "Senior Android Engineer and team lead with 12+ years of experience: multi-module Kotlin and Jetpack Compose apps, streaming media for 15M+ users, secure healthcare apps, and real-time video communication.",
   siteUrl: "https://kozakov.me",
   cvPath: "andriikozakov.pdf",
   /** OPTIONAL — hidden while empty. Up to 3 figures shown under the hero CTAs. */
-  proofPoints: [] as ProofPoint[],
+  proofPoints: [
+    { value: "15M+", label: "users on a streaming app I led" },
+    { value: "20", label: "max people per WebRTC call" },
+    { value: "2", label: "products as team or tech lead" },
+  ] as ProofPoint[],
   links: {
     github: "https://github.com/koza4e4ok",
     email: "koza4e4ok@gmail.com",
     telegram: "https://t.me/koza4e4ok",
     telegramHandle: "@koza4e4ok",
     /** OPTIONAL — hidden while empty, e.g. "https://www.linkedin.com/in/<handle>/" */
-    linkedin: "",
+    linkedin: "https://www.linkedin.com/in/andrii-kozakov-b67724a5/",
   },
   knowsAbout: [
-    "Kotlin",
-    "Jetpack Compose",
     "Android",
+    "Kotlin",
+    "Java",
+    "Jetpack Compose",
+    "Multi-module architecture",
     "MVVM",
-    "Clean Architecture",
+    "Offline-first apps",
+    "Android security",
+    "WebRTC",
     "CI/CD",
   ],
 };
@@ -103,69 +116,90 @@ export const profile = {
 export const skillGroups: SkillGroup[] = [
   {
     title: "CORE_ANDROID",
-    skills: ["Kotlin", "Jetpack Compose", "Coroutines", "Flow", "Dagger Hilt"],
+    skills: [
+      "Kotlin",
+      "Java",
+      "Jetpack Compose",
+      "Coroutines & Flow",
+      "Navigation 3",
+      "Media3 / ExoPlayer",
+    ],
   },
   {
     title: "ARCHITECTURE",
     skills: [
       "MVVM",
-      "MVI",
-      "Clean Architecture",
-      "Modularization",
-      "Unit Testing",
+      "MVP",
+      "Multi-module",
+      "Dagger2 / Hilt",
+      "Offline-first sync",
+      "Keystore & SQLCipher",
     ],
   },
   {
-    title: "DELIVERY_&_TOOLS",
+    title: "DELIVERY_&_QUALITY",
     skills: [
-      "Retrofit",
-      "Room",
-      "WorkManager",
-      "Firebase",
-      "Git",
-      "GitHub Actions CI/CD",
+      "JUnit & Espresso",
+      "UI Automator",
+      "Screenshot tests",
+      "GitLab CI/CD",
+      "Google Play releases",
+      "Sentry & Crashlytics",
     ],
   },
 ];
 
-// TODO(content): these three entries are placeholders. Replace them with real
-// work (Play Store / repo links and real screenshots), then delete `placeholder`.
 export const projects: Project[] = [
   {
-    title: "VitaFit",
-    status: "ONLINE",
+    title: "Media Streaming Platform",
+    status: "15M+ USERS",
+    client: "Global entertainment company",
+    role: "Senior developer · Team lead",
     description:
-      "Health & fitness Android app with real-time biometric tracking, multi-device sync, and offline-first architecture built with Jetpack Compose and Health API.",
-    tech: ["Kotlin", "Compose", "Health API", "Flow"],
-    image:
-      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80",
-    link: "https://github.com/koza4e4ok",
-    github: "https://github.com/koza4e4ok",
-    placeholder: true,
+      "24/7 streaming, breaking news, video playlists, and galleries for 15M+ users. I led the Android team, designed the multi-module architecture, and built the Shopify + Google Pay shop and the ExoPlayer news and video modules.",
+    tech: [
+      "Kotlin",
+      "Coroutines",
+      "Dagger2",
+      "ExoPlayer",
+      "Shopify",
+      "Google Pay",
+    ],
   },
   {
-    title: "CryptoEdge",
+    title: "Dementia Care Tablet Suite",
+    status: "TECH LEAD",
+    client: "US-based healthcare provider",
+    role: "Tech lead",
+    description:
+      "Two offline-first tablet apps that help people with dementia and their caregivers organise daily life. Architected from scratch: Compose with Navigation 3, WorkManager sync, on-device media, and MDM-managed kiosk devices.",
+    tech: [
+      "Compose",
+      "Navigation 3",
+      "WorkManager",
+      "Room",
+      "Media3",
+      "ML Kit",
+    ],
+    caseStudy: "dementia-care-tablets",
+  },
+  {
+    title: "Medical Therapy App",
     status: "SECURE",
+    client: "Healthcare client",
+    role: "Android developer",
     description:
-      "Secure crypto wallet for Android featuring biometric authentication, offline transaction signing, and MVVM clean architecture with encrypted local storage.",
-    tech: ["Kotlin", "MVVM", "Biometrics", "Room"],
-    image:
-      "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&q=80",
-    link: "https://github.com/koza4e4ok",
-    github: "https://github.com/koza4e4ok",
-    placeholder: true,
+      "Therapy programs with encrypted storage (Android Keystore, SQLCipher), Play Integrity, root and debug detection, biometric sign-in, offline sync, custom progress charts, and an event calendar. Shipped to Google Play.",
+    tech: ["Kotlin", "Flow", "Hilt", "Room", "SQLCipher", "Biometrics"],
   },
   {
-    title: "FlowSync",
-    status: "ACTIVE",
+    title: "Secure Video Communication",
+    status: "REAL-TIME",
+    client: "European company, email-server partner",
+    role: "Android developer",
     description:
-      "Task management Android app using WorkManager for reliable background scheduling, RoomDB for local persistence, and Kotlin Coroutines for async processing.",
-    tech: ["Kotlin", "WorkManager", "Room DB", "Coroutines"],
-    image:
-      "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=800&q=80",
-    link: "https://github.com/koza4e4ok",
-    github: "https://github.com/koza4e4ok",
-    placeholder: true,
+      "Video conferencing and messaging for small businesses: WebRTC calls with up to 20 participants, real-time chat with document, audio, and video previews, incoming-call notifications, and accounts across multiple servers.",
+    tech: ["Java", "WebRTC", "SignalR", "RxJava", "Realm", "MVP"],
   },
 ];
 
@@ -173,20 +207,27 @@ export const experience: Role[] = [
   {
     company: "DataArt Solutions, Inc.",
     companyUrl: "https://www.dataart.com",
-    role: "SENIOR ANDROID ENGINEER",
+    role: "SENIOR SOFTWARE DEVELOPER",
     period: "2021 — PRESENT",
     summary:
-      "Leading development of multi-module Android applications using Jetpack Compose and modern architecture. Mentoring junior developers, conducting code reviews, and implementing CI/CD pipelines with GitHub Actions.",
-    highlights: [],
+      "Team lead and tech lead on Android products for media and healthcare clients: architecture from scratch, estimation and planning, code review, testing, and CI/CD.",
+    highlights: [
+      "Led the Android team of a streaming app for 15M+ users; split it into independent feature modules",
+      "Tech lead for two offline-first Compose tablet apps deployed in MDM kiosk mode",
+      "Secured a therapy app with Keystore and SQLCipher encryption plus Play Integrity checks",
+    ],
   },
   {
     company: "Unicreo",
     companyUrl: "https://unicreo.com/",
-    role: "ANDROID DEVELOPER",
+    role: "SOFTWARE DEVELOPER",
     period: "2016 — 2021",
     summary:
-      "Full-cycle Android development from project estimation and architecture design through to Google Play delivery. Owned feature development, code quality, and release management.",
-    highlights: [],
+      "Full-cycle Android development from project estimation and architecture design through to Google Play delivery, working directly with clients on features.",
+    highlights: [
+      "Built WebRTC video conferencing for up to 20 participants with real-time chat and file sharing",
+      "Designed the MVP + DI architecture and shipped releases to Google Play",
+    ],
   },
   {
     company: "Digital Horizon",
@@ -207,6 +248,71 @@ export const testimonials: Testimonial[] = [];
  * replace every [bracketed prompt], drop `draft`, and link it from a project.
  */
 export const caseStudies: CaseStudy[] = [
+  {
+    slug: "dementia-care-tablets",
+    draft: true,
+    title: "Offline-first tablet apps for dementia care",
+    summary:
+      "Two tablet apps for a US healthcare provider that help people with dementia and their caregivers organise daily activities, built from scratch to work with little or no internet on locked-down devices.",
+    role: "Tech lead",
+    period: "[Year — Year]",
+    stack: [
+      "Kotlin",
+      "Jetpack Compose",
+      "Navigation 3",
+      "Hilt",
+      "WorkManager",
+      "Room",
+      "Media3",
+      "ML Kit",
+      "MDM",
+    ],
+    results: [
+      { value: "2", label: "apps designed from scratch" },
+      { value: "[N]", label: "[devices or users rolled out to]" },
+    ],
+    sections: [
+      {
+        heading: "Context",
+        paragraphs: [
+          "A US-based healthcare provider needed two dedicated systems to improve the caregiving experience for people with dementia and help them organise their day. Both run on tablets with limited or no internet access, need specific accessibility features, and are managed through an MDM system.",
+          "[Who uses each app, and how many people or devices it serves.]",
+        ],
+      },
+      {
+        heading: "Problem",
+        paragraphs: [
+          "[What was hard for patients and caregivers before, and why the client needed new apps.]",
+        ],
+      },
+      {
+        heading: "Constraints",
+        paragraphs: [
+          "The apps had to work offline first, handle video, audio, image, and text content stored on the device, and run in kiosk mode with device functionality restricted through MDM.",
+          "[Team size, deadlines, and any other limits.]",
+        ],
+      },
+      {
+        heading: "Options considered",
+        paragraphs: [
+          "[The approaches you weighed, e.g. for navigation, sync, or content storage, and why you chose what you did.]",
+        ],
+      },
+      {
+        heading: "What I did",
+        paragraphs: [
+          "I designed the architecture from scratch as a multi-module project split into independent feature modules. The UI is built in Jetpack Compose, with all screens combined under one main navigation using Navigation 3.",
+          "Sync workers built on WorkManager keep data current when a connection is available, and dedicated managers download and store mixed media content on the device. I also built the pipeline that uploads app updates through the MDM system and set up devices in kiosk mode, and integrated Crashlytics and analytics.",
+        ],
+      },
+      {
+        heading: "Outcome",
+        paragraphs: [
+          "[What changed for users or the client, measured if possible, and what you would do differently.]",
+        ],
+      },
+    ],
+  },
   {
     slug: "template",
     draft: true,

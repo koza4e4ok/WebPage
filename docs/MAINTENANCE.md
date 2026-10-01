@@ -26,7 +26,7 @@ All copy and links live in `src/content/profile.ts`. Edit that file, then run th
 | Up to three hero figures | `profile.proofPoints` | Short values ("400k", "99.9%") and labels that fit two lines. |
 | GitHub, email, Telegram, LinkedIn | `profile.links` | Every destination opens the intended profile. |
 | Skill groups | `skillGroups` | Group balance; no self-rated percentages. |
-| Projects | `projects` | Real links and screenshots; remove `placeholder` once replaced. |
+| Projects | `projects` | Client work stays anonymous; `image`, `link`, and `github` are optional and only render when set. |
 | Roles and measurable outcomes | `experience[].summary`, `experience[].highlights` | Two or three one-line results per role; expanded state still reachable on phones. |
 | Colleague quotes | `testimonials` | Under ~300 characters, with the person's permission. |
 | Case studies | `caseStudies` | Replace every bracketed prompt, drop `draft`, link from a project. |

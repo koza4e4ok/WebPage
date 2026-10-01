@@ -186,8 +186,7 @@ Each published entry in `caseStudies` becomes a static page at `/work/<slug>/` w
 | Item | Why it matters | Recommended action |
 |---|---|---|
 | `public/avatar.webp` | The current source asset is corrupted and may not render reliably. | Replace it with a valid, optimized WebP portrait, then verify the hero at desktop and mobile widths. |
-| Project entries | The three projects are placeholders (`placeholder: true`) with stock images and profile-level links. | Replace them in `src/content/profile.ts` with real work, screenshots, and repository or store links. |
-| Professional social link | LinkedIn is supported but empty. | Set `links.linkedin` in `src/content/profile.ts`; navbar, contact, terminal, and JSON-LD pick it up. |
+| Project screenshots | Client projects are under NDA, so cards show a terminal header instead of screenshots. | Add `image`, `link`, or `github` to a project in `src/content/profile.ts` when a public asset exists. |
 | Typewriter visual completion | The intentional boot sequence can increase Lighthouse Speed Index even when LCP and CLS pass. | Keep it as a brand choice, or replace it with a CSS-only reveal if a higher lab score is more important. |
 
 Operational guidance, editing routines, and troubleshooting steps are available in [docs/MAINTENANCE.md](docs/MAINTENANCE.md).

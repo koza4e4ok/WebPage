@@ -52,20 +52,20 @@ export function Skills() {
             <motion.li
               key={group.title}
               variants={itemVariants}
-              className="bg-white dark:bg-[#050505] border border-gray-200 dark:border-gray-800 rounded-xl p-4 short:p-3 lg:p-6 group relative hover:border-terminal-green/50 hover:shadow-[0_4px_20px_rgba(0,255,65,0.05)] transition-all duration-300"
+              className="bg-white dark:bg-[#050505] border border-gray-200 dark:border-gray-800 rounded-xl p-4 short:p-2.5 lg:p-6 compact:p-4 group relative hover:border-terminal-green/50 hover:shadow-[0_4px_20px_rgba(0,255,65,0.05)] transition-all duration-300"
             >
-              <div className="flex items-center gap-3 md:block mb-3 short:mb-2 lg:mb-4">
+              <div className="flex items-center gap-3 md:block mb-3 short:mb-1.5 lg:mb-4">
                 <div className="w-9 h-9 short:w-8 short:h-8 lg:w-10 lg:h-10 shrink-0 rounded-xl bg-gray-200 dark:bg-[#111] border border-terminal-green/20 flex items-center justify-center md:mb-3 lg:mb-4 shadow-[0_0_15px_rgba(0,255,65,0.1)] group-hover:scale-110 transition-transform">
                   {GROUP_ICONS[i % GROUP_ICONS.length]}
                 </div>
-                <h4 className="text-xl font-terminal text-terminal-green">{group.title}</h4>
+                <h4 className="text-xl short:text-lg font-terminal text-terminal-green">{group.title}</h4>
               </div>
 
-              <ul className="flex flex-wrap gap-1.5 lg:gap-2" aria-label={`${group.title} skills`}>
+              <ul className="flex flex-wrap gap-1.5 short:gap-1 lg:gap-2" aria-label={`${group.title} skills`}>
                 {group.skills.map((skill) => (
                   <li
                     key={skill}
-                    className="text-xs font-mono px-2 py-1 rounded-md border border-terminal-green/20 bg-terminal-green/5 text-gray-800 dark:text-gray-300"
+                    className="text-xs short:text-[11px] font-mono px-2 py-1 short:px-1.5 short:py-0.5 rounded-md border border-terminal-green/20 bg-terminal-green/5 text-gray-800 dark:text-gray-300"
                   >
                     {skill}
                   </li>

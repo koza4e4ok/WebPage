@@ -73,7 +73,7 @@ React’s `lazy` API defers component code until the component first renders, an
 | [`Hero.tsx`](../src/components/Hero.tsx) | Primary identity, hero calls to action, count-up badge, and CSS-first entrance treatment. | Hero slot reservations are intentional stability safeguards, especially on mobile. |
 | [`TypewriterText.tsx`](../src/components/TypewriterText.tsx) | Types copy while reserving the final line’s footprint. | Do not replace the measurement span with an unreserved text node or CLS will regress. |
 | [`Skills.tsx`](../src/components/Skills.tsx) | Technical capability groups shown as skill chips (no self-rated levels). | Loaded only when first needed; animation belongs in the deferred path. |
-| [`Projects.tsx`](../src/components/Projects.tsx) | Selected work, project links, and optional case-study links. | Entries are placeholders until replaced in `src/content/profile.ts`. |
+| [`Projects.tsx`](../src/components/Projects.tsx) | Selected work, project links, and optional case-study links. | Cards adapt to optional screenshot, link, and repository fields. |
 | [`Experience.tsx`](../src/components/Experience.tsx) | Career timeline. | Timeline draw animation must retain a reduced-motion equivalent. |
 | [`Contact.tsx`](../src/components/Contact.tsx) | Direct channels and optional Web3Forms submission. | Keep labels, required attributes, and the live status region aligned with visual form changes. |
 | [`Testimonials.tsx`](../src/components/Testimonials.tsx) | Colleague quotes. | Rendered, and added to navigation, only when `testimonials` has entries. |
