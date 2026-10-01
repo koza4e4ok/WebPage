@@ -124,12 +124,13 @@ export function Skills() {
                         aria-labelledby={skillId}
                       >
                         <motion.div
-                          className="h-full bg-terminal-green rounded-full relative"
-                          initial={{ width: 0 }}
-                          whileInView={{ width: `${skill.level}%` }}
+                          className="h-full bg-terminal-green rounded-full relative origin-left"
+                          initial={{ scaleX: 0 }}
+                          whileInView={{ scaleX: 1 }}
                           viewport={{ once: true }}
                           transition={{ duration: 0.9, ease: "easeOut", delay: 0.1 }}
                           style={{
+                            width: `${skill.level}%`,
                             boxShadow: "0 0 6px rgba(0,153,34,0.6)",
                           }}
                         />

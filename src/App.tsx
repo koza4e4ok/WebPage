@@ -8,10 +8,15 @@ import { playConfirm, playSuccess } from "./lib/audioEngine";
 import { haptic } from "./hooks/useHaptic";
 import { Terminal as TerminalIcon } from "lucide-react";
 
-const Skills = lazy(() => import("./components/Skills").then(({ Skills: Component }) => ({ default: Component })));
-const Projects = lazy(() => import("./components/Projects").then(({ Projects: Component }) => ({ default: Component })));
-const Experience = lazy(() => import("./components/Experience").then(({ Experience: Component }) => ({ default: Component })));
-const Contact = lazy(() => import("./components/Contact").then(({ Contact: Component }) => ({ default: Component })));
+const loadSkills = () => import("./components/Skills");
+const loadProjects = () => import("./components/Projects");
+const loadExperience = () => import("./components/Experience");
+const loadContact = () => import("./components/Contact");
+
+const Skills = lazy(() => loadSkills().then(({ Skills: Component }) => ({ default: Component })));
+const Projects = lazy(() => loadProjects().then(({ Projects: Component }) => ({ default: Component })));
+const Experience = lazy(() => loadExperience().then(({ Experience: Component }) => ({ default: Component })));
+const Contact = lazy(() => loadContact().then(({ Contact: Component }) => ({ default: Component })));
 
 const KONAMI_CODE = [
   "ArrowUp", "ArrowUp",
@@ -38,6 +43,26 @@ export default function App() {
 
   const toggleMatrixOverdrive = useCallback(() => {
     setIsMatrixOverdrive((prev) => !prev);
+  }, []);
+
+  // Preload dynamic components during idle time to remove load delays when scrolling
+  useEffect(() => {
+    const preload = () => {
+      loadSkills();
+      loadProjects();
+      loadExperience();
+      loadContact();
+    };
+
+    if (typeof window !== "undefined" && "requestIdleCallback" in window) {
+      const idleId = (window as unknown as { requestIdleCallback: (cb: () => void, opts?: { timeout: number }) => number }).requestIdleCallback(preload, { timeout: 2000 });
+      return () => {
+        (window as unknown as { cancelIdleCallback: (id: number) => void }).cancelIdleCallback(idleId);
+      };
+    } else {
+      const timerId = setTimeout(preload, 1000);
+      return () => clearTimeout(timerId);
+    }
   }, []);
 
   // Global keydown handler for Konami code and shortcut keys (~ or Ctrl+K)
@@ -101,7 +126,7 @@ export default function App() {
           <div className="crt-overlay absolute inset-0 z-40 pointer-events-none" />
           <div className="crt-vignette absolute inset-0 z-30 pointer-events-none" />
 
-          <main id="main-content" tabIndex={-1} className="relative z-10 w-full h-full overflow-y-auto scroll-smooth custom-scrollbar snap-y snap-mandatory flex flex-col focus-visible:outline-none focus-visible:ring-0 focus:outline-none">
+          <main id="main-content" tabIndex={-1} className="relative z-10 w-full h-full overflow-y-auto custom-scrollbar snap-y snap-mandatory flex flex-col focus-visible:outline-none focus-visible:ring-0 focus:outline-none">
             <Hero />
             <DeferredSection id="skills"><Skills /></DeferredSection>
             <DeferredSection id="projects"><Projects /></DeferredSection>

@@ -35,7 +35,7 @@ export function DeferredSection({ id, children }: DeferredSectionProps) {
           observer.disconnect();
         }
       },
-      { root, rootMargin: "0px", threshold: 0.01 }
+      { root, rootMargin: "300px 0px", threshold: 0.01 }
     );
     observer.observe(target);
     return () => observer.disconnect();

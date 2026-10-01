@@ -42,7 +42,6 @@
 .custom-scrollbar {
   scrollbar-width: thin;
   scrollbar-color: var(--color-terminal-dim) rgba(0,0,0,0.5);
-  scroll-behavior: smooth;
 }
 .custom-scrollbar::-webkit-scrollbar {
   width: 8px;
@@ -56,13 +55,21 @@
   border-radius: 4px;
 }
 
+/* GPU layer isolation utilities for background layers & CRT overlays */
+.gpu-layer {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
 /* Friendly CRT overlay */
 .crt-overlay {
   background: linear-gradient(rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.05) 50%);
   background-size: 100% 4px;
+  transform: translateZ(0);
 }
 .crt-vignette {
   background: radial-gradient(circle at center, transparent 40%, rgba(0,0,0,0.05) 100%);
+  transform: translateZ(0);
 }
 @media (prefers-color-scheme: dark) {
   .crt-overlay {
