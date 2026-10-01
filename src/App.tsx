@@ -91,12 +91,12 @@ export default function App() {
         Skip to main content
       </a>
 
-      <div className="pt-2 md:pt-4 lg:pt-6 px-2 md:px-4 lg:px-6 w-full max-w-[100rem] mx-auto z-50 flex-shrink-0 relative">
+      <div className="pt-1 md:pt-4 lg:pt-6 px-1 md:px-4 lg:px-6 w-full max-w-[100rem] mx-auto z-50 flex-shrink-0 relative">
         <Navbar onOpenTerminal={openTerminal} />
       </div>
 
-      <div className="p-2 md:p-4 lg:p-6 pb-2 md:pb-4 lg:pb-6 flex-1 w-full max-w-[100rem] mx-auto flex flex-col min-h-0">
-        <div className="relative flex-1 bg-white dark:bg-[#050505] rounded-xl lg:rounded-[2rem] border-[6px] md:border-[12px] border-gray-300 dark:border-[#111] overflow-hidden shadow-[0_4px_30px_rgba(0,255,65,0.05),inset_0_0_60px_rgba(0,0,0,0.05)] flex flex-col min-h-0">
+      <div className="p-1 md:p-4 lg:p-6 pb-1 md:pb-4 lg:pb-6 flex-1 w-full max-w-[100rem] mx-auto flex flex-col min-h-0">
+        <div className="relative flex-1 bg-white dark:bg-[#050505] rounded-xl lg:rounded-[2rem] border-2 sm:border-[6px] md:border-[12px] border-gray-300 dark:border-[#111] overflow-hidden shadow-[0_4px_30px_rgba(0,255,65,0.05),inset_0_0_60px_rgba(0,0,0,0.05)] flex flex-col min-h-0">
           <HackerBackground isMatrixOverdrive={isMatrixOverdrive} />
           <div className="crt-overlay absolute inset-0 z-40 pointer-events-none" />
           <div className="crt-vignette absolute inset-0 z-30 pointer-events-none" />

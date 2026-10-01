@@ -63,20 +63,20 @@ export function Skills() {
   return (
     <section
       id="skills"
-      className="w-full h-full flex-shrink-0 snap-start snap-always p-2 md:p-4 lg:p-8 flex items-center justify-center"
+      className="w-full h-full flex-shrink-0 snap-start snap-always p-1 sm:p-2 md:p-4 lg:p-8 flex items-center justify-center"
     >
-      <div className="w-full max-w-6xl mx-auto h-full hacker-card p-4 md:p-8 lg:p-12 flex flex-col justify-center relative z-10 overflow-hidden">
+      <div className="w-full max-w-6xl mx-auto h-full hacker-card p-2.5 sm:p-4 md:p-8 lg:p-12 flex flex-col justify-center relative z-10 overflow-hidden">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
-          className="mb-3 sm:mb-6 lg:mb-10 border-l-4 border-terminal-green pl-3 lg:pl-6 w-full shrink-0"
+          className="mb-2 sm:mb-6 lg:mb-10 border-l-4 border-terminal-green pl-2.5 lg:pl-6 w-full shrink-0"
         >
-          <motion.h2 variants={itemVariants} className="text-xs lg:text-sm font-mono text-terminal-dim uppercase tracking-widest mb-0.5 lg:mb-2">
+          <motion.h2 variants={itemVariants} className="text-[10px] sm:text-xs lg:text-sm font-mono text-terminal-dim uppercase tracking-widest mb-0.5 lg:mb-2">
             {"//"} SYSTEM_DIAGNOSTICS
           </motion.h2>
-          <motion.h3 variants={itemVariants} className="text-2xl sm:text-3xl md:text-5xl font-terminal text-gray-900 dark:text-gray-200">
+          <motion.h3 variants={itemVariants} className="text-xl sm:text-3xl md:text-5xl font-terminal text-gray-900 dark:text-gray-200">
             Technical Specs.
           </motion.h3>
         </motion.div>
@@ -92,17 +92,19 @@ export function Skills() {
             <motion.div
               key={cat.title}
               variants={itemVariants}
-              className="w-[85%] sm:w-[280px] md:w-auto shrink-0 snap-center md:shrink bg-white dark:bg-[#050505] border border-gray-200 dark:border-gray-800 rounded-xl p-3 sm:p-4 lg:p-6 group relative hover:border-terminal-green/50 hover:shadow-[0_4px_20px_rgba(0,255,65,0.05)] transition-all duration-300 flex flex-col min-h-0"
+              className="w-[85%] sm:w-[280px] md:w-auto shrink-0 snap-center md:shrink bg-white dark:bg-[#050505] border border-gray-200 dark:border-gray-800 rounded-xl p-2.5 sm:p-4 lg:p-6 group relative hover:border-terminal-green/50 hover:shadow-[0_4px_20px_rgba(0,255,65,0.05)] transition-all duration-300 flex flex-col min-h-0 justify-between"
             >
-              <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-xl bg-gray-200 dark:bg-[#111] border border-terminal-green/20 flex items-center justify-center mb-2 lg:mb-4 shadow-[0_0_15px_rgba(0,255,65,0.1)] group-hover:scale-110 transition-transform">
-                {cat.icon}
+              <div>
+                <div className="w-7 h-7 sm:w-8 sm:h-8 lg:w-10 lg:h-10 rounded-xl bg-gray-200 dark:bg-[#111] border border-terminal-green/20 flex items-center justify-center mb-1.5 sm:mb-2 lg:mb-4 shadow-[0_0_15px_rgba(0,255,65,0.1)] group-hover:scale-110 transition-transform">
+                  {cat.icon}
+                </div>
+
+                <h4 className="text-base sm:text-lg lg:text-xl font-terminal text-terminal-green mb-2 lg:mb-4">
+                  {cat.title}
+                </h4>
               </div>
 
-              <h4 className="text-lg lg:text-xl font-terminal text-terminal-green mb-3 lg:mb-4">
-                {cat.title}
-              </h4>
-
-              <div className="flex flex-col gap-2 flex-grow">
+              <div className="flex flex-col gap-1.5 sm:gap-2 flex-grow justify-center">
                 {cat.skills.map((skill) => {
                   const skillId = `skill-${skill.name.toLowerCase().replace(/\s+/g, '-')}`;
                   return (
