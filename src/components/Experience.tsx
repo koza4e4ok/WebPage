@@ -62,7 +62,7 @@ export function Experience() {
           </motion.div>
 
           {/* Timeline container */}
-          <div className="relative ml-2 md:ml-6 flex-1 overflow-y-auto custom-scrollbar flex flex-col justify-evenly py-1 sm:py-2 min-h-0">
+          <div className="relative ml-2 md:ml-6 flex-1 flex flex-col justify-evenly py-1 sm:py-2 min-h-0">
             {/* Animated timeline line */}
             <motion.div
               className="absolute left-0 top-0 bottom-0 w-px bg-terminal-green/30"
