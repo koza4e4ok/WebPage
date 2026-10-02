@@ -139,6 +139,7 @@ export function Projects() {
                           target="_blank"
                           rel="noreferrer noopener"
                           aria-label={`Open ${project.title}`}
+                          title={`Open ${project.title}`}
                           onClick={() => { playConfirm(); haptic("confirm"); }}
                           onMouseEnter={playTick}
                           className={`${BUTTON_BASE} flex-1`}
@@ -152,6 +153,7 @@ export function Projects() {
                           target="_blank"
                           rel="noreferrer noopener"
                           aria-label={`View ${project.title} on GitHub`}
+                          title={`View ${project.title} on GitHub`}
                           onClick={() => { playConfirm(); haptic("confirm"); }}
                           onMouseEnter={playTick}
                           className={`${BUTTON_BASE} hacker-btn-alt min-w-11 md:min-w-[32px]`}
