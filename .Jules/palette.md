@@ -59,3 +59,7 @@
 ## 2025-03-09 - Static aria-label with aria-expanded
 **Learning:** When using `aria-expanded` to communicate a mobile navigation menu toggle's state to screen readers, the `aria-label` should remain static. Changing both the label (e.g., from "Open menu" to "Close menu") and the expanded state simultaneously causes screen readers to announce redundant states.
 **Action:** Always verify that `aria-expanded` is paired with a static accessible name representing the menu being toggled, rather than the action to perform next.
+
+## 2023-10-27 - Icon-only buttons need tooltips for sighted users
+**Learning:** Icon-only buttons (like the GitHub links in the Projects section) with `aria-label`s are accessible to screen reader users, but sighted mouse users have no text context for the action, causing ambiguity.
+**Action:** Always add `title` attribute tooltips to icon-only buttons for sighted mouse users in addition to their `aria-label`s.
