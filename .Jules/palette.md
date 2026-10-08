@@ -59,3 +59,9 @@
 ## 2025-03-09 - Static aria-label with aria-expanded
 **Learning:** When using `aria-expanded` to communicate a mobile navigation menu toggle's state to screen readers, the `aria-label` should remain static. Changing both the label (e.g., from "Open menu" to "Close menu") and the expanded state simultaneously causes screen readers to announce redundant states.
 **Action:** Always verify that `aria-expanded` is paired with a static accessible name representing the menu being toggled, rather than the action to perform next.
+## 2026-10-08 - Accessible Toggle Button Context
+**Learning:** When using  on toggle buttons where the visual text dynamically changes (e.g., '< less' vs '> more'), a screen reader will announce the dynamic text along with the expanded state, but without context it can be confusing.
+**Action:** Add an  that includes the dynamic text alongside contextual information (e.g., '${state} details for ${company}') so screen readers get both the action description and context.
+## 2025-03-09 - Accessible Toggle Button Context
+**Learning:** When using `aria-expanded` on toggle buttons where the visual text dynamically changes (e.g., '< less' vs '> more'), a screen reader will announce the dynamic text along with the expanded state, but without context it can be confusing.
+**Action:** Add an `aria-label` that includes the dynamic text alongside contextual information (e.g., '${state} details for ${company}') so screen readers get both the action description and context.
