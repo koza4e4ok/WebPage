@@ -119,6 +119,7 @@ export function Experience() {
                     onClick={() => setExpanded(isExpanded ? null : exp.company)}
                     aria-expanded={isExpanded}
                     aria-controls={descId}
+                    aria-label={`${isExpanded ? "< less" : hasHighlights ? "> results" : "> more"} details for ${exp.company}`}
                     className={`${hasHighlights ? "inline-flex md:hidden compact:inline-flex" : "hidden short:inline-flex"} py-1 text-[11px] font-mono uppercase tracking-widest text-terminal-green focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terminal-green rounded`}
                   >
                     {isExpanded ? "< less" : hasHighlights ? "> results" : "> more"}

@@ -59,3 +59,6 @@
 ## 2025-03-09 - Static aria-label with aria-expanded
 **Learning:** When using `aria-expanded` to communicate a mobile navigation menu toggle's state to screen readers, the `aria-label` should remain static. Changing both the label (e.g., from "Open menu" to "Close menu") and the expanded state simultaneously causes screen readers to announce redundant states.
 **Action:** Always verify that `aria-expanded` is paired with a static accessible name representing the menu being toggled, rather than the action to perform next.
+## 2025-03-09 - Accessible More/Less Expandable Buttons
+**Learning:** Adding an `aria-label` to expandable UI items that toggle text like "< less" to "> more" is important to give screen reader users context about *what* details are being shown/hidden, especially for a list of repeating elements like experiences.
+**Action:** When a button toggles more/less content for an item, use `aria-label` to provide the descriptive context, e.g., `aria-label={\`\${isExpanded ? "< less" : "> more"} details for \${item.name}\`}`.
