@@ -80,6 +80,12 @@
         (<code>youtube.readonly</code>): to confirm which channel is connected
         and to check the status of uploaded videos.
       </li>
+      <li>
+        <strong>View YouTube Analytics reports</strong>
+        (<code>yt-analytics.readonly</code>): to read performance numbers (views,
+        watch time, likes, subscribers gained) for the owner's own videos and
+        build the owner's weekly performance report.
+      </li>
     </ul>
     <p>
       The app does not access email, contacts, files, or any other Google data.
@@ -100,10 +106,19 @@
         <strong>Basic profile info</strong> (<code>user.info.basic</code>): to
         show which TikTok account is connected (open ID and display name).
       </li>
+      <li>
+        <strong>Public video list</strong> (<code>video.list</code>): to read
+        view, like, comment and share counts of the owner's own public videos
+        for the weekly performance report.
+      </li>
+      <li>
+        <strong>Profile stats</strong> (<code>user.info.stats</code>): to read
+        the owner's follower and like totals for the same report.
+      </li>
     </ul>
     <p>
-      The app does not publish to TikTok directly and does not read followers,
-      messages, videos or any other TikTok data.
+      The app does not publish to TikTok directly and does not read messages,
+      followers' identities, private videos or any other TikTok data.
     </p>
 
     <h2>How the data is used and stored</h2>
@@ -113,8 +128,13 @@
         only by the account that runs the tool.
       </li>
       <li>
-        They are used solely to upload approved videos to the owner's accounts
-        and read their upload status.
+        They are used solely to upload approved videos to the owner's accounts,
+        read their upload status, and read the owner's own performance numbers.
+      </li>
+      <li>
+        To write the owner's weekly report, those performance numbers (with the
+        owner's own video titles) are sent to an AI model API (Google Gemini)
+        for analysis. The report goes only to the owner.
       </li>
       <li>
         No Google or TikTok user data is sold, shared with third parties, used
