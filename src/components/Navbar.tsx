@@ -177,7 +177,7 @@ export function Navbar({ onOpenTerminal }: NavbarProps) {
               aria-label="Open Terminal Shell"
               aria-keyshortcuts="~"
               title="Launch Terminal"
-              className="w-10 h-10 flex items-center justify-center rounded-lg bg-gray-50 dark:bg-[#0a0a0a] border border-gray-200 dark:border-gray-800 text-terminal-green"
+              className="w-10 h-10 flex items-center justify-center rounded-lg bg-gray-50 dark:bg-[#0a0a0a] border border-gray-200 dark:border-gray-800 text-terminal-green hover:border-terminal-green hover:shadow-[0_0_10px_rgba(0,255,65,0.2)] hover:bg-terminal-green/10 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terminal-green focus-visible:ring-offset-2"
             >
               <TerminalIcon size={16} />
             </button>
