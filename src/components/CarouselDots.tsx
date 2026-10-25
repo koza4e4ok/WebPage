@@ -32,7 +32,6 @@ export function CarouselDots({
               haptic("tick");
             }}
             aria-label={`Show ${label}`}
-            title={`Show ${label}`}
             aria-current={isActive ? "true" : undefined}
             className="p-2 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terminal-green"
           >
