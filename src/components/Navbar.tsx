@@ -140,7 +140,7 @@ export function Navbar({ onOpenTerminal }: NavbarProps) {
                 aria-label="Open Interactive CLI Terminal"
                 aria-keyshortcuts="~"
                 title="Launch Terminal Shell [~]"
-              className="w-8 h-8 rounded-full flex items-center justify-center bg-gray-50 dark:bg-[#0a0a0a] border border-gray-200 dark:border-gray-800 text-gray-600 dark:text-gray-400 hover:text-terminal-green hover:border-terminal-green hover:shadow-[0_0_10px_rgba(0,255,65,0.2)] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terminal-green focus-visible:ring-offset-2 ring-offset-white dark:focus-visible:ring-offset-[#0a0a0a]"
+                className="w-8 h-8 rounded-full flex items-center justify-center bg-gray-50 dark:bg-[#0a0a0a] border border-gray-200 dark:border-gray-800 text-gray-600 dark:text-gray-400 hover:text-terminal-green hover:border-terminal-green hover:shadow-[0_0_10px_rgba(0,255,65,0.2)] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terminal-green focus-visible:ring-offset-2 ring-offset-white dark:focus-visible:ring-offset-[#0a0a0a]"
               >
                 <TerminalIcon size={14} />
               </button>
@@ -155,7 +155,7 @@ export function Navbar({ onOpenTerminal }: NavbarProps) {
                   title={link.label}
                   onClick={handleSocialClick}
                   onMouseEnter={() => { playTick(); haptic("tick"); }}
-                className="w-8 h-8 rounded-full flex items-center justify-center bg-gray-50 dark:bg-[#0a0a0a] border border-gray-200 dark:border-gray-800 text-gray-600 dark:text-gray-400 hover:text-terminal-green hover:border-terminal-green hover:shadow-[0_0_10px_rgba(0,255,65,0.2)] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terminal-green focus-visible:ring-offset-2 ring-offset-white dark:focus-visible:ring-offset-[#0a0a0a]"
+                  className="w-8 h-8 rounded-full flex items-center justify-center bg-gray-50 dark:bg-[#0a0a0a] border border-gray-200 dark:border-gray-800 text-gray-600 dark:text-gray-400 hover:text-terminal-green hover:border-terminal-green hover:shadow-[0_0_10px_rgba(0,255,65,0.2)] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terminal-green focus-visible:ring-offset-2 ring-offset-white dark:focus-visible:ring-offset-[#0a0a0a]"
                 >
                   {link.icon}
                 </a>
