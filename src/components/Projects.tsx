@@ -128,6 +128,7 @@ export function Projects() {
                           href={`${import.meta.env.BASE_URL}work/${project.caseStudy}/`}
                           onClick={() => { playConfirm(); haptic("confirm"); }}
                           onMouseEnter={playTick}
+                          aria-label={`Read case study for ${project.title}`}
                           className={`${BUTTON_BASE} flex-1`}
                         >
                           <FileText size={12} className="mr-1" /> Case study
