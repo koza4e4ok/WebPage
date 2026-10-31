@@ -62,6 +62,3 @@
 ## 2025-03-09 - Contextualizing Dynamic Toggle Text
 **Learning:** For accessibility on toggle buttons where the visual text content dynamically changes (e.g., "> more" changing to "< less") and `aria-expanded` is used, screen readers will announce the visual text along with the expanded state (e.g., "< less, expanded"). Without additional context, this can be ambiguous, especially in a list of items where it's unclear *what* is being expanded or collapsed.
 **Action:** When a toggle button's text is dynamically changing and ambiguous out of context, provide a dynamic `aria-label` that includes the visible text plus added context (e.g., `less details for [Company]` or `more details for [Company]`) to clarify what is being toggled without relying solely on the visual position.
-## 2026-10-09 - Accessible Links for Repeated Generic Content
-**Learning:** For lists or carousels with repeated generic link text (e.g., 'Case study', 'Read more'), screen reader users cannot distinguish the specific destinations without additional context, especially when navigating by links.
-**Action:** Always use context-rich `aria-label` attributes (e.g., `aria-label="Read case study for ${project.title}"`) on links with generic visible text to ensure clarity out of context for assistive technologies.
